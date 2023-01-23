@@ -1,0 +1,42 @@
+* {
+    font-family: sans;
+}
+
+body {
+    padding: 2em;
+    margin: auto;
+    max-width: 50em;
+    background: #151515;
+    color: #E9E4E4;
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+
+.navbar-item {
+    color: #E9E4E4;
+    margin-right: 5px;
+    margin-left: 5px;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+.navbar-item:hover {
+    text-decoration: underline;
+}
+
+.avatar {
+    border-radius: 50%;
+}
+
+.project-link {
+    color: #97BBD3;
+    text-decoration: none;
+}
+
+.about {
+    text-align: justify;
+}
