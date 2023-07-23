@@ -1,5 +1,10 @@
+@font-face {
+  font-family: Lato;
+  src: url(Lato-Regular.ttf);
+}
+
 * {
-  font-family: sans;
+  font-family: Lato, sans, sans-serif;
 }
 
 body {
