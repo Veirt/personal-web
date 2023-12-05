@@ -1,18 +1,23 @@
-@font-face {
-  font-family: Lato;
-  src: url(Lato-Regular.ttf);
+:root {
+  --text: #e8e3e3;
+  --background: #141414;
+  --primary: #97bbd3;
+  --secondary: #171618;
+  --accent: #7c7981;
 }
 
 * {
-  font-family: Lato, sans, sans-serif;
+  font-family: "Segoe UI", Segoe, Tahoma, Geneva, sans-serif;
 }
 
 body {
   padding: 2em;
+  font-size: 20px;
+  line-height: 1.5;
   margin: auto;
   max-width: 50em;
-  background: #151515;
-  color: #e9e4e4;
+  background: var(--background);
+  color: var(--text);
 }
 
 nav {
@@ -22,15 +27,16 @@ nav {
 }
 
 .navbar-item {
-  color: #e9e4e4;
+  color: var(--text);
   margin-right: 5px;
   margin-left: 5px;
-  font-size: 18px;
+  font-size: 22px;
   text-decoration: none;
 }
 
 .navbar-item:hover {
-  text-decoration: underline;
+  color: var(--primary);
+  transition: ease 0.5s;
 }
 
 .avatar {
@@ -38,10 +44,12 @@ nav {
 }
 
 .link {
-  color: #97bbd3;
+  color: var(--primary);
   text-decoration: none;
 }
 
-.about {
-  text-align: justify;
+@media only screen and (max-width: 1250px) {
+  .navbar-item {
+    font-size: 40px;
+  }
 }
