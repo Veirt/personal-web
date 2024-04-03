@@ -53,3 +53,7 @@ nav {
     font-size: 40px;
   }
 }
+
+span.email b {
+  display: none;
+}
