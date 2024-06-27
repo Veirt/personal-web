@@ -22,8 +22,9 @@ jobs:
           sudo apt-get install minify -y
 
           sudo chmod -R 777 public
-          minify -r -o minified public
+          cd public
+          minify -r -o . .
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: minified
+          folder: public
