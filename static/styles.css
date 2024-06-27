@@ -39,13 +39,25 @@ nav {
   transition: ease 0.5s;
 }
 
-.avatar {
-  border-radius: 50%;
+.active {
+  color: var(--primary);
 }
 
 .link {
   color: var(--primary);
   text-decoration: none;
+}
+
+.link:hover {
+  border-bottom: 1px solid var(--primary);
+}
+
+.blog__title {
+  margin-top: 0px;
+}
+
+.email {
+  color: var(--primary);
 }
 
 span.email b {

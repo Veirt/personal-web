@@ -4,12 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>veirt's website</title>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="/styles.css" />
   </head>
 
   <body>
     <nav class="navbar">
-      <a class="navbar-item" href="/">home</a>
+      <a class="navbar-item {% if current_path == '/' %} active {% endif %}" href="/">home</a>
+      <a class="navbar-item {% if current_path == '/blog/' %} active {% endif %}" href="/blog">blog</a>
       <a class="navbar-item" target="_blank" href="https://github.com/Veirt">github</a>
     </nav>
 

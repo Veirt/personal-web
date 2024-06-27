@@ -11,7 +11,7 @@
     Additionally, I enjoy experimenting with *nix systems, building home servers, and <a class="link" href="https://typingstats.com/profile/veirt">typing</a> as a hobby.
 
 </p>
-<p>Email: <span class="email link">veirt@duck<b>whatever</b>.com</span></p>
+<p>Email: <span class="email">veirt@duck<b>whatever</b>.com</span></p>
 
 <p>PGP Fingerprint: <a class="link" href="https://github.com/veirt.gpg">003C A58A 7E5D 9767 5964  832E 0415 622A E760 D716</a></p>
 
@@ -27,6 +27,18 @@
         <a class="link" href="https://github.com/nihui/waifu2x-ncnn-vulkan">waifu2x-ncnn-vulkan</a>
     </li>
 </ul>
+
+{% set section = get_section(path="blog/_index.md") %}
+{% if section.pages | length > 0 %}
+<h1>Blog</h1>
+<ul>
+  {% for page in section.pages %}
+  <li>
+    <a class="link" href="{{ page.permalink | safe }}">{{ page.title }}</a>
+  </li>
+  {% endfor %}
+</ul>
+{% endif %}
 
 {% endblock content %}
 
