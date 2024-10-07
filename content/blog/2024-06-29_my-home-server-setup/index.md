@@ -1,5 +1,6 @@
 +++
 title = "My Home Server Setup"
+description = "A look at my home server setup. I share what hardware I use and the different services I run for media, backups, and other tasks."
 date = 2024-06-29
 +++
 

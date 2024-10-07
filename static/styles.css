@@ -1,8 +1,8 @@
 :root {
   --text: #e8e3e3;
-  --background: #141414;
-  --primary: #97bbd3;
-  --secondary: #171618;
+  --background: #060709;
+  --primary: #A4AFCB;
+  --secondary: #5B73AE;
   --accent: #7c7981;
 }
 
@@ -65,13 +65,38 @@ a {
   border-bottom: 1px solid var(--primary);
 }
 
+article {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 140px;
+  padding: 15px;
+  border: 2px solid #262930;
+  gap: 10px;
+}
+
+article:hover {
+  border: 2px solid #5B73AE;
+}
+
 .blog__title {
+  margin-top: 0px;
   margin-bottom: 0px;
 }
 
-.blog__subtitle {
-  margin-top: 0px;
-  font-size: 13px;
+.blog__date {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.blog__description {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .email {
@@ -80,4 +105,57 @@ a {
 
 span.email b {
   display: none;
+}
+
+.snowflake {
+  position: absolute;
+  background-color: white;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.snow {
+  position: absolute;
+  animation: fall 8s linear forwards;
+  border-radius: 50%;
+  background-color: #fff;
+}
+
+
+@keyframes fall {
+  to {
+    transform: translate(-200px, 300px);
+    opacity: 0;
+  }
+}
+
+
+.article:hover .snowflake {
+  opacity: 1;
+}
+
+@media only screen and (max-width: 768px) {
+  body {
+    padding: 15px;
+    font-size: 14px;
+  }
+
+  article {
+    height: 130px;
+  }
+
+  .blog__title {
+    font-size: 18px;
+  }
+
+  nav {
+    padding: 10px 0;
+    justify-content: center;
+  }
+
+  .navbar-item {
+    font-size: 18px;
+  }
 }

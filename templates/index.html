@@ -7,13 +7,12 @@
 {% if section.pages | length > 0 %}
 <h1>Latest Blog</h1>
 <ul>
-  {% for page in section.pages %}
-  <li>
-    <a class="link" href="{{ page.permalink | safe }}">{{ page.title }}</a>
-  </li>
-  {% endfor %}
+    {% for page in section.pages %}
+    <li>
+        <a class="link" href="{{ page.permalink | safe }}">{{ page.title }}</a>
+    </li>
+    {% endfor %}
 </ul>
 {% endif %}
 
 {% endblock content %}
-
