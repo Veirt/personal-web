@@ -107,33 +107,31 @@ span.email b {
   display: none;
 }
 
-.snowflake {
-  position: absolute;
-  background-color: white;
-  border-radius: 50%;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
 .snow {
   position: absolute;
-  animation: fall 8s linear forwards;
+  background: white;
   border-radius: 50%;
-  background-color: #fff;
+  pointer-events: none;
+  opacity: 0.8;
 }
 
-
-@keyframes fall {
+@keyframes fall1 {
   to {
-    transform: translate(-200px, 300px);
-    opacity: 0;
+    transform: translateX(-50px) translateY(100vh) rotate(360deg);
+    opacity: 0.3;
   }
 }
-
-
-.article:hover .snowflake {
-  opacity: 1;
+@keyframes fall2 {
+  to {
+    transform: translateX(-100px) translateY(100vh) rotate(360deg);
+    opacity: 0.3;
+  }
+}
+@keyframes fall3 {
+  to {
+    transform: translateX(-150px) translateY(100vh) rotate(720deg);
+    opacity: 0.3;
+  }
 }
 
 @media only screen and (max-width: 768px) {
