@@ -1,0 +1,25 @@
+.snow__container {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  border: 2px solid #262930;
+  gap: 10px;
+}
+
+.snow__container:hover {
+  border: 2px solid #5B73AE;
+}
+
+.snow {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+@keyframes fall1 { to { transform: translateX(-80px) translateY(100vh) rotate(360deg); } }
+@keyframes fall2 { to { transform: translateX(30px) translateY(100vh) rotate(-360deg); } }
+@keyframes fall3 { to { transform: translateX(-180px) translateY(100vh) rotate(720deg); } }

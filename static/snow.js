@@ -6,8 +6,8 @@ function createSnow() {
   snow.style.width = size;
   snow.style.height = size;
 
-  snow.style.top = `${-Math.random() * 20 - 10}px`;
-  snow.style.right = `${Math.random() * 100}%`;
+  snow.style.top = `${-Math.random() * 150}px`;
+  snow.style.left = `${Math.random() * 120 - 10}%`;
 
   const animations = ["fall1", "fall2", "fall3"];
   const anim = animations[Math.floor(Math.random() * animations.length)];
