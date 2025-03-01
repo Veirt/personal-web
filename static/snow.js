@@ -20,7 +20,7 @@ function createSnow() {
 }
 
 let snowInterval;
-document.querySelectorAll("article").forEach((article) => {
+document.querySelectorAll(".snow__container").forEach((article) => {
   article.addEventListener("mouseenter", () => {
     if (!snowInterval) {
       snowInterval = setInterval(() => {

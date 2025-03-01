@@ -65,19 +65,22 @@ a {
   border-bottom: 1px solid var(--primary);
 }
 
-article {
+.snow__container {
   position: relative;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  height: 140px;
   padding: 15px;
   border: 2px solid #262930;
   gap: 10px;
 }
 
-article:hover {
+.snow__container:hover {
   border: 2px solid #5B73AE;
+}
+
+.blog__item {
+  height: 140px;
 }
 
 .blog__title {
@@ -97,6 +100,34 @@ article:hover {
   -webkit-line-clamp: 3;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.project__container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.project__item {
+  padding: 25px;
+}
+
+.project__name {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.project__skills {
+  display: flex;
+  gap: 5px;
+}
+
+.project__skill__item {
+  background: var(--primary);
+  color: var(--background);
+  padding: 5px;
+  border-radius: 3px;
+  font-size: 14px;
 }
 
 .email {
@@ -140,12 +171,16 @@ span.email b {
     font-size: 14px;
   }
 
-  article {
+  .blog__item {
     height: 130px;
   }
 
   .blog__title {
     font-size: 18px;
+  }
+
+  .project__container {
+    grid-template-columns: 1fr;
   }
 
   nav {

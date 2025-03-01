@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="title">
+  {{ section.title }}
+</h1>
+
+{% if section.pages | length == 0 %}
+    <p>No projects yet.</p>
+{% endif %}
+
+<div class="project__container">
+    {% for page in section.pages %}
+    <div class="snow__container project__item">
+        <h1 class="project__name"><a class="link" target="_blank" rel="noopener noreferrer" href="{{ page.extra.url | safe }}">{{ page.title }}</a></h1>
+
+        <summary class="project__description">
+            {{ page.description }}
+        </summary>
+
+        <div class="project__skills">
+            {% for skill in page.extra.skills %}
+            <span class="project__skill__item">{{ skill }}</span>
+            {% endfor %}
+        </div>
+
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}
