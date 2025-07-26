@@ -14,6 +14,10 @@ import sitemap from "lume/plugins/sitemap.ts";
 import feed from "lume/plugins/feed.ts";
 import search from "lume/plugins/search.ts";
 import date from "lume/plugins/date.ts";
+import purgecss from "lume/plugins/purgecss.ts";
+import robots from "lume/plugins/robots.ts";
+import terser from "lume/plugins/terser.ts";
+import metas from "lume/plugins/metas.ts";
 
 const site = lume(
   {
@@ -36,7 +40,9 @@ site.use(mdx());
 site.use(nav());
 site.use(icons());
 site.use(esbuild());
+site.use(terser());
 site.use(lightningcss());
+site.use(metas());
 site.use(check_urls());
 site.use(favicon());
 site.use(minify_html());
@@ -49,7 +55,7 @@ site.use(
     query: "type=blog",
     info: {
       title: "veirt's blog",
-      description: "Developer, creator, and technology enthusiast",
+      description: "Software Engineer | Full-stack · DevOps · SysAdmin",
     },
   }),
 );
@@ -73,17 +79,18 @@ site.filter("excerpt", (content: string, length = 150) => {
   return text.length > length ? text.slice(0, length) + "..." : text;
 });
 site.use(search());
+site.use(purgecss());
+site.use(robots());
 
 site.copy("CNAME");
 
 // Set up site data
 site.data("site", {
   title: "veirt's website",
-  description: "Developer, creator, and technology enthusiast",
+  description: "Software Engineer | Full-stack · DevOps · SysAdmin",
   url: "https://veirt.is-a.dev",
   author: {
     name: "veirt",
-    email: "veirt@duck.com",
     url: "https://github.com/Veirt",
   },
 });

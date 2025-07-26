@@ -1,5 +1,8 @@
 {
   "dependencies": {
-    "date-fns": "^4.1.0"
+    "date-fns": "^4.1.0",
+    "purgecss": "npm:purgecss",
+    "purgecss-from-html": "npm:purgecss-from-html",
+    "terser": "npm:terser"
   }
 }
