@@ -1,4 +1,5 @@
 import lume from "lume/mod.ts";
+import cacheBusting from "lume/middlewares/cache_busting.ts";
 import code_highlight from "lume/plugins/code_highlight.ts";
 import json_ld from "lume/plugins/json_ld.ts";
 import mdx from "lume/plugins/mdx.ts";
@@ -23,6 +24,9 @@ const site = lume(
   {
     src: "./",
     dest: "./_site",
+    server: {
+      middlewares: [cacheBusting()],
+    },
   },
   {
     markdown: {
