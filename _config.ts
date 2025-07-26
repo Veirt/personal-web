@@ -23,6 +23,7 @@ import metas from "lume/plugins/metas.ts";
 const site = lume(
   {
     src: "./",
+    location: new URL("https://veirt-is.a.dev"),
     dest: "./_site",
     server: {
       middlewares: [cacheBusting()],
@@ -110,6 +111,7 @@ site.data("site", {
     url: "https://github.com/Veirt",
   },
   keywords: [
+    "veirt",
     "software engineer",
     "full-stack developer",
     "devops",
