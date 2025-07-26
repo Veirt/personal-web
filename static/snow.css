@@ -9,22 +9,23 @@
   border-radius: 50%;
   pointer-events: none;
   opacity: 0.8;
+  will-change: transform;
 }
 
 @keyframes fall1 {
   to {
-    transform: translateX(-80px) translateY(100vh) rotate(360deg);
+    transform: translate3d(-80px, 100vh, 0) rotate(360deg);
   }
 }
 
 @keyframes fall2 {
   to {
-    transform: translateX(30px) translateY(100vh) rotate(-360deg);
+    transform: translate3d(30px, 100vh, 0) rotate(-360deg);
   }
 }
 
 @keyframes fall3 {
   to {
-    transform: translateX(-180px) translateY(100vh) rotate(720deg);
+    transform: translate3d(-180px, 100vh, 0) rotate(720deg);
   }
 }
