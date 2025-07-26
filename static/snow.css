@@ -12,20 +12,136 @@
   will-change: transform;
 }
 
+.snow--small {
+  filter: blur(0.5px);
+}
+
+.snow--medium {
+  filter: blur(0.8px);
+}
+
+.snow--large {
+  filter: blur(1.2px);
+}
+
+.snow--near {
+  opacity: 0.9;
+  z-index: 3;
+}
+
+.snow--mid {
+  opacity: 0.6;
+  z-index: 2;
+}
+
+.snow--far {
+  opacity: 0.3;
+  z-index: 1;
+  filter: blur(1.5px);
+}
+
 @keyframes fall1 {
-  to {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+
+  25% {
+    transform: translate3d(-10px, 25vh, 0) rotate(90deg);
+  }
+
+  50% {
+    transform: translate3d(-30px, 50vh, 0) rotate(180deg);
+  }
+
+  75% {
+    transform: translate3d(-60px, 75vh, 0) rotate(270deg);
+  }
+
+  100% {
     transform: translate3d(-80px, 100vh, 0) rotate(360deg);
   }
 }
 
 @keyframes fall2 {
-  to {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+
+  30% {
+    transform: translate3d(15px, 30vh, 0) rotate(-108deg);
+  }
+
+  60% {
+    transform: translate3d(25px, 60vh, 0) rotate(-216deg);
+  }
+
+  100% {
     transform: translate3d(30px, 100vh, 0) rotate(-360deg);
   }
 }
 
 @keyframes fall3 {
-  to {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+
+  20% {
+    transform: translate3d(-20px, 20vh, 0) rotate(144deg);
+  }
+
+  40% {
+    transform: translate3d(-80px, 40vh, 0) rotate(288deg);
+  }
+
+  60% {
+    transform: translate3d(-120px, 60vh, 0) rotate(432deg);
+  }
+
+  80% {
+    transform: translate3d(-150px, 80vh, 0) rotate(576deg);
+  }
+
+  100% {
     transform: translate3d(-180px, 100vh, 0) rotate(720deg);
+  }
+}
+
+@keyframes fall4 {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+  }
+
+  25% {
+    transform: translate3d(10px, 25vh, 0) rotate(90deg) scale(0.8);
+  }
+
+  50% {
+    transform: translate3d(-5px, 50vh, 0) rotate(180deg) scale(1.1);
+  }
+
+  75% {
+    transform: translate3d(20px, 75vh, 0) rotate(270deg) scale(0.9);
+  }
+
+  100% {
+    transform: translate3d(15px, 100vh, 0) rotate(360deg) scale(1);
+  }
+}
+
+@keyframes fall5 {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+
+  33% {
+    transform: translate3d(-25px, 33vh, 0) rotate(-120deg);
+  }
+
+  66% {
+    transform: translate3d(10px, 66vh, 0) rotate(-240deg);
+  }
+
+  100% {
+    transform: translate3d(-40px, 100vh, 0) rotate(-360deg);
   }
 }

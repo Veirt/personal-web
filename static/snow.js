@@ -14,6 +14,7 @@ function returnSnowToPool(snow) {
     snow.style.height = "";
     snow.style.top = "";
     snow.style.left = "";
+    snow.className = "snow";
     snowPool.push(snow);
   }
 }
@@ -32,19 +33,41 @@ function createSnow(options = {}) {
   snow.style.top = `${-Math.random() * 130}px`;
   snow.style.left = `${Math.random() * 120 - 10}%`;
 
-  if (options.transparent) {
-    snow.style.opacity = `${Math.random() * 0.3 + 0.1}`;
+  const animations = ["fall1", "fall2", "fall3", "fall4", "fall5"];
+
+  const sizeVariation = size < 2.5 ? "small" : size < 4.5 ? "medium" : "large";
+  snow.classList.add(`snow--${sizeVariation}`);
+
+  const depthRandom = Math.random();
+  let depthLayer;
+  if (depthRandom < 0.2) {
+    depthLayer = "near";
+  } else if (depthRandom < 0.6) {
+    depthLayer = "mid";
   } else {
-    snow.style.opacity = "0.8";
+    depthLayer = "far";
+  }
+  snow.classList.add(`snow--${depthLayer}`);
+
+  if (options.transparent) {
+    const baseOpacity =
+      depthLayer === "near" ? 0.3 : depthLayer === "mid" ? 0.2 : 0.1;
+    snow.style.opacity = `${baseOpacity + Math.random() * 0.2}`;
+  } else if (depthLayer === "far") {
+    snow.style.opacity = `${0.2 + Math.random() * 0.2}`;
+  } else if (depthLayer === "mid") {
+    snow.style.opacity = `${0.5 + Math.random() * 0.2}`;
+  } else {
+    snow.style.opacity = `${0.7 + Math.random() * 0.2}`;
   }
 
-  const animations = ["fall1", "fall2", "fall3"];
-  const anim = animations[Math.floor(Math.random() * 3)];
-  const duration = 15 - size / 2 + Math.random() * 3;
+  const anim = animations[Math.floor(Math.random() * animations.length)];
+  const baseDuration =
+    depthLayer === "near" ? 12 : depthLayer === "mid" ? 15 : 18;
+  const duration = baseDuration - size / 3 + Math.random() * 4;
 
   snow.style.animation = `${anim} ${duration}s linear forwards`;
 
-  // Use a single event listener with cleanup
   const cleanup = () => {
     snow.removeEventListener("animationend", cleanup);
     if (snow.parentNode) {
