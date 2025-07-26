@@ -70,6 +70,9 @@ site.filter("date", (date: Date, format: string) => {
       day: "numeric",
     });
   }
+  if (format === "DATETIME") {
+    return date.toISOString();
+  }
   return date.toISOString();
 });
 
@@ -77,6 +80,14 @@ site.filter("date", (date: Date, format: string) => {
 site.filter("excerpt", (content: string, length = 150) => {
   const text = content.replace(/<[^>]*>/g, ""); // Strip HTML tags
   return text.length > length ? text.slice(0, length) + "..." : text;
+});
+
+// Add reading time filter
+site.filter("readingTime", (content: string) => {
+  const wordsPerMinute = 200;
+  const words = content.replace(/<[^>]*>/g, "").split(/\s+/).length;
+  const minutes = Math.ceil(words / wordsPerMinute);
+  return minutes;
 });
 site.use(search());
 site.use(purgecss());
@@ -87,12 +98,25 @@ site.copy("CNAME");
 // Set up site data
 site.data("site", {
   title: "veirt's website",
-  description: "Software Engineer | Full-stack · DevOps · SysAdmin",
+  description:
+    "Software Engineer | Full-stack · DevOps · SysAdmin | Building modern web applications, exploring new technologies, and sharing knowledge through code.",
   url: "https://veirt.is-a.dev",
   author: {
     name: "veirt",
     url: "https://github.com/Veirt",
   },
+  keywords: [
+    "software engineer",
+    "full-stack developer",
+    "devops",
+    "web development",
+    "programming",
+    "javascript",
+    "typescript",
+    "python",
+    "rust",
+  ],
+  lang: "en",
 });
 
 site.add("static", ".");

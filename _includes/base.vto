@@ -3,14 +3,70 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{{ title }}{{ if title }} - {{ /if }}veirt's website</title>
-    <meta name="description" content="{{ description || site.description }}">
     
-    <!-- Open Graph -->
+    <!-- SEO Meta Tags -->
+    <title>{{ title }}{{ if title }} | {{ /if }}{{ site.title }}</title>
+    <meta name="description" content="{{ description || site.description }}">
+    <meta name="author" content="{{ site.author.name }}">
+    <link rel="canonical" href="{{ site.url }}{{ url }}">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="{{ if type == 'blog' }}article{{ else }}website{{ /if }}">
+    <meta property="og:url" content="{{ site.url }}{{ url }}">
     <meta property="og:title" content="{{ title || site.title }}">
     <meta property="og:description" content="{{ description || site.description }}">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="{{ site.url }}{{ url }}">
+    <meta property="og:site_name" content="{{ site.title }}">
+    {{ if type == 'blog' }}
+    <meta property="article:author" content="{{ site.author.name }}">
+    <meta property="article:published_time" content="{{ date |> date('DATETIME') }}">
+    {{ if tags }}
+    {{ for tag of tags }}
+    <meta property="article:tag" content="{{ tag }}">
+    {{ /for }}
+    {{ /if }}
+    {{ /if }}
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="{{ site.url }}{{ url }}">
+    <meta property="twitter:title" content="{{ title || site.title }}">
+    <meta property="twitter:description" content="{{ description || site.description }}">
+    
+    <!-- Structured Data -->
+    {{ if type == 'blog' }}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "{{ title }}",
+      "description": "{{ description }}",
+      "author": {
+        "@type": "Person",
+        "name": "{{ site.author.name }}",
+        "url": "{{ site.author.url }}"
+      },
+      "datePublished": "{{ date |> date('DATETIME') }}",
+      "dateModified": "{{ date |> date('DATETIME') }}",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "{{ site.url }}{{ url }}"
+      }
+    }
+    </script>
+    {{ /if }}
+    
+    <!-- Favicon and Icons -->
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    
+    <!-- RSS Feed -->
+    <link rel="alternate" type="application/rss+xml" title="{{ site.title }} RSS Feed" href="{{ site.url }}/feed.xml">
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://github.com">
     
     <link rel="stylesheet" href="/styles.css" />
     <link rel="stylesheet" href="/snow.css" />

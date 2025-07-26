@@ -433,6 +433,27 @@ a {
   font-size: 0.95rem;
 }
 
+.blog__page__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag__item {
+  background: var(--primary);
+  color: var(--background);
+  padding: 0.3rem 0.6rem;
+  border-radius: 16px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.tag__item:hover {
+  background: var(--secondary);
+  transform: scale(1.05);
+}
+
 .blog__page__skills {
   display: flex;
   flex-wrap: wrap;
@@ -644,7 +665,7 @@ a {
 
 /* About page styles */
 .about__content {
-  max-width: 42rem;
+  max-width: 55rem;
   margin: 0 auto;
 }
 
@@ -784,4 +805,11 @@ span.email b {
   .blog__page__content h3 {
     font-size: 1.2rem;
   }
+}
+
+/* Reading time */
+.reading-time {
+  font-size: 0.85rem;
+  color: var(--accent);
+  opacity: 0.8;
 }

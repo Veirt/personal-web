@@ -2,31 +2,38 @@
 layout: base.vto
 ---
 
-<article class="blog__page">
+<article class="blog__page" itemscope itemtype="https://schema.org/BlogPosting">
   <header class="blog__page__header">
-    <h1 class="blog__page__title">{{ title }}</h1>
+    <h1 class="blog__page__title" itemprop="headline">{{ title }}</h1>
     <div class="blog__page__meta">
-      <time class="blog__page__date">{{ date |> date("HUMAN_DATE") }}</time>
+      <time class="blog__page__date" datetime="{{ date |> date('DATETIME') }}" itemprop="datePublished">{{ date |> date("HUMAN_DATE") }}</time>
+      <span class="reading-time">{{ content |> readingTime }} min read</span>
       {{ if tags }}
       <div class="blog__page__tags">
         {{ for tag of tags }}
-        <span class="tag__item">{{ tag }}</span>
+        <span class="tag__item" itemprop="keywords">{{ tag }}</span>
         {{ /for }}
       </div>
       {{ /if }}
+    </div>
+    
+    <!-- Author info for SEO -->
+    <div class="author-info" itemprop="author" itemscope itemtype="https://schema.org/Person" style="display: none;">
+      <span itemprop="name">{{ site.author.name }}</span>
+      <link itemprop="url" href="{{ site.author.url }}">
     </div>
   </header>
 
   {{ if toc }}
   <aside class="table__of__contents">
-    <h3 class="table__of__contents__title">Table of Contents</h3>
+    <h2 class="table__of__contents__title">Table of Contents</h2>
     <nav class="table__of__contents__nav">
       {{ toc }}
     </nav>
   </aside>
   {{ /if }}
 
-  <div class="blog__page__content">
+  <div class="blog__page__content" itemprop="articleBody">
     {{ content }}
   </div>
 </article>
