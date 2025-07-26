@@ -24,28 +24,6 @@
     {{ /if }}
     {{ /if }}
     
-    {{ if type == 'blog' }}
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "BlogPosting",
-      "headline": "{{ title }}",
-      "description": "{{ description }}",
-      "author": {
-        "@type": "Person",
-        "name": "{{ site.author.name }}",
-        "url": "{{ site.author.url }}"
-      },
-      "datePublished": "{{ date |> date('DATETIME') }}",
-      "dateModified": "{{ date |> date('DATETIME') }}",
-      "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "{{ site.url }}{{ url }}"
-      }
-    }
-    </script>
-    {{ /if }}
-    
     <!-- Favicon and Icons -->
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">

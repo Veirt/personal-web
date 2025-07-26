@@ -1,0 +1,9 @@
+jsonLd:
+  "@type": WebSite
+  url: /
+  headline: veirt's personal website
+  name: Veirt
+  description: Software Engineer | Full-stack · DevOps · SysAdmin",
+  author:
+    "@type": Person
+    name: Veirt
