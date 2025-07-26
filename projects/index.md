@@ -1,7 +1,7 @@
 ---
 layout: projects.vto
 title: Projects
-subtitle: Open source projects and tools I've built
+subtitle: Projects and tools I've built
 ---
 
       A simple utility to toggle Discord Rich Presence on and off. Perfect for when you want to keep your activity private.
