@@ -1,12 +1,12 @@
 ---
 layout: page.vto
-title: About
-subtitle: Get to know me a little better
+title: about
+subtitle: get to know me a little better
 ---
 
 <div class="about__content">
   <p class="about__intro">
-      Hey, I'm Veirt. I'm a developer with an interest in backend development and systems programming.
+      Hey, I'm Veirt. I'm a developer with an interest in backend development, DevOps, and systems programming.
   </p>
   
   <p class="about__description">

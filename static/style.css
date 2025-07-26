@@ -148,6 +148,7 @@ a {
   color: var(--primary);
   text-decoration: none;
   transition: all 0.2s ease;
+  width: fit-content;
 }
 
 /* a:focus { */
@@ -164,6 +165,47 @@ a {
 .page__header {
   text-align: center;
   margin-bottom: 3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.page__header::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  right: -20px;
+  bottom: -20px;
+  background-image:
+    radial-gradient(2px 2px at 20px 30px, var(--primary), transparent),
+    radial-gradient(2px 2px at 40px 70px, rgba(164, 175, 203, 0.6), transparent),
+    radial-gradient(1px 1px at 90px 40px, rgba(164, 175, 203, 0.4), transparent),
+    radial-gradient(1px 1px at 130px 80px, var(--primary), transparent),
+    radial-gradient(2px 2px at 160px 30px, rgba(164, 175, 203, 0.3), transparent);
+  background-repeat: repeat;
+  background-size: 200px 100px;
+  animation: snowfall 20s linear infinite;
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+.page__header::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+}
+
+@keyframes snowfall {
+  0% {
+    transform: translateY(-100px) translateX(0);
+  }
+
+  100% {
+    transform: translateY(calc(100vh + 100px)) translateX(100px);
+  }
 }
 
 .page__title {
@@ -713,6 +755,159 @@ span.email b {
   display: none;
 }
 
+/* Now page styles */
+.now__content {
+  max-width: 50rem;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* Snowy night banner */
+.now__banner {
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(180deg, #0a0f1c 0%, #1a1f2e 50%, #2d3748 100%);
+  border-radius: var(--radius);
+  margin-bottom: 3rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+/* Stars in the banner */
+.now__banner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image:
+    radial-gradient(1px 1px at 30px 20px, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(0.5px 0.5px at 80px 35px, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(1px 1px at 150px 15px, rgba(255, 255, 255, 0.9), transparent),
+    radial-gradient(0.5px 0.5px at 220px 40px, rgba(255, 255, 255, 0.5), transparent),
+    radial-gradient(1px 1px at 290px 25px, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(0.5px 0.5px at 360px 30px, rgba(255, 255, 255, 0.4), transparent),
+    radial-gradient(1px 1px at 420px 18px, rgba(255, 255, 255, 0.8), transparent);
+  background-repeat: repeat-x;
+  background-size: 450px 60px;
+  animation: starTwinkle 8s ease-in-out infinite alternate;
+  z-index: 1;
+}
+
+.now__intro {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 3rem;
+  text-align: center;
+  color: var(--accent);
+}
+
+.now__intro a {
+  color: var(--primary);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.now__intro a:hover {
+  border-bottom-color: var(--primary);
+}
+
+.now__section {
+  margin-bottom: 3rem;
+  background: var(--surface);
+  padding: 2rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  transition: all 0.3s ease;
+}
+
+.now__section:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.now__section__title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: var(--primary);
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 0.5rem;
+}
+
+.now__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.now__list li {
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--border);
+  line-height: 1.6;
+  position: relative;
+  padding-left: 1.5rem;
+  transition: all 0.2s ease;
+}
+
+.now__list li:hover {
+  color: var(--primary);
+  padding-left: 2rem;
+}
+
+.now__list li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--primary);
+  opacity: 0.7;
+  transition: all 0.2s ease;
+}
+
+.now__list li:hover::before {
+  opacity: 1;
+  transform: translateX(2px);
+}
+
+.now__list li:last-child {
+  border-bottom: none;
+}
+
+.now__list strong {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.now__footer {
+  text-align: center;
+  margin-top: 4rem;
+}
+
+.now__footer em {
+  color: var(--accent);
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+/* Banner animations */
+@keyframes starTwinkle {
+  0% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 0.8;
+  }
+
+  100% {
+    opacity: 0.5;
+  }
+}
+
 @media only screen and (max-width: 768px) {
   body {
     padding: 1rem;
@@ -804,6 +999,34 @@ span.email b {
 
   .blog__page__content h3 {
     font-size: 1.2rem;
+  }
+
+  .now__content {
+    min-height: 60vh;
+  }
+
+  .now__banner {
+    height: 150px;
+    margin-bottom: 2rem;
+  }
+
+  .now__section {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+  }
+
+  .now__section__title {
+    font-size: 1.2rem;
+  }
+
+  .now__intro {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    text-align: left;
+  }
+
+  .now__footer {
+    margin-top: 3rem;
   }
 }
 

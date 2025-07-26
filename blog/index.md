@@ -1,5 +1,5 @@
 ---
 layout: blog.vto
-title: Blog
-subtitle: Thoughts, experiences, and technical discoveries
+title: blog
+subtitle: thoughts, experiences, and technical discoveries
 ---
