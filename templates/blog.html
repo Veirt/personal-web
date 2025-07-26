@@ -1,17 +1,20 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1 class="title">
-  {{ section.title }}
-</h1>
+<header class="page-header">
+  <h1 class="page-title">{{ section.title }}</h1>
+  <p class="page-subtitle">Thoughts, experiences, and technical discoveries</p>
+</header>
 
 {% if section.pages | length == 0 %}
-    <p>No posts yet.</p>
+    <div class="empty-state">
+        <p>No posts yet.</p>
+    </div>
 {% endif %}
 
 {% for page in section.pages %}
 <article class="snow__container blog__item">
-    <h1 class="blog__title"><a class="link" href="{{ page.permalink | safe }}">{{ page.title }}</a></h1>
+    <h2 class="blog__title"><a class="link" href="{{ page.permalink | safe }}">{{ page.title }}</a></h2>
     <div class="blog__date">
         <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
             <path fill="currentColor" d="M15 2h2v2h4v18H3V4h4V2h2v2h6zM5 8h14V6H5zm0 2v10h14V10z" />
@@ -19,9 +22,9 @@
         {{ page.date }}
     </div>
 
-    <summary class="blog__description">
+    <p class="blog__description">
         {{ page.description }}
-    </summary>
+    </p>
 </article>
 {% endfor %}
 {% endblock content %}

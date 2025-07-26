@@ -1,30 +1,45 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1 class="title">
-  {{ section.title }}
-</h1>
+<header class="page-header">
+  <h1 class="page-title">{{ section.title }}</h1>
+  <p class="page-subtitle">A collection of my work and experiments</p>
+</header>
 
 {% if section.pages | length == 0 %}
-    <p>No projects yet.</p>
+    <div class="empty-state">
+        <p>No projects yet.</p>
+    </div>
 {% endif %}
 
 <div class="project__container">
     {% for page in section.pages %}
-    <div class="snow__container project__item">
-        <h1 class="project__name"><a class="link" target="_blank" rel="noopener noreferrer" href="{{ page.extra.url | safe }}">{{ page.title }}</a></h1>
-
-        <summary class="project__description">
-            {{ page.description }}
-        </summary>
-
-        <div class="project__skills">
-            {% for skill in page.extra.skills %}
-            <span class="project__skill__item">{{ skill }}</span>
-            {% endfor %}
+    <article class="snow__container project__item">
+        <div class="project__header">
+            <h2 class="project__name">
+                <a class="project__link" target="_blank" rel="noopener noreferrer" href="{{ page.extra.url | safe }}">
+                    {{ page.title }}
+                    <svg class="external-icon" xmlns="http://www.w3.org/2000/svg" width="0.8em" height="0.8em" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M14 3v2h3.59l-9.83 9.83l1.41 1.41L19 6.41V10h2V3m-2 16H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7h-2v7Z"/>
+                    </svg>
+                </a>
+            </h2>
         </div>
 
-    </div>
+        <p class="project__description">
+            {{ page.description }}
+        </p>
+
+        {% if page.extra.skills %}
+        <div class="project__footer">
+            <div class="project__skills">
+                {% for skill in page.extra.skills %}
+                <span class="project__skill__item">{{ skill }}</span>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </article>
     {% endfor %}
 </div>
 {% endblock content %}
