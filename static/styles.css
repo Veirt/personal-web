@@ -118,9 +118,6 @@ img {
   max-height: 100%;
 }
 
-.text-primary {
-  color: var(--primary);
-}
 
 .navbar__item {
   display: flex;
@@ -164,26 +161,26 @@ a {
 }
 
 /* Page Headers */
-.page-header {
+.page__header {
   text-align: center;
   margin-bottom: 3rem;
 }
 
-.page-title {
+.page__title {
   font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
   color: var(--primary);
 }
 
-.page-subtitle {
+.page__subtitle {
   font-size: 1.1rem;
   color: var(--accent);
   margin: 0;
   font-weight: 400;
 }
 
-.empty-state {
+.empty__state {
   text-align: center;
   padding: 3rem 0;
   color: var(--accent);
@@ -324,6 +321,10 @@ a {
 
 .project__footer {
   margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
 }
 
 .project__skills {
@@ -348,57 +349,40 @@ a {
   transform: scale(1.05);
 }
 
+.project__date {
+  font-size: 0.85rem;
+  color: var(--accent);
+  opacity: 0.8;
+  white-space: nowrap;
+  margin-left: auto;
+}
+
 /* Home page specific styles */
-.latest-blog {
+.latest__blog {
   margin-top: 3rem;
 }
 
-.section-title {
+.section__title {
   font-size: 1.5rem;
   font-weight: 600;
   margin-bottom: 1.5rem;
   color: var(--text);
 }
 
-.blog-preview {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
-}
 
-.blog-preview-item {
-  padding: 1.5rem;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  transition: all 0.3s ease;
-}
-
-.blog-preview-item:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow);
-  border-color: var(--primary);
-}
-
-.blog-preview-title {
+.blog__title {
   margin: 0 0 0.5rem 0;
   font-size: 1.2rem;
   font-weight: 600;
 }
 
-.blog-preview-description {
+.blog__description {
   color: var(--accent);
   margin: 0 0 1rem 0;
   line-height: 1.5;
 }
 
-.blog-preview-date {
-  color: var(--accent);
-  font-size: 0.9rem;
-}
-
-.view-all-link {
+.view__all {
   display: inline-flex;
   align-items: center;
   font-weight: 500;
@@ -408,9 +392,10 @@ a {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   transition: all 0.3s ease;
+  margin-top: 10px;
 }
 
-.view-all-link:hover {
+.view__all:hover {
   background: var(--primary);
   color: var(--background);
   transform: translateY(-1px);
@@ -616,24 +601,24 @@ a {
 }
 
 /* About page styles */
-.about-content {
+.about__content {
   max-width: 45rem;
   margin: 0 auto;
 }
 
-.about-intro {
+.about__intro {
   font-size: 1.2rem;
   font-weight: 500;
   color: var(--primary);
   margin-bottom: 1.5rem;
 }
 
-.about-description {
+.about__description {
   line-height: 1.7;
   margin-bottom: 2rem;
 }
 
-.contact-info {
+.contact__info {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -641,29 +626,29 @@ a {
   margin-top: 2rem;
 }
 
-.contact-item {
+.contact__item {
   margin-bottom: 1rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 
-.contact-item:last-child {
+.contact__item:last-child {
   margin-bottom: 0;
 }
 
-.contact-item strong {
+.contact__item strong {
   color: var(--text);
   font-weight: 600;
 }
 
 /* About page styles */
-.about-content {
+.about__content {
   max-width: 42rem;
   margin: 0 auto;
 }
 
-.about-intro {
+.about__intro {
   font-size: 1.2rem;
   font-weight: 500;
   color: var(--primary);
@@ -671,30 +656,30 @@ a {
   line-height: 1.6;
 }
 
-.about-description {
+.about__description {
   font-size: 1rem;
   line-height: 1.7;
   margin-bottom: 2rem;
   color: var(--text);
 }
 
-.contact-info {
+.contact__info {
   background: var(--surface);
   padding: 2rem;
   border-radius: var(--radius);
   border: 1px solid var(--border);
 }
 
-.contact-item {
+.contact__item {
   margin-bottom: 1rem;
   line-height: 1.6;
 }
 
-.contact-item:last-child {
+.contact__item:last-child {
   margin-bottom: 0;
 }
 
-.contact-item strong {
+.contact__item strong {
   color: var(--primary);
   font-weight: 600;
 }
@@ -724,15 +709,15 @@ span.email b {
     justify-content: center;
   }
 
-  .page-header {
+  .page__header {
     margin-bottom: 2rem;
   }
 
-  .page-title {
+  .page__title {
     font-size: 2rem;
   }
 
-  .page-subtitle {
+  .page__subtitle {
     font-size: 1rem;
   }
 
@@ -761,19 +746,15 @@ span.email b {
     margin-left: 0.5rem;
   }
 
-  .blog-preview-item {
-    padding: 1.25rem;
-  }
-
-  .about-content {
+  .about__content {
     margin: 0;
   }
 
-  .contact-info {
+  .contact__info {
     padding: 1.5rem;
   }
 
-  .about-intro {
+  .about__intro {
     font-size: 1.1rem;
   }
 

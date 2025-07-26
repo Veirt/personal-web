@@ -1,0 +1,32 @@
+---
+layout: base.vto
+---
+
+<article class="blog__page">
+  <header class="blog__page__header">
+    <h1 class="blog__page__title">{{ title }}</h1>
+    <div class="blog__page__meta">
+      <time class="blog__page__date">{{ date |> date("HUMAN_DATE") }}</time>
+      {{ if tags }}
+      <div class="blog__page__tags">
+        {{ for tag of tags }}
+        <span class="tag__item">{{ tag }}</span>
+        {{ /for }}
+      </div>
+      {{ /if }}
+    </div>
+  </header>
+
+  {{ if toc }}
+  <aside class="table__of__contents">
+    <h3 class="table__of__contents__title">Table of Contents</h3>
+    <nav class="table__of__contents__nav">
+      {{ toc }}
+    </nav>
+  </aside>
+  {{ /if }}
+
+  <div class="blog__page__content">
+    {{ content }}
+  </div>
+</article>

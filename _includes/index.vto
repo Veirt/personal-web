@@ -1,0 +1,39 @@
+---
+layout: base.vto
+---
+
+<header class="page__header">
+  <h1 class="page__title">{{ title }}</h1>
+  {{ if subtitle }}
+  <p class="page__subtitle">{{ subtitle }}</p>
+  {{ /if }}
+</header>
+
+<section class="latest__blog">
+  <h2 class="section__title">Latest Blog Posts</h2>
+  
+  {{ set blogPosts = search.pages("type=blog", "date=desc") |> slice(0, 3) }}
+  {{ if blogPosts.length > 0 }}
+    {{ for post of blogPosts }}
+    <article class="blog__item snow__container">
+      <h3 class="blog__title">
+        <a class="link" href="{{ post.url }}">{{ post.title }}</a>
+      </h3>
+        <div class="blog__date">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M15 2h2v2h4v18H3V4h4V2h2v2h6zM5 8h14V6H5zm0 2v10h14V10z" />
+            </svg>
+            {{ post.date |> date("HUMAN_DATE") }}
+        </div>
+      <p class="blog__description">{{ post.description || (post.content | excerpt(150)) }}</p>
+    </article>
+    {{ /for }}
+    
+    <a class="view__all" href="/blog/">View all posts →</a>
+  {{ else }}
+    <div class="empty__state">
+      <p>No blog posts yet.</p>
+    </div>
+  {{ /if }}
+</section>
+

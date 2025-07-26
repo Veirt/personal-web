@@ -1,6 +1,0 @@
-base_url = "https://veirt.is-a.dev"
-compile_sass = false
-build_search_index = true
-
-[markdown]
-highlight_code = true
