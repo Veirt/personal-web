@@ -157,9 +157,6 @@ a {
 /*   border-radius: 2px; */
 /* } */
 
-.link:hover {
-  border-bottom: 1px solid var(--primary);
-}
 
 /* Page Headers */
 .page__header {
@@ -304,7 +301,7 @@ a {
   font-weight: 600;
 }
 
-.project__link {
+.link {
   color: var(--text);
   text-decoration: none;
   display: inline-flex;
@@ -313,7 +310,7 @@ a {
   transition: color 0.2s ease;
 }
 
-.project__link:hover {
+.link:hover {
   color: var(--primary);
 }
 
@@ -322,7 +319,7 @@ a {
   transition: opacity 0.2s ease;
 }
 
-.project__link:hover .external-icon {
+.link:hover .external-icon {
   opacity: 1;
 }
 
@@ -331,7 +328,7 @@ a {
   transition: all 0.2s ease;
 }
 
-.project__link:hover .project__arrow {
+.link:hover .project__arrow {
   opacity: 1;
   transform: translateX(2px);
 }
