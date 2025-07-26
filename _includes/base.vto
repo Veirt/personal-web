@@ -4,13 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     
-    <!-- SEO Meta Tags -->
     <title>{{ title }}{{ if title }} | {{ /if }}{{ site.title }}</title>
     <meta name="description" content="{{ description || site.description }}">
     <meta name="author" content="{{ site.author.name }}">
     <link rel="canonical" href="{{ site.url }}{{ url }}">
     
-    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="{{ if type == 'blog' }}article{{ else }}website{{ /if }}">
     <meta property="og:url" content="{{ site.url }}{{ url }}">
     <meta property="og:title" content="{{ title || site.title }}">
@@ -26,13 +24,6 @@
     {{ /if }}
     {{ /if }}
     
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="{{ site.url }}{{ url }}">
-    <meta property="twitter:title" content="{{ title || site.title }}">
-    <meta property="twitter:description" content="{{ description || site.description }}">
-    
-    <!-- Structured Data -->
     {{ if type == 'blog' }}
     <script type="application/ld+json">
     {
@@ -61,15 +52,15 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
     
-    <!-- RSS Feed -->
     <link rel="alternate" type="application/rss+xml" title="{{ site.title }} RSS Feed" href="{{ site.url }}/feed.xml">
     
-    <!-- Preconnect for performance -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="dns-prefetch" href="https://github.com">
     
     <link rel="stylesheet" href="/styles.css" />
     <link rel="stylesheet" href="/snow.css" />
+    
+     <script type="module" src="https://cdn.jsdelivr.net/npm/@hotwired/turbo@latest/dist/turbo.es2017-esm.min.js"></script>
+    
     <script src="/snow.js" defer></script>
     <script src="/theme.js" defer></script>
 </head>

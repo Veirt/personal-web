@@ -813,3 +813,37 @@ span.email b {
   color: var(--accent);
   opacity: 0.8;
 }
+
+/* Turbo page transition effects */
+.turbo-progress-bar {
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(164, 175, 203, 0.3);
+}
+
+/* Smooth transitions for page changes */
+body {
+  transition: opacity 0.2s ease-in-out;
+}
+
+body.turbo-loading {
+  opacity: 0.8;
+}
+
+/* Content fade-in animation */
+.main-content {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
