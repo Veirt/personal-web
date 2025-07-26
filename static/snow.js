@@ -19,18 +19,20 @@ function createSnow() {
   return snow;
 }
 
-let snowInterval;
-document.querySelectorAll(".snow__container").forEach((article) => {
-  article.addEventListener("mouseenter", () => {
-    if (!snowInterval) {
-      snowInterval = setInterval(() => {
-        for (let i = 0; i < 5; i++) article.appendChild(createSnow());
-      }, 500);
-    }
-  });
+document.addEventListener("turbo:load", function () {
+  let snowInterval;
+  document.querySelectorAll(".snow__container").forEach((article) => {
+    article.addEventListener("mouseenter", () => {
+      if (!snowInterval) {
+        snowInterval = setInterval(() => {
+          for (let i = 0; i < 5; i++) article.appendChild(createSnow());
+        }, 500);
+      }
+    });
 
-  article.addEventListener("mouseleave", () => {
-    clearInterval(snowInterval);
-    snowInterval = null;
+    article.addEventListener("mouseleave", () => {
+      clearInterval(snowInterval);
+      snowInterval = null;
+    });
   });
 });
