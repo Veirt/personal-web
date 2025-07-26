@@ -8,23 +8,34 @@
     <link rel="stylesheet" href="/styles.css" />
     <link rel="stylesheet" href="/snow.css" />
     <script src="/snow.js" defer></script>
+    <script src="/theme.js" defer></script>
 </head>
 
 <body>
     <nav class="navbar">
-        <a class="navbar-item {% if current_path == '/' %} active {% endif %}" href="/">home</a>
-        <a class="navbar-item {% if current_path == '/blog/' %} active {% endif %}" href="/blog">blog</a>
-        <a class="navbar-item {% if current_path == '/projects/' %} active {% endif %}" href="/projects">projects</a>
-        <a class="navbar-item {% if current_path == '/about/' %} active {% endif %}" href="/about">about</a>
-        <a class="navbar-item" target="_blank" href="https://github.com/Veirt">
-            github
-            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
-                <g>
-                    <path d="M15.64 7.025h-3.622v-2h7v7h-2v-3.55l-4.914 4.914l-1.414-1.414z" />
-                    <path d="M10.982 6.975h-6v12h12v-6h-2v4h-8v-8h4z" />
-                </g>
+        <div class="navbar__links">
+            <a class="navbar__item {% if current_path == '/' %} active {% endif %}" href="/">home</a>
+            <a class="navbar__item {% if current_path == '/blog/' %} active {% endif %}" href="/blog">blog</a>
+            <a class="navbar__item {% if current_path == '/projects/' %} active {% endif %}" href="/projects">projects</a>
+            <a class="navbar__item {% if current_path == '/about/' %} active {% endif %}" href="/about">about</a>
+            <a class="navbar__item" target="_blank" href="https://github.com/Veirt">
+                github
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+                    <g>
+                        <path d="M15.64 7.025h-3.622v-2h7v7h-2v-3.55l-4.914 4.914l-1.414-1.414z" />
+                        <path d="M10.982 6.975h-6v12h12v-6h-2v4h-8v-8h4z" />
+                    </g>
+                </svg>
+            </a>
+        </div>
+        <button class="theme__toggle" id="theme-toggle" aria-label="Toggle theme">
+            <svg class="theme__icon theme__icon--sun" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M12 2v2a8 8 0 0 0 0 16v2c5.523 0 10-4.477 10-10S17.523 2 12 2"/>
             </svg>
-        </a>
+            <svg class="theme__icon theme__icon--moon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M12 3a6 6 0 0 0 9 5.2A9 9 0 1 1 8.2 3A6 6 0 0 0 12 3"/>
+            </svg>
+        </button>
     </nav>
 
     <section class="section">
