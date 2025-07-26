@@ -2,8 +2,6 @@ import lume from "lume/mod.ts";
 import cacheBusting from "lume/middlewares/cache_busting.ts";
 import code_highlight from "lume/plugins/code_highlight.ts";
 import json_ld from "lume/plugins/json_ld.ts";
-import mdx from "lume/plugins/mdx.ts";
-import nav from "lume/plugins/nav.ts";
 import icons from "lume/plugins/icons.ts";
 import esbuild from "lume/plugins/esbuild.ts";
 import lightningcss from "lume/plugins/lightningcss.ts";
@@ -43,8 +41,6 @@ const site = lume(
 site.use(code_highlight({}));
 site.use(svgo());
 site.use(json_ld());
-site.use(mdx());
-site.use(nav());
 site.use(icons());
 site.use(esbuild());
 site.use(terser());
