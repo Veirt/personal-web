@@ -9,6 +9,7 @@ import esbuild from "lume/plugins/esbuild.ts";
 import lightningcss from "lume/plugins/lightningcss.ts";
 import check_urls from "lume/plugins/check_urls.ts";
 import favicon from "lume/plugins/favicon.ts";
+import svgo from "lume/plugins/svgo.ts";
 import minify_html from "lume/plugins/minify_html.ts";
 import brotli from "lume/plugins/brotli.ts";
 import sitemap from "lume/plugins/sitemap.ts";
@@ -40,6 +41,7 @@ const site = lume(
 );
 
 site.use(code_highlight({}));
+site.use(svgo());
 site.use(json_ld());
 site.use(mdx());
 site.use(nav());

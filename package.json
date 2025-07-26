@@ -4,6 +4,7 @@
     "markdown-it-deflist": "^3.0.0",
     "purgecss": "npm:purgecss",
     "purgecss-from-html": "npm:purgecss-from-html",
+    "svgo": "^4.0.0",
     "terser": "npm:terser"
   }
 }
