@@ -1,4 +1,7 @@
 import lume from "lume/mod.ts";
+import toc, {
+  linkInsideHeader,
+} from "https://deno.land/x/lume_markdown_plugins@v0.9.0/toc.ts";
 import cacheBusting from "lume/middlewares/cache_busting.ts";
 import code_highlight from "lume/plugins/code_highlight.ts";
 import json_ld from "lume/plugins/json_ld.ts";
@@ -38,6 +41,11 @@ const site = lume(
   },
 );
 
+site.use(
+  toc({
+    anchor: linkInsideHeader(),
+  }),
+);
 site.use(code_highlight({}));
 site.use(svgo());
 site.use(json_ld());

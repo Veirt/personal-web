@@ -19,7 +19,7 @@ in October 2022, I decided to buy a new machine for my server, that's powerful e
 I bought it used for ~189 USD on my local online store, you could probably buy it cheaper on eBay. Though it was probably overpriced, but I still think it's worth it for
 me.
 
-# My Home Server (Now)
+## My Home Server (Now)
 
 This is what my home server looks like now. I've been using the EliteDesk unit for almost 2 years, I also reuse
 my old gaming laptop as a server.
@@ -52,7 +52,7 @@ These are the specification of the machines I'm running:
 With that three not-so-powerful machines, you probably wonder what I'm running. And in this post, I would like to show
 you what I'm actually running on these machines.
 
-# What is Running Inside My Server
+## What is Running Inside My Server
 
 Here is what my [self-made home server dashboard](https://github.com/veirt/vesta) looks like:
 
@@ -118,7 +118,7 @@ There are quite a few services, aren't there? I will explain what all of those s
     as a server.
   - [Memento Mori Helper](https://github.com/moonheart/mementomori-helper): There is nothing to explain here.
 
-# Conclusion
+## Conclusion
 
 Setting up and maintaining a home server is really fun. At first, I only started because I want to host a game server. But, starting with
 Pi-Hole, I started looking for self-hosted applications that might be useful. There was also a time when I scrolled
