@@ -10,7 +10,7 @@ date: 2024-12-12
 
 ## Tutortoise: Your Perfect Tutor is Around You
 
-![Pitch Deck](/projects/tutortoise/pitchdeck.png)
+<img alt="Pitch Deck" src="/projects/tutortoise/pitchdeck.png" transform-images="avif" />
 
 Tutortoise is a platform that helps connect learners with the right tutors
 based on their needs—covering subject matter, budget, schedule, and preferred
@@ -31,4 +31,4 @@ together as a cross-functional team.
 
 ## Infrastructure Overview
 
-![Infrastructure](/projects/tutortoise/infrastructure.png)
+<img alt="Infrastructure" src="/projects/tutortoise/infrastructure.png" transform-images="avif" />

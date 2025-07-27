@@ -21,6 +21,8 @@ import purgecss from "lume/plugins/purgecss.ts";
 import robots from "lume/plugins/robots.ts";
 import terser from "lume/plugins/terser.ts";
 import metas from "lume/plugins/metas.ts";
+import picture from "lume/plugins/picture.ts";
+import transformImages from "lume/plugins/transform_images.ts";
 
 const site = lume(
   {
@@ -55,8 +57,11 @@ site.use(terser());
 site.use(lightningcss());
 site.use(metas());
 site.use(check_urls());
-site.use(favicon());
+site.use(favicon({ input: "static/favicon.png" }));
 site.use(minify_html());
+site.use(purgecss());
+site.use(picture());
+site.use(transformImages());
 site.use(brotli());
 site.use(sitemap());
 site.use(date());
@@ -70,6 +75,8 @@ site.use(
     },
   }),
 );
+site.use(search());
+site.use(robots());
 
 // Add date filter for better formatting
 site.filter("date", (date: Date, format: string) => {
@@ -100,9 +107,6 @@ site.filter("readingTime", (content: string) => {
   const minutes = Math.ceil(words / wordsPerMinute);
   return minutes;
 });
-site.use(search());
-site.use(purgecss());
-site.use(robots());
 
 site.copy("CNAME");
 
