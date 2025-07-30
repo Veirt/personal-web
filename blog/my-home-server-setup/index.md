@@ -11,7 +11,7 @@ Hey! This is my first blog post. I've been down the home server and self-hosted 
 I started this hobby in July 2022, with [Orange Pi Zero 2](http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/details/Orange-Pi-Zero-2.html)
 as my first server.
 
-<img width="700" src="orangepi.jpg" alt="Orange Pi Zero 2" transform-images="avif" />
+<img width="700" src="/blog/my-home-server-setup/orangepi.jpg" alt="Orange Pi Zero 2" transform-images="avif" />
 
 I bought Zero 2 as the alternative for Raspberry Pi 4, because it was too overpriced back then. Long story short,
 in October 2022, I decided to buy a new machine for my server, that's powerful enough to host a game private server. It's one of the [TinyMiniMicro](https://www.servethehome.com/introducing-project-tinyminimicro-home-lab-revolution/) unit, an
@@ -24,7 +24,7 @@ me.
 This is what my home server looks like now. I've been using the EliteDesk unit for almost 2 years, I also reuse
 my old gaming laptop as a server.
 
-<img src="server-now.jpg" alt="My Server (Now)" transform-images="avif" />
+<img src="/blog/my-home-server-setup/server-now.jpg" alt="My Server (Now)" transform-images="avif" />
 
 These are the specification of the machines I'm running:
 
@@ -56,7 +56,7 @@ you what I'm actually running on these machines.
 
 Here is what my [self-made home server dashboard](https://github.com/veirt/vesta) looks like:
 
-<img src="dashboard.png" alt="Home Server Dashboard" transform-images="avif" />
+<img src="/blog/my-home-server-setup/dashboard.png" alt="Home Server Dashboard" transform-images="avif" />
 
 There are quite a few services, aren't there? I will explain what all of those services/applications do, starting from the top-left.
 
