@@ -5,7 +5,7 @@ title: My Home Server Setup
 description: A look at my home server setup. I share what hardware I use and the different services I run for media, backups, and other tasks.
 date: 2024-06-29
 tags: ["homelab", "server", "docker", "monitoring"]
-og_image: /blog/my-home-server-setup/dashboard.png
+og_image: /blog/my-home-server-setup/orangepi.jpg
 ---
 
 Hey! This is my first blog post. I've been down the home server and self-hosted rabbit hole for 2 years now.
