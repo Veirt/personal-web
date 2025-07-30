@@ -15,7 +15,6 @@ import minify_html from "lume/plugins/minify_html.ts";
 import brotli from "lume/plugins/brotli.ts";
 import sitemap from "lume/plugins/sitemap.ts";
 import feed from "lume/plugins/feed.ts";
-import search from "lume/plugins/search.ts";
 import date from "lume/plugins/date.ts";
 import purgecss from "lume/plugins/purgecss.ts";
 import robots from "lume/plugins/robots.ts";
@@ -44,22 +43,31 @@ const site = lume(
 );
 
 site.use(
+  code_highlight({
+    theme: {
+      name: "nord",
+      cssFile: "highlight-nord.css",
+    },
+  }),
+);
+
+site.use(
   toc({
     anchor: linkInsideHeader(),
   }),
 );
-site.use(code_highlight({}));
-site.use(svgo());
-site.use(json_ld());
-site.use(icons());
+
 site.use(esbuild());
 site.use(terser());
 site.use(lightningcss());
+site.use(svgo());
+site.use(json_ld());
+site.use(icons());
 site.use(metas());
 site.use(check_urls());
 site.use(favicon({ input: "static/favicon.png" }));
-site.use(minify_html());
 site.use(purgecss());
+site.use(minify_html());
 site.use(picture());
 site.use(transformImages());
 site.use(brotli());
@@ -75,7 +83,6 @@ site.use(
     },
   }),
 );
-site.use(search());
 site.use(robots());
 
 // Add date filter for better formatting
@@ -94,12 +101,6 @@ site.filter("date", (date: Date, format: string) => {
   return date.toISOString();
 });
 
-// Add excerpt filter for blog previews
-site.filter("excerpt", (content: string, length = 150) => {
-  const text = content.replace(/<[^>]*>/g, ""); // Strip HTML tags
-  return text.length > length ? text.slice(0, length) + "..." : text;
-});
-
 // Add reading time filter
 site.filter("readingTime", (content: string) => {
   const wordsPerMinute = 200;
@@ -107,8 +108,6 @@ site.filter("readingTime", (content: string) => {
   const minutes = Math.ceil(words / wordsPerMinute);
   return minutes;
 });
-
-site.copy("CNAME");
 
 // Set up site data
 site.data("site", {

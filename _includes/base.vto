@@ -15,16 +15,15 @@
     <meta property="og:description" content="{{ description || site.description }}">
     <meta property="og:site_name" content="{{ site.title }}">
     {{ if type == 'blog' }}
-    <meta property="article:author" content="{{ site.author.name }}">
-    <meta property="article:published_time" content="{{ date |> date('DATETIME') }}">
-    {{ if tags }}
-    {{ for tag of tags }}
-    <meta property="article:tag" content="{{ tag }}">
-    {{ /for }}
-    {{ /if }}
+        <meta property="article:author" content="{{ site.author.name }}">
+        <meta property="article:published_time" content="{{ date |> date('DATETIME') }}">
+        {{ if tags }}
+            {{ for tag of tags }}
+                <meta property="article:tag" content="{{ tag }}">
+            {{ /for }}
+        {{ /if }}
     {{ /if }}
     
-    <!-- Favicon and Icons -->
     <link rel="icon" href="/favicon.png" sizes="any">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="manifest" href="/site.webmanifest">
@@ -32,14 +31,18 @@
     <link rel="alternate" type="application/rss+xml" title="{{ site.title }} RSS Feed" href="{{ site.url }}/feed.xml">
     
     <link rel="dns-prefetch" href="https://github.com">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
     
     <link rel="stylesheet" href="/style.css" />
-    <link rel="stylesheet" href="/snow.css" />
+    <link rel="preload" href="/snow.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/snow.css"></noscript>
+
+    <link rel="preload" href="/highlight-nord.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/highlight-nord.css"></noscript>
     
     <script src="/snow.js" defer></script>
     <script src="/theme.js" defer></script>
     <script type="module" src="https://cdn.jsdelivr.net/npm/@hotwired/turbo@latest/dist/turbo.es2017-esm.min.js"></script>
-    
 </head>
 
 <body>

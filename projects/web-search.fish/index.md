@@ -8,23 +8,55 @@ technologies: ["Fish", "Shell Scripting"]
 date: 2024-10-14
 ---
 
-`web-search.fish` is a lightweight Fish shell plugin that lets you quickly search the web straight from your terminal.
+## web-search.fish – Quick Web Search from the Fish Shell
 
-It supports a wide variety of search “contexts” out of the box—like Google, DuckDuckGo, GitHub, StackOverflow, YouTube, Brave, and more. You can search like so:
+`web-search.fish` is a simple plugin I made for the Fish shell to open web
+searches directly from the terminal. It started as a way to speed up repetitive
+searches without reaching for the mouse—just type and go.
 
-```fish
+<img src="https://veirt.github.io/web-search.fish/demo.gif" alt="Preview" />
+
+Inspired by the `web-search` plugin from oh-my-zsh, this version is lightweight, built specifically for Fish, and doesn't require anything fancy—just `xdg-open` to launch the browser.
+
+You can search with:
+
+```shell
 web-search google your query here
 ```
 
-Or define convenient aliases in your `config.fish`, for example:
+Or set up short aliases for even quicker access:
 
-```fish
+```shell
 alias github="web-search github"
 alias duck="web-search duckduckgo"
 ```
 
-It’s super simple to customize: just set environment variables with the `WEB_SEARCH_` prefix to add your own contexts or override existing ones.
+It supports a good number of search contexts by default, like Google,
+DuckDuckGo, GitHub, StackOverflow, YouTube, Brave, and many others. You can
+also define your own by setting an environment variable with the `WEB_SEARCH_`
+prefix. No need to touch the code—just update your `config.fish`.
 
-The tool is minimal by design—no heavy dependencies, just uses `xdg-open` to launch your browser—and lets you stay focused in your terminal workflow.
+## How to Install
 
-If you run into setup issues (like mismatched default browser settings), the README includes straightforward tips to resolve them.
+With [Fisher](https://github.com/jorgebucaran/fisher):
+
+```shell
+fisher install veirt/web-search.fish
+```
+
+Or manually:
+
+```shell
+curl -sL https://raw.githubusercontent.com/Veirt/web-search.fish/main/install.fish | fish
+```
+
+## Why?
+
+Mostly just to make terminal life a bit smoother. I often found myself
+switching between the terminal and browser just to do quick lookups, and this
+plugin helps avoid that. It's not trying to be much—just a small tool that fits
+nicely into a terminal-first setup.
+
+## Credits
+
+Built with ideas from [oh-my-zsh/web-search](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/web-search). That plugin made things easier on Zsh—I just wanted something similar for Fish.
