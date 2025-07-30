@@ -82,29 +82,56 @@ function createSnow(options = {}) {
 
 document.addEventListener("turbo:load", function () {
   const intervals = [];
+  let hoverSnowInterval;
 
-  const cleanup = () => {
+  const stopPermanentSnow = () => {
     intervals.forEach((interval) => clearInterval(interval));
     intervals.length = 0;
   };
 
+  const startPermanentSnow = () => {
+    stopPermanentSnow();
+
+    const nowBanner = document.querySelector(".now__banner");
+    if (nowBanner) {
+      nowBanner.classList.add("snow__container");
+
+      const bannerInterval = setInterval(() => {
+        const fragment = document.createDocumentFragment();
+        for (let i = 0; i < 3; i++) {
+          fragment.appendChild(createSnow());
+        }
+        nowBanner.appendChild(fragment);
+      }, 800);
+      intervals.push(bannerInterval);
+    }
+
+    const pageHeader = document.querySelector(".page__header");
+    if (pageHeader) {
+      pageHeader.classList.add("snow__container");
+
+      const headerInterval = setInterval(() => {
+        const fragment = document.createDocumentFragment();
+        for (let i = 0; i < 2; i++) {
+          fragment.appendChild(
+            createSnow({ smallSize: true, transparent: true }),
+          );
+        }
+        pageHeader.appendChild(fragment);
+      }, 1200);
+      intervals.push(headerInterval);
+    }
+  };
+
+  const cleanup = () => {
+    stopPermanentSnow();
+    if (hoverSnowInterval) {
+      clearInterval(hoverSnowInterval);
+      hoverSnowInterval = null;
+    }
+  };
+
   document.addEventListener("turbo:before-visit", cleanup);
-
-  let hoverSnowInterval;
-
-  const nowBanner = document.querySelector(".now__banner");
-  if (nowBanner) {
-    nowBanner.classList.add("snow__container");
-
-    const bannerInterval = setInterval(() => {
-      const fragment = document.createDocumentFragment();
-      for (let i = 0; i < 3; i++) {
-        fragment.appendChild(createSnow());
-      }
-      nowBanner.appendChild(fragment);
-    }, 800);
-    intervals.push(bannerInterval);
-  }
 
   document
     .querySelectorAll(".snow__container:not(.now__banner)")
@@ -129,19 +156,13 @@ document.addEventListener("turbo:load", function () {
       });
     });
 
-  const pageHeader = document.querySelector(".page__header");
-  if (pageHeader) {
-    pageHeader.classList.add("snow__container");
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      cleanup();
+    } else {
+      startPermanentSnow();
+    }
+  });
 
-    const headerInterval = setInterval(() => {
-      const fragment = document.createDocumentFragment();
-      for (let i = 0; i < 2; i++) {
-        fragment.appendChild(
-          createSnow({ smallSize: true, transparent: true }),
-        );
-      }
-      pageHeader.appendChild(fragment);
-    }, 1200);
-    intervals.push(headerInterval);
-  }
+  startPermanentSnow();
 });
