@@ -79,7 +79,8 @@ site.use(
     query: "type=blog",
     info: {
       title: "veirt's blog",
-      description: "Software Engineer | Full-stack · DevOps · SysAdmin",
+      description:
+        "wandering the web, building and taking things apart — mostly to learn, sometimes to solve.",
     },
   }),
 );
@@ -113,7 +114,7 @@ site.filter("readingTime", (content: string) => {
 site.data("site", {
   title: "veirt's website",
   description:
-    "Software Engineer | Full-stack · DevOps · SysAdmin | Building modern web applications, exploring new technologies, and sharing knowledge through code.",
+    "wandering the web, building and taking things apart — mostly to learn, sometimes to solve.",
   url: "https://veirt.is-a.dev",
   author: {
     name: "veirt",

@@ -1,7 +1,7 @@
 {
   "name": "Veirt's Website",
   "short_name": "Veirt",
-  "description": "Software Engineer | Full-stack · DevOps · SysAdmin",
+  "description": "wandering the web, building and taking things apart — mostly to learn, sometimes to solve.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#060709",
