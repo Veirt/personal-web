@@ -22,11 +22,12 @@ import terser from "lume/plugins/terser.ts";
 import metas from "lume/plugins/metas.ts";
 import picture from "lume/plugins/picture.ts";
 import transformImages from "lume/plugins/transform_images.ts";
+import slugifyUrls from "lume/plugins/slugify_urls.ts";
 
 const site = lume(
   {
     src: "./",
-    location: new URL("https://veirt-is.a.dev"),
+    location: new URL("https://veirt.is-a.dev"),
     dest: "./_site",
     server: {
       middlewares: [cacheBusting()],
@@ -68,6 +69,7 @@ site.use(check_urls());
 site.use(favicon({ input: "static/favicon.png" }));
 site.use(purgecss());
 site.use(minify_html());
+site.use(slugifyUrls());
 site.use(picture());
 site.use(transformImages());
 site.use(brotli());

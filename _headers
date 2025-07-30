@@ -1,0 +1,30 @@
+# Headers for performance and security
+# Add this to your hosting platform (Netlify, Vercel, etc.)
+
+/*
+  # Security headers
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  
+  # Performance headers
+  Cache-Control: public, max-age=31536000, immutable
+  
+# Different caching for HTML files
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+# Long cache for static assets
+/style.css
+  Cache-Control: public, max-age=31536000, immutable
+  
+/snow.css  
+  Cache-Control: public, max-age=31536000, immutable
+  
+/theme.js
+  Cache-Control: public, max-age=31536000, immutable
+  
+/snow.js
+  Cache-Control: public, max-age=31536000, immutable
