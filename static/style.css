@@ -52,6 +52,13 @@ h1 {
     margin-bottom: 1em;
 }
 
+article h1,
+aside h1,
+nav h1,
+section h1 {
+    font-size: 2.2em;
+}
+
 h2 {
     font-size: 1.8em;
 }
@@ -283,7 +290,9 @@ img {
 
 a {
     color: var(--primary);
-    text-decoration: none;
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, var(--primary) 50%, transparent);
+    text-underline-offset: 0.2em;
     transition: all 0.2s ease;
     width: fit-content;
 }
