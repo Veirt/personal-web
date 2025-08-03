@@ -7,7 +7,7 @@ layout: base.vto
     <h1 class="blog__page__title" itemprop="name">{{ title }}</h1>
     <div class="blog__page__meta">
       {{ if date }}
-      <time class="blog__page__date" datetime="{{ date |> date('DATETIME') }}" itemprop="dateCreated">{{ date |> date("HUMAN_DATE") }}</time>
+          <time class="blog__page__date" datetime="{{ date |> date('DATETIME') }}" itemprop="dateCreated">{{ date |> date("MMMM yyyy") }}</time>
       {{ /if }}
       {{ if tags }}
       <div class="blog__page__skills" aria-label="Project tags">
@@ -65,6 +65,17 @@ layout: base.vto
             <span class="toc__indicator"></span>
             <span class="toc__text">{{ item.text }}</span>
           </a>
+          {{ if item.children.length  }}
+            <ul class="table__of__contents__sublist">
+                {{ for subitem of item.children }}
+                    <li class="table__of__contents__subitem">
+                        <a href="{{ subitem.url }}" class="table__of__contents__link" data-level="{{ subitem.level }}">
+                            <span class="toc__indicator"></span>
+                            <span class="toc__text">{{ subitem.text }}</span>
+                        </a>
+                    </li>
+                {{ /for }}
+          {{ /if}}
         </li>
         {{ /for }}
       </ul>
