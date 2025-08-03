@@ -3,35 +3,54 @@ layout: base.vto
 ---
 
 <header class="page__header">
-  <h1 class="page__title">{{ title }}</h1>
-  {{ if subtitle }}
-  <p class="page__subtitle">{{ subtitle }}</p>
-  {{ /if }}
+    <h1 class="page__title">{{ title }}</h1>
+    {{ if subtitle }}
+        <p class="page__subtitle">{{ subtitle }}</p>
+    {{ /if }}
 </header>
 
-{{ if search.pages("type=blog").length  == 0 }}
+{{ if search.pages("type=blog").length == 0 }}
     <section class="empty__state" role="status" aria-live="polite">
         <p>No posts yet.</p>
     </section>
 {{ else }}
     <section role="region" aria-label="Blog posts">
         {{ for post of search.pages("type=blog", "date=desc") }}
-        <article class="blog__item snow__container">
-            <header>
-                <h2 class="blog__title">
-                    <a class="link" href="{{ post.url }}" aria-describedby="post-{{ post.title |> slugify }}-desc">{{ post.title }}</a>
-                </h2>
-                <div class="blog__date">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true">
-                        <path fill="currentColor" d="M15 2h2v2h4v18H3V4h4V2h2v2h6zM5 8h14V6H5zm0 2v10h14V10z" />
-                    </svg>
-                    <time datetime="{{ post.date |> date('DATETIME') }}">{{ post.date |> date("HUMAN_DATE") }}</time>
-                </div>
-            </header>
-            <p class="blog__description" id="post-{{ post.title |> slugify }}-desc">
-                {{ post.description }}
-            </p>
-        </article>
+            <article class="blog__item snow__container">
+                <header>
+                    <h2 class="blog__title">
+                        <a
+                            class="link"
+                            href="{{ post.url }}"
+                            aria-describedby="post-{{ post.title |> slugify }}-desc"
+                        >{{ post.title }}</a>
+                    </h2>
+                    <div class="blog__date">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="1em"
+                            height="1em"
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                        >
+                            <path
+                                fill="currentColor"
+                                d="M15 2h2v2h4v18H3V4h4V2h2v2h6zM5 8h14V6H5zm0 2v10h14V10z"
+                            />
+                        </svg>
+                        <time datetime="{{ post.date |> date('DATETIME') }}">{{
+                            post.date
+                            |> date("HUMAN_DATE")
+                        }}</time>
+                    </div>
+                </header>
+                <p
+                    class="blog__description"
+                    id="post-{{ post.title |> slugify }}-desc"
+                >
+                    {{ post.description }}
+                </p>
+            </article>
         {{ /for }}
     </section>
 {{ /if }}

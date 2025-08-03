@@ -9,11 +9,10 @@ date: 2021-09-30
 ---
 
 > My first reverse engineering library. Originally written in Python and now
-> rewritten in Rust to learn more about binary parsing and improve
-> performance.
+> rewritten in Rust to learn more about binary parsing and improve performance.
 
-`dnpak.py` is a Python package (with Rust backend) to manipulate **Dragon
-Nest** `.pak` files. It is based on data definitions from
+`dnpak.py` is a Python package (with Rust backend) to manipulate **Dragon Nest**
+`.pak` files. It is based on data definitions from
 [vincentzhang96/DragonNestFileFormats](http://vincentzhang96.github.io/DragonNestFileFormats/files/pak).
 
 You can:

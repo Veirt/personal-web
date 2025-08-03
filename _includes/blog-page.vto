@@ -3,53 +3,89 @@ layout: base.vto
 ---
 
 <article class="blog__page" itemscope itemtype="https://schema.org/BlogPosting">
-  <header class="blog__page__header">
-    <h1 class="blog__page__title" itemprop="headline">{{ title }}</h1>
-    <div class="blog__page__meta">
-      <time class="blog__page__date" datetime="{{ date |> date('DATETIME') }}" itemprop="datePublished">{{ date |> date("HUMAN_DATE") }}</time>
-      <span class="reading-time" aria-label="Estimated reading time">{{ content |> readingTime }} min read</span>
-      {{ if tags }}
-      <div class="blog__page__tags" aria-label="Post tags">
-        {{ for tag of tags }}
-        <span class="tag__item" itemprop="keywords">{{ tag }}</span>
-        {{ /for }}
-      </div>
-      {{ /if }}
-    </div>
-    
-    <!-- Author info for SEO -->
-    <div class="author-info" itemprop="author" itemscope itemtype="https://schema.org/Person" style="display: none;">
-      <span itemprop="name">{{ site.author.name }}</span>
-      <link itemprop="url" href="{{ site.author.url }}">
-    </div>
-  </header>
+    <header class="blog__page__header">
+        <h1 class="blog__page__title" itemprop="headline">{{ title }}</h1>
+        <div class="blog__page__meta">
+            <time
+                class="blog__page__date"
+                datetime="{{ date |> date('DATETIME') }}"
+                itemprop="datePublished"
+            >{{ date |> date("HUMAN_DATE") }}</time>
+            <span class="reading-time" aria-label="Estimated reading time">{{
+                    content
+                    |> readingTime
+                }} min read</span>
+            {{ if tags }}
+                <div class="blog__page__tags" aria-label="Post tags">
+                    {{ for tag of tags }}
+                        <span class="tag__item" itemprop="keywords">{{
+                            tag
+                        }}</span>
+                    {{ /for }}
+                </div>
+            {{ /if }}
+        </div>
 
-  {{ if toc.length > 0 }}
-  <aside class="table__of__contents" role="navigation" aria-labelledby="toc-heading">
-    <div class="table__of__contents__header">
-      <h2 class="table__of__contents__title" id="toc-heading">
-        <svg class="table__of__contents__icon" xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24" aria-hidden="true">
-          <path fill="currentColor" d="M3 9h14V7H3v2zm0 4h14v-2H3v2zm0 4h14v-2H3v2zm16 0h2v-2h-2v2zm0-10v2h2V7h-2zm0 6h2v-2h-2v2z"/>
-        </svg>
-        Table of Contents
-      </h2>
-    </div>
-    <nav class="table__of__contents__nav">
-      <ol class="table__of__contents__list">
-        {{ for item of toc }}
-        <li class="table__of__contents__item">
-          <a href="{{ item.url }}" class="table__of__contents__link" data-level="{{ item.level }}">
-            <span class="toc__indicator" aria-hidden="true"></span>
-            <span class="toc__text">{{ item.text }}</span>
-          </a>
-        </li>
-        {{ /for }}
-      </ol>
-    </nav>
-  </aside>
-  {{ /if }}
+        <!-- Author info for SEO -->
+        <div
+            class="author-info"
+            itemprop="author"
+            itemscope
+            itemtype="https://schema.org/Person"
+            style="display: none"
+        >
+            <span itemprop="name">{{ site.author.name }}</span>
+            <link itemprop="url" href="{{ site.author.url }}">
+        </div>
+    </header>
 
-  <div class="blog__page__content" itemprop="articleBody">
-    {{ content }}
-  </div>
+    {{ if toc.length > 0 }}
+        <aside
+            class="table__of__contents"
+            role="navigation"
+            aria-labelledby="toc-heading"
+        >
+            <div class="table__of__contents__header">
+                <h2 class="table__of__contents__title" id="toc-heading">
+                    <svg
+                        class="table__of__contents__icon"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="1.2em"
+                        height="1.2em"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                    >
+                        <path
+                            fill="currentColor"
+                            d="M3 9h14V7H3v2zm0 4h14v-2H3v2zm0 4h14v-2H3v2zm16 0h2v-2h-2v2zm0-10v2h2V7h-2zm0 6h2v-2h-2v2z"
+                        />
+                    </svg>
+                    Table of Contents
+                </h2>
+            </div>
+            <nav class="table__of__contents__nav">
+                <ol class="table__of__contents__list">
+                    {{ for item of toc }}
+                        <li class="table__of__contents__item">
+                            <a
+                                href="{{ item.url }}"
+                                class="table__of__contents__link"
+                                data-level="{{ item.level }}"
+                            >
+                                <span
+                                    class="toc__indicator"
+                                    aria-hidden="true"
+                                ></span>
+                                <span class="toc__text">{{ item.text }}</span>
+                            </a>
+                        </li>
+                    {{ /for }}
+                </ol>
+            </nav>
+        </aside>
+    {{ /if }}
+
+    <div class="blog__page__content" itemprop="articleBody">
+        {{ content }}
+    </div>
 </article>

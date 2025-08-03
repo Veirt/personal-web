@@ -16,7 +16,9 @@ searches without reaching for the mouse—just type and go.
 
 <img src="https://veirt.github.io/web-search.fish/demo.gif" alt="Preview" />
 
-Inspired by the `web-search` plugin from oh-my-zsh, this version is lightweight, built specifically for Fish, and doesn't require anything fancy—just `xdg-open` to launch the browser.
+Inspired by the `web-search` plugin from oh-my-zsh, this version is lightweight,
+built specifically for Fish, and doesn't require anything fancy—just `xdg-open`
+to launch the browser.
 
 You can search with:
 
@@ -32,8 +34,8 @@ alias duck="web-search duckduckgo"
 ```
 
 It supports a good number of search contexts by default, like Google,
-DuckDuckGo, GitHub, StackOverflow, YouTube, Brave, and many others. You can
-also define your own by setting an environment variable with the `WEB_SEARCH_`
+DuckDuckGo, GitHub, StackOverflow, YouTube, Brave, and many others. You can also
+define your own by setting an environment variable with the `WEB_SEARCH_`
 prefix. No need to touch the code—just update your `config.fish`.
 
 ## How to Install
@@ -52,11 +54,13 @@ curl -sL https://raw.githubusercontent.com/Veirt/web-search.fish/main/install.fi
 
 ## Why?
 
-Mostly just to make terminal life a bit smoother. I often found myself
-switching between the terminal and browser just to do quick lookups, and this
-plugin helps avoid that. It's not trying to be much—just a small tool that fits
-nicely into a terminal-first setup.
+Mostly just to make terminal life a bit smoother. I often found myself switching
+between the terminal and browser just to do quick lookups, and this plugin helps
+avoid that. It's not trying to be much—just a small tool that fits nicely into a
+terminal-first setup.
 
 ## Credits
 
-Built with ideas from [oh-my-zsh/web-search](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/web-search). That plugin made things easier on Zsh—I just wanted something similar for Fish.
+Built with ideas from
+[oh-my-zsh/web-search](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/web-search).
+That plugin made things easier on Zsh—I just wanted something similar for Fish.

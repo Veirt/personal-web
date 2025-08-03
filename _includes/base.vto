@@ -1,158 +1,226 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="{{ site.lang || 'en' }}">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="robots" content="index, follow" />
-    <meta name="googlebot" content="index, follow" />
-    
-    <title>{{ title }}{{ if title }} | {{ /if }}{{ site.title }}</title>
-    <meta name="description" content="{{ description || site.description }}">
-    <meta name="author" content="{{ site.author.name }}">
-    <meta name="keywords" content="{{ site.keywords |> join(', ') }}{{ if tags }}, {{ tags |> join(', ') }}{{ /if }}">
-    <link rel="canonical" href="{{ site.url }}{{ url }}">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="robots" content="index, follow" />
+        <meta name="googlebot" content="index, follow" />
 
-    <meta name="google-site-verification" content="a5qBFQJgk8sV0G6bSwwx4D53rpPMXScRcsSu2SXxDEs" />
+        <title>{{ title }}{{ if title }} | {{ /if }}{{ site.title }}</title>
+        <meta
+            name="description"
+            content="{{ description || site.description }}"
+        >
+        <meta name="author" content="{{ site.author.name }}">
+        <meta
+            name="keywords"
+            content="{{ site.keywords |> join(', ') }}{{ if tags }}, {{ tags |> join(', ') }}{{ /if }}"
+        >
+        <link rel="canonical" href="{{ site.url }}{{ url }}">
 
-    <!-- Open Graph -->
-    <meta property="og:type" content="{{ if type == 'blog' }}article{{ else }}website{{ /if }}">
-    <meta property="og:url" content="{{ site.url }}{{ url }}">
-    <meta property="og:title" content="{{ title || site.title }}">
-    <meta property="og:description" content="{{ description || site.description }}">
-    <meta property="og:site_name" content="{{ site.title }}">
-    <meta property="og:locale" content="en_US">
-    {{ if og_image }}
-    <meta property="og:image" content="{{ site.url }}{{ og_image }}">
-    {{ else }}
-    <meta property="og:image" content="{{ site.url }}/favicon.png">
-    {{ /if }}
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
-    <meta property="og:image:type" content="image/png">
+        <meta
+            name="google-site-verification"
+            content="a5qBFQJgk8sV0G6bSwwx4D53rpPMXScRcsSu2SXxDEs"
+        />
 
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="{{ title || site.title }}">
-    <meta name="twitter:description" content="{{ description || site.description }}">
-    <meta name="twitter:url" content="{{ site.url }}{{ url }}">
-    {{ if og_image }}
-    <meta name="twitter:image" content="{{ site.url }}{{ og_image }}">
-    {{ else }}
-    <meta name="twitter:image" content="{{ site.url }}/favicon.png">
-    {{ /if }}
-    {{ if type == 'blog' }}
-        <meta property="article:author" content="{{ site.author.name }}">
-        <meta property="article:published_time" content="{{ date |> date('DATETIME') }}">
-        {{ if tags }}
-            {{ for tag of tags }}
-                <meta property="article:tag" content="{{ tag }}">
-            {{ /for }}
+        <!-- Open Graph -->
+        <meta
+            property="og:type"
+            content="{{ if type == 'blog' }}article{{ else }}website{{ /if }}"
+        >
+        <meta property="og:url" content="{{ site.url }}{{ url }}">
+        <meta property="og:title" content="{{ title || site.title }}">
+        <meta
+            property="og:description"
+            content="{{ description || site.description }}"
+        >
+        <meta property="og:site_name" content="{{ site.title }}">
+        <meta property="og:locale" content="en_US">
+        {{ if og_image }}
+            <meta property="og:image" content="{{ site.url }}{{ og_image }}">
+        {{ else }}
+            <meta property="og:image" content="{{ site.url }}/favicon.png">
         {{ /if }}
-    {{ /if }}
-    
-    <!-- Breadcrumb structured data -->
-    {{ if url != '/' }}
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "{{ site.url }}"
-        }{{ if url |> startsWith('/blog') }},
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Blog",
-          "item": "{{ site.url }}/blog/"
-        }{{ /if }}{{ if url |> startsWith('/projects') }},
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Projects",
-          "item": "{{ site.url }}/projects/"
-        }{{ /if }}{{ if type == 'blog' && url != '/blog/' }},
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": "{{ title }}",
-          "item": "{{ site.url }}{{ url }}"
-        }{{ /if }}{{ if type == 'project' }},
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": "{{ title }}",
-          "item": "{{ site.url }}{{ url }}"
-        }{{ /if }}
-      ]
-    }
-    </script>
-    {{ /if }}
-    
-    <link rel="icon" href="/favicon.png" sizes="any">
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <link rel="manifest" href="/site.webmanifest">
-    
-    <link rel="alternate" type="application/rss+xml" title="{{ site.title }} RSS Feed" href="{{ site.url }}/feed.xml">
-    
-    <link rel="dns-prefetch" href="https://github.com">
-    <link rel="preconnect" href="https://cdn.jsdelivr.net">
-    
-    <link rel="stylesheet" href="/style.css" />
-    <style>
-        .turbo-progress-bar {
-            background-color: var(--primary);
-        }
-    </style>
+        <meta property="og:image:width" content="512">
+        <meta property="og:image:height" content="512">
+        <meta property="og:image:type" content="image/png">
 
-    <link rel="preload" href="/snow.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/snow.css"></noscript>
+        <!-- Twitter Card -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="{{ title || site.title }}">
+        <meta
+            name="twitter:description"
+            content="{{ description || site.description }}"
+        >
+        <meta name="twitter:url" content="{{ site.url }}{{ url }}">
+        {{ if og_image }}
+            <meta name="twitter:image" content="{{ site.url }}{{ og_image }}">
+        {{ else }}
+            <meta name="twitter:image" content="{{ site.url }}/favicon.png">
+        {{ /if }}
+        {{ if type == 'blog' }}
+            <meta property="article:author" content="{{ site.author.name }}">
+            <meta
+                property="article:published_time"
+                content="{{ date |> date('DATETIME') }}"
+            >
+            {{ if tags }}
+                {{ for tag of tags }}
+                    <meta property="article:tag" content="{{ tag }}">
+                {{ /for }}
+            {{ /if }}
+        {{ /if }}
 
-    <link rel="preload" href="/highlight-nord.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/highlight-nord.css"></noscript>
-    
-    <script defer src="/snow.js"></script>
-    <script defer src="/theme.js"></script>
-    <script type="module" src="https://cdn.jsdelivr.net/npm/@hotwired/turbo@latest/dist/turbo.es2017-esm.min.js" defer></script>
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="096fb35a-3087-4cfd-b7ef-c4cb9b1787c1"></script>
-</head>
+        <link rel="icon" href="/favicon.png" sizes="any">
+        <link rel="icon" href="/favicon.ico" type="image/x-icon">
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+        <link rel="manifest" href="/site.webmanifest">
 
-<body>
-    <header role="banner">
-        <nav class="navbar" role="navigation" aria-label="Main navigation">
-            <ul class="navbar__links" role="list">
-                <li><a class="navbar__item {{ if url == '/' }}active{{ /if }}" href="/" aria-current="{{ if url == '/' }}page{{ /if }}">home</a></li>
-                <li><a class="navbar__item {{ if url |> startsWith('/blog') }}active{{ /if }}" href="/blog/" aria-current="{{ if url |> startsWith('/blog') }}page{{ /if }}">blog</a></li>
-                <li><a class="navbar__item {{ if url |> startsWith('/projects') }}active{{ /if }}" href="/projects/" aria-current="{{ if url |> startsWith('/projects') }}page{{ /if }}">projects</a></li>
-                <li><a class="navbar__item {{ if url == '/now/' }}active{{ /if }}" href="/now/" aria-current="{{ if url == '/now/' }}page{{ /if }}">now</a></li>
-                <li><a class="navbar__item" target="_blank" href="https://github.com/Veirt" rel="noopener noreferrer" aria-label="Visit my GitHub profile (opens in new tab)">
-                    github
-                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true">
-                        <g>
-                            <path d="M15.64 7.025h-3.622v-2h7v7h-2v-3.55l-4.914 4.914l-1.414-1.414z" />
-                            <path d="M10.982 6.975h-6v12h12v-6h-2v4h-8v-8h4z" />
-                        </g>
+        <link
+            rel="alternate"
+            type="application/rss+xml"
+            title="{{ site.title }} RSS Feed"
+            href="{{ site.url }}/feed.xml"
+        >
+
+        <link rel="dns-prefetch" href="https://github.com">
+        <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+        <link rel="stylesheet" href="/style.css" />
+        <style>
+            .turbo-progress-bar {
+                background-color: var(--primary);
+            }
+        </style>
+
+        <link
+            rel="preload"
+            href="/snow.css"
+            as="style"
+            onload="this.onload=null;this.rel='stylesheet'"
+        >
+        <noscript><link rel="stylesheet" href="/snow.css"></noscript>
+
+        <link
+            rel="preload"
+            href="/highlight-nord.css"
+            as="style"
+            onload="this.onload=null;this.rel='stylesheet'"
+        >
+        <noscript><link rel="stylesheet" href="/highlight-nord.css"></noscript>
+
+        <script defer src="/snow.js"></script>
+        <script defer src="/theme.js"></script>
+        <script
+            type="module"
+            src="https://cdn.jsdelivr.net/npm/@hotwired/turbo@latest/dist/turbo.es2017-esm.min.js"
+            defer
+        ></script>
+        <script
+            defer
+            src="https://cloud.umami.is/script.js"
+            data-website-id="096fb35a-3087-4cfd-b7ef-c4cb9b1787c1"
+        ></script>
+    </head>
+
+    <body>
+        <header role="banner">
+            <nav class="navbar" role="navigation" aria-label="Main navigation">
+                <ul class="navbar__links" role="list">
+                    <li>
+                        <a
+                            class="navbar__item {{ if url == '/' }}active{{ /if }}"
+                            href="/"
+                            aria-current="{{ if url == '/' }}page{{ /if }}"
+                        >home</a>
+                    </li>
+                    <li>
+                        <a
+                            class="navbar__item {{ if url |> startsWith('/blog') }}active{{ /if }}"
+                            href="/blog/"
+                            aria-current="{{ if url |> startsWith('/blog') }}page{{ /if }}"
+                        >blog</a>
+                    </li>
+                    <li>
+                        <a
+                            class="navbar__item {{ if url |> startsWith('/projects') }}active{{ /if }}"
+                            href="/projects/"
+                            aria-current="{{ if url |> startsWith('/projects') }}page{{ /if }}"
+                        >projects</a>
+                    </li>
+                    <li>
+                        <a
+                            class="navbar__item {{ if url == '/now/' }}active{{ /if }}"
+                            href="/now/"
+                            aria-current="{{ if url == '/now/' }}page{{ /if }}"
+                        >now</a>
+                    </li>
+                    <li>
+                        <a
+                            class="navbar__item"
+                            target="_blank"
+                            href="https://github.com/Veirt"
+                            rel="noopener noreferrer"
+                            aria-label="Visit my GitHub profile (opens in new tab)"
+                        >
+                            github
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="1em"
+                                height="1em"
+                                viewBox="0 0 24 24"
+                                aria-hidden="true"
+                            >
+                                <g>
+                                    <path
+                                        d="M15.64 7.025h-3.622v-2h7v7h-2v-3.55l-4.914 4.914l-1.414-1.414z"
+                                    />
+                                    <path
+                                        d="M10.982 6.975h-6v12h12v-6h-2v4h-8v-8h4z"
+                                    />
+                                </g>
+                            </svg>
+                        </a>
+                    </li>
+                </ul>
+                <button
+                    class="theme__toggle"
+                    id="theme-toggle"
+                    aria-label="Toggle between light and dark theme"
+                    aria-pressed="false"
+                >
+                    <svg
+                        class="theme__icon theme__icon--sun"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                    >
+                        <path
+                            fill="currentColor"
+                            d="M12 2v2a8 8 0 0 0 0 16v2c5.523 0 10-4.477 10-10S17.523 2 12 2"
+                        />
                     </svg>
-                </a></li>
-            </ul>
-            <button class="theme__toggle" id="theme-toggle" aria-label="Toggle between light and dark theme" aria-pressed="false">
-                <svg class="theme__icon theme__icon--sun" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true">
-                    <path fill="currentColor" d="M12 2v2a8 8 0 0 0 0 16v2c5.523 0 10-4.477 10-10S17.523 2 12 2"/>
-                </svg>
-                <svg class="theme__icon theme__icon--moon" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" aria-hidden="true">
-                    <path fill="currentColor" d="M12 3a6 6 0 0 0 9 5.2A9 9 0 1 1 8.2 3A6 6 0 0 0 12 3"/>
-                </svg>
-            </button>
-        </nav>
-    </header>
+                    <svg
+                        class="theme__icon theme__icon--moon"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                    >
+                        <path
+                            fill="currentColor"
+                            d="M12 3a6 6 0 0 0 9 5.2A9 9 0 1 1 8.2 3A6 6 0 0 0 12 3"
+                        />
+                    </svg>
+                </button>
+            </nav>
+        </header>
 
-    <main class="main-content" role="main">
-        {{ content }}
-    </main>
-</body>
-
+        <main class="main-content" role="main">
+            {{ content }}
+        </main>
+    </body>
 </html>

@@ -8,9 +8,9 @@ const server = new Server();
 server.use(cacheBusting());
 server.use(expires());
 server.use(
-  notFound({
-    page404: "/404.html",
-  }),
+    notFound({
+        page404: "/404.html",
+    }),
 );
 
 server.start();

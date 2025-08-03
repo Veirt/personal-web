@@ -8,8 +8,10 @@ technologies: ["Vue", "TypeScript", "TailwindCSS"]
 date: 2021-03-04
 ---
 
-A simple single-page app built to generate secure passwords based on user-selected criteria.  
-This was my first time working with Vue and TailwindCSS, and a hands-on way to explore frontend state management and component-driven architecture.
+A simple single-page app built to generate secure passwords based on
+user-selected criteria.\
+This was my first time working with Vue and TailwindCSS, and a hands-on way to
+explore frontend state management and component-driven architecture.
 
 The app supports:
 

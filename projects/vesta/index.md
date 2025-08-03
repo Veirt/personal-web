@@ -12,11 +12,16 @@ date: 2024-08-16
 
 <img src="/projects/vesta/screenshot.png" alt="Preview" transform-images="avif" />
 
-Vesta is a minimal dashboard I made to monitor my home server. I was looking for something really lightweight that didn’t require a full monitoring stack, just a clean overview of the services I run. So I built my own.
+Vesta is a minimal dashboard I made to monitor my home server. I was looking for
+something really lightweight that didn’t require a full monitoring stack, just a
+clean overview of the services I run. So I built my own.
 
-It’s written in Rust using Axum, and the UI is styled with Tailwind. It reads from a simple config file and performs basic HTTP checks to show which services are up.
+It’s written in Rust using Axum, and the UI is styled with Tailwind. It reads
+from a simple config file and performs basic HTTP checks to show which services
+are up.
 
-I named it after the Roman goddess of the hearth — felt fitting for something that sits quietly at the center of my homelab setup.
+I named it after the Roman goddess of the hearth — felt fitting for something
+that sits quietly at the center of my homelab setup.
 
 ## Why I built it
 
@@ -34,8 +39,10 @@ configure, and good-looking enough.
 ## Notes
 
 - You can find the example config and screenshot in the repo.
-- I still consider it a work-in-progress, but it’s already powering the main dashboard in my homelab.
+- I still consider it a work-in-progress, but it’s already powering the main
+  dashboard in my homelab.
 
 ---
 
-Just a small tool that solved a need I had — and hopefully useful for others too.
+Just a small tool that solved a need I had — and hopefully useful for others
+too.

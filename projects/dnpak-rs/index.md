@@ -10,7 +10,10 @@ date: 2022-04-11
 
 ## dnpak-rs
 
-I originally made a [Python version](https://github.com/Veirt/dnpak.py) of this to understand how Dragon Nest `.pak` files work. As I was learning Rust, I rewrote it to improve performance and usability. This Rust version powers [dnutils](/projects/dnutils), and is significantly faster and more robust.
+I originally made a [Python version](https://github.com/Veirt/dnpak.py) of this
+to understand how Dragon Nest `.pak` files work. As I was learning Rust, I
+rewrote it to improve performance and usability. This Rust version powers
+[dnutils](/projects/dnutils), and is significantly faster and more robust.
 `dnpak-rs` is a Rust library for reading and writing Dragon Nest `.pak` files.
 
 ## Features

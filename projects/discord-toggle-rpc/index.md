@@ -17,7 +17,9 @@ works by modifying the client state using your Discord token.
 
 ## How It Works
 
-This tool uses your Discord token (set via environment variable) to toggle the Rich Presence display. It’s minimal and fast — exactly what I needed at the time.
+This tool uses your Discord token (set via environment variable) to toggle the
+Rich Presence display. It’s minimal and fast — exactly what I needed at the
+time.
 
 ## Installation
 
@@ -39,7 +41,10 @@ You can place it in `/etc/environment` or export it manually in your shell.
 
 Your Discord token looks like `mfa.XXXX...` or just a long base64 string.
 
-- **In browser**: open DevTools → Network tab → click any XHR request → check `authorization` header.
-- **In desktop app**: try `Ctrl+Shift+I` to open DevTools, then follow the same steps. If it doesn’t work, use the browser method instead.
+- **In browser**: open DevTools → Network tab → click any XHR request → check
+  `authorization` header.
+- **In desktop app**: try `Ctrl+Shift+I` to open DevTools, then follow the same
+  steps. If it doesn’t work, use the browser method instead.
 
-This is a personal utility and may break if Discord changes how their client works.
+This is a personal utility and may break if Discord changes how their client
+works.
