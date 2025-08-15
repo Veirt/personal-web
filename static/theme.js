@@ -1,8 +1,8 @@
-document.addEventListener("DOMContentLoaded", function () {
+(function () {
     const htmlElement = document.documentElement;
     const savedTheme = localStorage.getItem("theme") || "dark";
     htmlElement.setAttribute("data-theme", savedTheme);
-});
+})();
 
 document.addEventListener("turbo:load", function () {
     const themeToggle = document.getElementById("theme-toggle");
