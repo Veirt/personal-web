@@ -91,72 +91,83 @@ function createSnow(options = {}) {
 }
 
 document.addEventListener("turbo:load", () => {
-    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (motionQuery.matches) {
-        return;
-    }
+    const intervals = [];
+    let hoverSnowInterval;
 
-    let animationFrameId;
-    let lastBannerSnow = 0;
-    let lastHeaderSnow = 0;
-
-    const nowBanner = document.querySelector(".now__banner");
-    const pageHeader = document.querySelector(".page__header");
-
-    const animateSnow = (timestamp) => {
-        if (nowBanner && timestamp - lastBannerSnow > 800) {
-            lastBannerSnow = timestamp;
-            const fragment = document.createDocumentFragment();
-            for (let i = 0; i < 3; i++) {
-                fragment.appendChild(createSnow());
-            }
-            nowBanner.appendChild(fragment);
-        }
-
-        if (pageHeader && timestamp - lastHeaderSnow > 1200) {
-            lastHeaderSnow = timestamp;
-            const fragment = document.createDocumentFragment();
-            for (let i = 0; i < 2; i++) {
-                fragment.appendChild(
-                    createSnow({ smallSize: true, transparent: true }),
-                );
-            }
-            pageHeader.appendChild(fragment);
-        }
-
-        animationFrameId = requestAnimationFrame(animateSnow);
+    const stopPermanentSnow = () => {
+        intervals.forEach((interval) => clearInterval(interval));
+        intervals.length = 0;
     };
 
     const startPermanentSnow = () => {
-        if (nowBanner) nowBanner.classList.add("snow__container");
-        if (pageHeader) pageHeader.classList.add("snow__container");
-        if (animationFrameId) cancelAnimationFrame(animationFrameId);
-        animationFrameId = requestAnimationFrame(animateSnow);
-    };
+        stopPermanentSnow();
 
-    const stopPermanentSnow = () => {
-        if (animationFrameId) {
-            cancelAnimationFrame(animationFrameId);
-            animationFrameId = null;
+        const nowBanner = document.querySelector(".now__banner");
+        if (nowBanner) {
+            nowBanner.classList.add("snow__container");
+
+            const bannerInterval = setInterval(() => {
+                const fragment = document.createDocumentFragment();
+                for (let i = 0; i < 3; i++) {
+                    fragment.appendChild(createSnow());
+                }
+                nowBanner.appendChild(fragment);
+            }, 800);
+            intervals.push(bannerInterval);
+        }
+
+        const pageHeader = document.querySelector(".page__header");
+        if (pageHeader) {
+            pageHeader.classList.add("snow__container");
+
+            const headerInterval = setInterval(() => {
+                const fragment = document.createDocumentFragment();
+                for (let i = 0; i < 2; i++) {
+                    fragment.appendChild(
+                        createSnow({ smallSize: true, transparent: true }),
+                    );
+                }
+                pageHeader.appendChild(fragment);
+            }, 1200);
+            intervals.push(headerInterval);
         }
     };
 
     const cleanup = () => {
         stopPermanentSnow();
+        if (hoverSnowInterval) {
+            clearInterval(hoverSnowInterval);
+            hoverSnowInterval = null;
+        }
     };
 
     document.addEventListener("turbo:before-visit", cleanup);
 
+    document
+        .querySelectorAll(".snow__container:not(.now__banner)")
+        .forEach((container) => {
+            container.addEventListener("mouseenter", () => {
+                if (!hoverSnowInterval) {
+                    hoverSnowInterval = setInterval(() => {
+                        const fragment = document.createDocumentFragment();
+                        for (let i = 0; i < 5; i++) {
+                            fragment.appendChild(createSnow());
+                        }
+                        container.appendChild(fragment);
+                    }, 500);
+                }
+            });
+
+            container.addEventListener("mouseleave", () => {
+                if (hoverSnowInterval) {
+                    clearInterval(hoverSnowInterval);
+                    hoverSnowInterval = null;
+                }
+            });
+        });
+
     document.addEventListener("visibilitychange", () => {
         if (document.hidden) {
-            cleanup();
-        } else {
-            startPermanentSnow();
-        }
-    });
-
-    motionQuery.addEventListener("change", () => {
-        if (motionQuery.matches) {
             cleanup();
         } else {
             startPermanentSnow();
