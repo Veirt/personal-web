@@ -10,38 +10,21 @@ date: 2025-02-25
 
 ## About
 
-This is where I manage the configuration for my homelab using GitOps. Everything
-runs on Kubernetes, and I use [Flux](https://fluxcd.io) to keep things in sync
-with what's defined in Git.
+You might've seen my blog on my home server, but probably not.
+So, I started my home server back in 2022. At first, whenever I wanted to set up an app, my first choice of deploying things was a docker-compose.yaml. It's really simple, my favorite thing about it is where I can mount the configuration of a particular app, in a specified directory. I usually put it in the same directory as the docker-compose.yaml, and it makes backing up really easy. I can just get entire directory, put it on another machine, run `docker compose up -d` and voilà, the same app with the exact configuration just works.
 
-I also use:
+## Why Kubernetes?
 
-- `cert-manager` for TLS certificates
-- `Vault` with `external-secrets` to manage secrets
-- `sealed-secrets` for encrypted secrets in Git
-- `zeropod` to scale pods to zero when not in use
-- `Renovate` to keep container images and Helm charts up-to-date
+You may wonder: if a simple `docker-compose.yaml` works, why move on to really
+complex, production-grade tools like Kubernetes? Do I need 99.6969% uptime? No.
+Is a simple `docker-compose.yaml` reliable enough for my needs? Yes.
+Then why did I move?
+The answer is probably boring for you: learning and job relevance.
 
-There's a private repo for things that shouldn't be public (like secrets and
-internal apps), but most of the structure and apps are open here.
+What really drove me to migrate to Kubernetes was a
+[video](https://youtu.be/WfDwFvl5XBo) by Mischa van den Burg. Basically, he
+said that his homelab is a project that he can show when applying for jobs.
 
-## Installed Apps
-
-I run a bunch of self-hosted tools—some for media, others for productivity and
-automation. A few examples:
-
-- **Jellyfin**, **Metube**, and **Miniserve** for media streaming and downloads
-- **Syncthing** to sync files between devices
-- **Paperless-NGX**, **Memos**, and **n8n** for organizing docs and automating
-  tasks
-- **Vaultwarden** for managing passwords
-- **Searxng** and **Gotify** for private search and push notifications
-- Some small tools I’ve made too, like **Vesta** (a simple dashboard).
-
-Most of them are installed declaratively and updated automatically, which makes
-things easy to manage over time.
-
----
-
-That’s all—just a small project to keep my homelab organized and learn more
-about GitOps and Kubernetes along the way.
+Not only that, I think Kubernetes is a necessary tool to learn when it comes to
+making scalable apps these days. This is a great way for me to learn through my
+small homelab.

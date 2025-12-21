@@ -74,66 +74,6 @@ layout: base.vto
         </div>
     </header>
 
-    {{ if toc.length > 0 }}
-        <aside class="table__of__contents">
-            <div class="table__of__contents__header">
-                <h2 class="table__of__contents__title">
-                    <svg
-                        class="table__of__contents__icon"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="1.2em"
-                        height="1.2em"
-                        viewBox="0 0 24 24"
-                    >
-                        <path
-                            fill="currentColor"
-                            d="M3 9h14V7H3v2zm0 4h14v-2H3v2zm0 4h14v-2H3v2zm16 0h2v-2h-2v2zm0-10v2h2V7h-2zm0 6h2v-2h-2v2z"
-                        />
-                    </svg>
-                    Table of Contents
-                </h2>
-            </div>
-            <nav class="table__of__contents__nav">
-                <ul class="table__of__contents__list">
-                    {{ for item of toc }}
-                        <li class="table__of__contents__item">
-                            <a
-                                href="{{ item.url }}"
-                                class="table__of__contents__link"
-                                data-level="{{ item.level }}"
-                            >
-                                <span class="toc__indicator"></span>
-                                <span class="toc__text">{{ item.text }}</span>
-                            </a>
-                            {{ if item.children.length }}
-                                <ul class="table__of__contents__sublist">
-                                    {{ for subitem of item.children }}
-                                        <li
-                                            class="table__of__contents__subitem"
-                                        >
-                                            <a
-                                                href="{{ subitem.url }}"
-                                                class="table__of__contents__link"
-                                                data-level="{{ subitem.level }}"
-                                            >
-                                                <span
-                                                    class="toc__indicator"
-                                                ></span>
-                                                <span class="toc__text">{{
-                                                    subitem
-                                                        .text
-                                                }}</span>
-                                            </a>
-                                        </li>
-                                    {{ /for }}
-                                </ul>
-                            {{ /if }}
-                        </li>
-                    {{ /for }}
-                </ul>
-            </nav>
-        </aside>
-    {{ /if }}
 
     <div class="blog__page__content">
         {{ content }}
