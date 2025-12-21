@@ -2,23 +2,23 @@
 layout: base.vto
 ---
 
-<article class="blog__page" itemscope itemtype="https://schema.org/BlogPosting">
-    <header class="blog__page__header">
-        <h1 class="blog__page__title" itemprop="headline">{{ title }}</h1>
-        <div class="blog__page__meta">
+<article class="max-w-4xl mx-auto text-[18px] tracking-[0.01em]" itemscope itemtype="https://schema.org/BlogPosting">
+    <header class="mb-8 pb-6 border-b-2  border-border">
+        <h1 class="text-4xl font-bold mb-4 text-primary leading-tight" itemprop="headline">{{ title }}</h1>
+        <div class="flex flex-wrap items-center gap-4">
             <time
-                class="blog__page__date"
+                class="text-accent text-sm"
                 datetime="{{ date |> date('DATETIME') }}"
                 itemprop="datePublished"
             >{{ date |> date("HUMAN_DATE") }}</time>
-            <span class="reading-time" aria-label="Estimated reading time">{{
+            <span class="text-accent text-sm" aria-label="Estimated reading time">{{
                     content
                     |> readingTime
                 }} min read</span>
             {{ if tags }}
-                <div class="blog__page__tags" aria-label="Post tags">
+                <div class="flex flex-wrap gap-2" aria-label="Post tags">
                     {{ for tag of tags }}
-                        <span class="tag__item" itemprop="keywords">{{
+                        <span class="bg-primary text-background px-2.5 py-1 rounded-full text-xs font-medium transition-all duration-200 hover:bg-secondary hover:scale-105" itemprop="keywords">{{
                             tag
                         }}</span>
                     {{ /for }}
@@ -28,64 +28,17 @@ layout: base.vto
 
         <!-- Author info for SEO -->
         <div
-            class="author-info"
+            class="author-info hidden"
             itemprop="author"
             itemscope
             itemtype="https://schema.org/Person"
-            style="display: none"
         >
             <span itemprop="name">{{ site.author.name }}</span>
             <link itemprop="url" href="{{ site.author.url }}">
         </div>
     </header>
 
-    <!-- {{ if toc.length > 0 }} -->
-    <!--     <aside -->
-    <!--         class="table__of__contents" -->
-    <!--         role="navigation" -->
-    <!--         aria-labelledby="toc-heading" -->
-    <!--     > -->
-    <!--         <div class="table__of__contents__header"> -->
-    <!--             <h2 class="table__of__contents__title" id="toc-heading"> -->
-    <!--                 <svg -->
-    <!--                     class="table__of__contents__icon" -->
-    <!--                     xmlns="http://www.w3.org/2000/svg" -->
-    <!--                     width="1.2em" -->
-    <!--                     height="1.2em" -->
-    <!--                     viewBox="0 0 24 24" -->
-    <!--                     aria-hidden="true" -->
-    <!--                 > -->
-    <!--                     <path -->
-    <!--                         fill="currentColor" -->
-    <!--                         d="M3 9h14V7H3v2zm0 4h14v-2H3v2zm0 4h14v-2H3v2zm16 0h2v-2h-2v2zm0-10v2h2V7h-2zm0 6h2v-2h-2v2z" -->
-    <!--                     /> -->
-    <!--                 </svg> -->
-    <!--                 Table of Contents -->
-    <!--             </h2> -->
-    <!--         </div> -->
-    <!--         <nav class="table__of__contents__nav"> -->
-    <!--             <ol class="table__of__contents__list"> -->
-    <!--                 {{ for item of toc }} -->
-    <!--                     <li class="table__of__contents__item"> -->
-    <!--                         <a -->
-    <!--                             href="{{ item.url }}" -->
-    <!--                             class="table__of__contents__link" -->
-    <!--                             data-level="{{ item.level }}" -->
-    <!--                         > -->
-    <!--                             <span -->
-    <!--                                 class="toc__indicator" -->
-    <!--                                 aria-hidden="true" -->
-    <!--                             ></span> -->
-    <!--                             <span class="toc__text">{{ item.text }}</span> -->
-    <!--                         </a> -->
-    <!--                     </li> -->
-    <!--                 {{ /for }} -->
-    <!--             </ol> -->
-    <!--         </nav> -->
-    <!--     </aside> -->
-    <!-- {{ /if }} -->
-
-    <div class="blog__page__content" itemprop="articleBody">
+    <div class="markdown-content max-w-none leading-relaxed text-text" itemprop="articleBody">
         {{ content }}
     </div>
 </article>

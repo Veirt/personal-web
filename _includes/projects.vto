@@ -2,35 +2,30 @@
 layout: base.vto
 ---
 
-<header class="page__header">
-    <h1 class="page__title">{{ title }}</h1>
-    {{ if subtitle }}
-        <p class="page__subtitle">{{ subtitle }}</p>
-    {{ /if }}
-</header>
+{{ include "page-header.vto" { title, subtitle } }}
 
 {{ if search.pages("type=project").length == 0 }}
-    <section class="empty__state" role="status" aria-live="polite">
+    <section class="empty__state text-center py-16 px-8 text-accent opacity-80 italic" role="status" aria-live="polite">
         <p>No projects yet.</p>
     </section>
 {{ else }}
     <section
-        class="project__container"
+        class="project__container grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-7 mt-8"
         role="region"
         aria-label="Project listings"
     >
         {{ for project of search.pages("type=project", "date=desc") }}
-            <article class="project__item snow__container">
-                <header class="project__header">
-                    <h2 class="project__name">
+            <article class="project__item snow__container p-7 bg-surface rounded-lg shadow-[var(--shadow)] border border-solid border-border transition-all duration-300 ease-out relative overflow-hidden hover:-translate-y-1 hover:border-primary">
+                <header class="project__header mb-5">
+                    <h2 class="project__name m-0 text-2xl font-semibold leading-snug">
                         <a
-                            class="link"
+                            class="link group text-primary no-underline border-b border-b-transparent inline-flex items-center gap-2 transition-all duration-300 ease-out hover:border-b-primary/60"
                             href="{{ project.url }}"
                             aria-describedby="project-{{ project.title |> slugify }}-desc"
                         >
                             {{ project.title }}
                             <svg
-                                class="project__arrow"
+                                class="project__arrow opacity-70 transition-all duration-200 ease-out group-hover:opacity-100 group-hover:translate-x-0.5"
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="0.8em"
                                 height="0.8em"
@@ -45,9 +40,9 @@ layout: base.vto
                         </a>
                     </h2>
                     {{ if project.github_url }}
-                        <div class="project__links" aria-label="Project links">
+                        <div class="project__links mt-2" aria-label="Project links">
                             <a
-                                class="project__external__link"
+                                class="project__external__link inline-flex items-center gap-1.5 text-accent text-sm no-underline transition-all duration-300 py-1 rounded opacity-80 hover:text-primary hover:opacity-100"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 href="{{ project.github_url }}"
@@ -72,22 +67,22 @@ layout: base.vto
                 </header>
 
                 <p
-                    class="project__description"
+                    class="project__description text-text/75 leading-relaxed mb-6 text-base"
                     id="project-{{ project.title |> slugify }}-desc"
                 >
                     {{ project.description }}
                 </p>
 
-                <footer class="project__footer">
+                <footer class="project__footer mt-auto flex justify-between items-end gap-4">
                     {{ if project.technologies }}
                         <div
-                            class="project__skills"
+                            class="project__skills flex flex-wrap gap-2"
                             role="list"
                             aria-label="Technologies used"
                         >
                             {{ for tech of project.technologies }}
                                 <span
-                                    class="project__skill__item"
+                                    class="bg-primary text-background px-3 py-1 rounded-md font-semibold text-xs tracking-wide transition-all duration-200 border border-solid border-primary shadow-sm"
                                     role="listitem"
                                 >{{ tech }}</span>
                             {{ /for }}

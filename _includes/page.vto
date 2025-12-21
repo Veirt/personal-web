@@ -2,11 +2,8 @@
 layout: base.vto
 ---
 
-<header class="page__header">
-    <h1 class="page__title">{{ title }}</h1>
-    {{ if subtitle }}
-        <p class="page__subtitle">{{ subtitle }}</p>
-    {{ /if }}
-</header>
+{{ include "page-header.vto" { title, subtitle } }}
 
-{{ content }}
+<div class="markdown-content max-w-none leading-relaxed text-text">
+    {{ content }}
+</div>

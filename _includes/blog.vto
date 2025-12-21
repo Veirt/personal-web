@@ -2,30 +2,25 @@
 layout: base.vto
 ---
 
-<header class="page__header">
-    <h1 class="page__title">{{ title }}</h1>
-    {{ if subtitle }}
-        <p class="page__subtitle">{{ subtitle }}</p>
-    {{ /if }}
-</header>
+{{ include "page-header.vto" { title, subtitle } }}
 
 {{ if search.pages("type=blog").length == 0 }}
-    <section class="empty__state" role="status" aria-live="polite">
+    <section class="text-center py-16 px-8 text-accent opacity-80 italic" role="status" aria-live="polite">
         <p>No posts yet.</p>
     </section>
 {{ else }}
-    <section role="region" aria-label="Blog posts">
+    <section class="flex flex-col gap-5" role="region" aria-label="Blog posts">
         {{ for post of search.pages("type=blog", "date=desc") }}
-            <article class="blog__item snow__container">
+            <article class="blog__item snow__container h-auto min-h-30 p-7 bg-surface border border-solid border-border rounded-lg transition-all duration-300 ease-out relative hover:-translate-y-1 hover:border-primary overflow-hidden">
                 <header>
-                    <h2 class="blog__title">
+                    <h2 class="mt-0 mb-3 text-2xl font-semibold leading-snug">
                         <a
-                            class="link"
+                            class="text-primary no-underline border-b border-b-transparent inline-flex items-center gap-2 transition-all duration-300 ease-out hover:border-b-primary/60"
                             href="{{ post.url }}"
                             aria-describedby="post-{{ post.title |> slugify }}-desc"
                         >{{ post.title }}</a>
                     </h2>
-                    <div class="blog__date">
+                    <div class="flex items-center gap-2 text-accent text-sm mb-4 opacity-90">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="1em"
@@ -45,7 +40,7 @@ layout: base.vto
                     </div>
                 </header>
                 <p
-                    class="blog__description"
+                    class="line-clamp-2 overflow-hidden text-ellipsis leading-normal text-text/85"
                     id="post-{{ post.title |> slugify }}-desc"
                 >
                     {{ post.description }}

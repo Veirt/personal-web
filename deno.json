@@ -1,7 +1,9 @@
 {
     "imports": {
         "lume/": "https://deno.land/x/lume@v3.0.5/",
-        "lume/jsx-runtime": "https://deno.land/x/ssx@v0.1.11/jsx-runtime.ts"
+        "lume/jsx-runtime": "https://deno.land/x/ssx@v0.1.11/jsx-runtime.ts",
+        "@unocss/preset-typography": "npm:@unocss/preset-typography@^65.1.1",
+        "@unocss/preset-wind4": "npm:@unocss/preset-wind4@^66.5.10"
     },
     "tasks": {
         "lume": "echo \"import 'lume/cli.ts'\" | deno run -A -",

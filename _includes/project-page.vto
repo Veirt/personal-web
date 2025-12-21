@@ -3,38 +3,38 @@ layout: base.vto
 ---
 
 <article
-    class="blog__page"
+    class="max-w-4xl mx-auto text-[18px] tracking-[0.01em]"
     itemscope
     itemtype="https://schema.org/SoftwareApplication"
 >
-    <header class="blog__page__header">
-        <h1 class="blog__page__title" itemprop="name">{{ title }}</h1>
-        <div class="blog__page__meta">
+    <header class="mb-8 pb-6 border-b-2 border-border">
+        <h1 class="text-4xl font-bold mb-4 text-primary leading-tight" itemprop="name">{{ title }}</h1>
+        <div class="flex flex-wrap items-center gap-4">
             {{ if date }}
                 <time
-                    class="blog__page__date"
+                    class="text-accent text-sm"
                     datetime="{{ date |> date('DATETIME') }}"
                     itemprop="dateCreated"
                 >{{ date |> date("MMMM yyyy") }}</time>
             {{ /if }}
             {{ if tags }}
-                <div class="blog__page__skills" aria-label="Project tags">
+                <div class="flex flex-wrap gap-2" aria-label="Project tags">
                     {{ for tag of tags }}
-                        <span class="skill__item">{{ tag }}</span>
+                        <span class="bg-primary text-background px-2.5 py-1 rounded-full text-xs font-medium">{{ tag }}</span>
                     {{ /for }}
                 </div>
             {{ /if }}
             {{ if technologies }}
-                <div class="blog__page__skills" aria-label="Technologies used">
+                <div class="flex flex-wrap gap-2" aria-label="Technologies used">
                     {{ for tech of technologies }}
-                        <span class="skill__item">{{ tech }}</span>
+                        <span class="bg-primary text-background px-2.5 py-1 rounded-full text-xs font-medium">{{ tech }}</span>
                     {{ /for }}
                 </div>
             {{ /if }}
             {{ if github_url }}
-                <div class="blog__page__links" aria-label="Project links">
+                <div class="flex items-center" aria-label="Project links">
                     <a
-                        class="external__link"
+                        class="text-primary no-underline font-medium inline-flex items-center gap-1.5 transition-all duration-200 hover:text-secondary"
                         target="_blank"
                         rel="noopener noreferrer"
                         href="{{ github_url }}"
@@ -59,7 +59,7 @@ layout: base.vto
             {{ /if }}
         </div>
 
-        <div style="display: none">
+        <div class="hidden">
             <span itemprop="description">{{ description }}</span>
             <span
                 itemprop="author"
@@ -75,7 +75,7 @@ layout: base.vto
     </header>
 
 
-    <div class="blog__page__content">
+    <div class="markdown-content max-w-none leading-relaxed text-text">
         {{ content }}
     </div>
 </article>
