@@ -10,14 +10,14 @@ layout: base.vto
     </section>
 {{ else }}
     <section
-        class="project__container grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-7 mt-8"
+        class="project__container grid grid-cols-[repeat(auto-fit,minmax(450px,1fr))] gap-7 mt-8"
         role="region"
         aria-label="Project listings"
     >
         {{ for project of search.pages("type=project", "date=desc") }}
-            <article class="project__item snow__container p-7 bg-surface rounded-lg shadow-[var(--shadow)] border border-solid border-border transition-all duration-300 ease-out relative overflow-hidden hover:-translate-y-1 hover:border-primary">
+            <article class="project__item snow__container p-7 border border-primary relative overflow-hidden flex flex-col">
                 <header class="project__header mb-5">
-                    <h2 class="project__name m-0 text-2xl font-semibold leading-snug">
+                    <h2 class="project__name m-0 text-xl font-semibold leading-snug uppercase tracking-widest">
                         <a
                             class="link group text-primary no-underline border-b border-b-transparent inline-flex items-center gap-2 transition-all duration-300 ease-out hover:border-b-primary/60"
                             href="{{ project.url }}"
@@ -40,9 +40,9 @@ layout: base.vto
                         </a>
                     </h2>
                     {{ if project.github_url }}
-                        <div class="project__links mt-2" aria-label="Project links">
+                        <div class="mt-2" aria-label="Project links">
                             <a
-                                class="project__external__link inline-flex items-center gap-1.5 text-accent text-sm no-underline transition-all duration-300 py-1 rounded opacity-80 hover:text-primary hover:opacity-100"
+                                class="inline-flex items-center gap-1.5 text-accent text-sm no-underline transition-all duration-300 py-1 opacity-80 hover:text-primary hover:opacity-100"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 href="{{ project.github_url }}"
@@ -67,7 +67,7 @@ layout: base.vto
                 </header>
 
                 <p
-                    class="project__description text-text/75 leading-relaxed mb-6 text-base"
+                    class="project__description text-text/75 leading-relaxed mb-6 text-base flex-grow"
                     id="project-{{ project.title |> slugify }}-desc"
                 >
                     {{ project.description }}
@@ -82,7 +82,7 @@ layout: base.vto
                         >
                             {{ for tech of project.technologies }}
                                 <span
-                                    class="bg-primary text-background px-3 py-1 rounded-md font-semibold text-xs tracking-wide transition-all duration-200 border border-solid border-primary shadow-sm"
+                                    class="text-primary px-3 py-1 uppercase font-semibold text-xs tracking-wide transition-all duration-200 border-2  border-primary shadow-sm"
                                     role="listitem"
                                 >{{ tech }}</span>
                             {{ /for }}

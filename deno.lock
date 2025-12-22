@@ -33,8 +33,10 @@
     "jsr:@std/toml@^1.0.3": "1.0.8",
     "jsr:@std/yaml@1.0.8": "1.0.8",
     "jsr:@std/yaml@^1.0.5": "1.0.8",
+    "npm:@iconify-json/solar@^1.2.5": "1.2.5",
     "npm:@types/estree@1.0.6": "1.0.6",
     "npm:@types/node@*": "22.15.15",
+    "npm:@unocss/preset-icons@^66.5.10": "66.5.10",
     "npm:@unocss/preset-typography@^65.1.1": "65.5.0",
     "npm:@unocss/preset-wind4@^66.5.10": "66.5.10",
     "npm:date-fns@^4.1.0": "4.1.0",
@@ -152,6 +154,30 @@
     }
   },
   "npm": {
+    "@antfu/install-pkg@1.1.0": {
+      "integrity": "sha512-MGQsmw10ZyI+EJo45CdSER4zEb+p31LpDAFp2Z3gkSd1yqVZGi0Ebx++YTEMonJy4oChEMLsxZ64j8FH6sSqtQ==",
+      "dependencies": [
+        "package-manager-detector",
+        "tinyexec"
+      ]
+    },
+    "@iconify-json/solar@1.2.5": {
+      "integrity": "sha512-WMAiNwchU8zhfrySww6KQBRIBbsQ6SvgIu2yA+CHGyMima/0KQwT5MXogrZPJGoQF+1Ye3Qj6K+1CiyNn3YkoA==",
+      "dependencies": [
+        "@iconify/types"
+      ]
+    },
+    "@iconify/types@2.0.0": {
+      "integrity": "sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg=="
+    },
+    "@iconify/utils@3.1.0": {
+      "integrity": "sha512-Zlzem1ZXhI1iHeeERabLNzBHdOa4VhQbqAcOQaMKuTuyZCpwKbC2R4Dd0Zo3g9EAc+Y4fiarO8HIHRAth7+skw==",
+      "dependencies": [
+        "@antfu/install-pkg",
+        "@iconify/types",
+        "mlly"
+      ]
+    },
     "@isaacs/balanced-match@4.0.1": {
       "integrity": "sha512-yzMTt9lEb8Gv7zRioUilSglI0c0smZ9k5D65677DLWLtWJaXIS3CqcGyUFByYKlnUj6TkjLVs54fBl6+TiGQDQ=="
     },
@@ -224,6 +250,14 @@
       "integrity": "sha512-9JsAY1a68WZaIbSiwQa7LLAO+t4T5nnhgmNxY3MGaK58k6Qa9ayZb4AG4fqOpw+Zn8tmKd7yXJ0s+27sx1n2BA==",
       "dependencies": [
         "@unocss/core@66.5.10"
+      ]
+    },
+    "@unocss/preset-icons@66.5.10": {
+      "integrity": "sha512-zf4Sev/F2QQgVjGjKBCw3BKc15HQAtvUrNX2zymXXbAjt83Lf27ofYzTAUVUO9mi/oQhXcP5sQrIGIe7iQX3hw==",
+      "dependencies": [
+        "@iconify/utils",
+        "@unocss/core@66.5.10",
+        "ofetch"
       ]
     },
     "@unocss/preset-mini@65.5.0": {
@@ -310,6 +344,9 @@
     "commander@2.20.3": {
       "integrity": "sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ=="
     },
+    "confbox@0.1.8": {
+      "integrity": "sha512-RMtmw0iFkeR4YV+fUOSucriAQNb9g8zFR52MWCtl+cCZOFRNL6zeB395vPzFhEjjn4fMxXudmELnl/KF/WrK6w=="
+    },
     "cross-spawn@7.0.6": {
       "integrity": "sha512-uV2QOWP2nWzsy2aMp8aRibhi9dlzF5Hgh5SHaB9OiTGEyDTiJJyx0uy51QXdyWbtAHNua4XJzUKca3OzKUd3vA==",
       "dependencies": [
@@ -357,6 +394,9 @@
     },
     "date-fns@4.1.0": {
       "integrity": "sha512-Ukq0owbQXxa/U3EGtsdVBkR1w7KOQ5gIBqdH2hkvknzZPYvBxb/aa6E8L7tmjFtkwZBu3UXBbjIgPo/Ez4xaNg=="
+    },
+    "destr@2.0.5": {
+      "integrity": "sha512-ugFTXCtDZunbzasqBxrK93Ik/DRYsO6S/fedkWEMKqt04xZ4csmnmwGDBAb07QWNaGMAmnTIemsYZCksjATwsA=="
     },
     "dom-serializer@2.0.0": {
       "integrity": "sha512-wIkAryiqt/nV5EQKqQpo3SToSOV9J0DnbJqwK7Wv/Trc92zIAYZ4FlMu+JPFW1DfGFt81ZTCGgDEabffXeLyJg==",
@@ -498,6 +538,15 @@
     "minipass@7.1.2": {
       "integrity": "sha512-qOOzS1cBTWYF4BH8fVePDBOO9iptMnGUEZwNc/cMWnTV2nVLZ7VoNWEPHkYczZA0pdoA7dl6e7FL659nX9S2aw=="
     },
+    "mlly@1.8.0": {
+      "integrity": "sha512-l8D9ODSRWLe2KHJSifWGwBqpTZXIXTeo8mlKjY+E2HAakaTeNpqAyBZ8GSqLzHgw4XmHmC8whvpjJNMbFZN7/g==",
+      "dependencies": [
+        "acorn",
+        "pathe",
+        "pkg-types",
+        "ufo"
+      ]
+    },
     "nanoid@3.3.11": {
       "integrity": "sha512-N8SpfPUnUp1bK+PMYW8qSWdl9U+wwNWI4QKxOYDy9JAro3WMX7p2OeVRF9v+347pnakNevPmiHhNmZ2HbFA76w==",
       "bin": true
@@ -505,14 +554,28 @@
     "napi-wasm@1.1.3": {
       "integrity": "sha512-h/4nMGsHjZDCYmQVNODIrYACVJ+I9KItbG+0si6W/jSjdA9JbWDoU4LLeMXVcEQGHjttI2tuXqDrbGF7qkUHHg=="
     },
+    "node-fetch-native@1.6.7": {
+      "integrity": "sha512-g9yhqoedzIUm0nTnTqAQvueMPVOuIY16bqgAJJC8XOOubYFNwz6IER9qs0Gq2Xd0+CecCKFjtdDTMA4u4xG06Q=="
+    },
     "nth-check@2.1.1": {
       "integrity": "sha512-lqjrjmaOoAnWfMmBPL+XNnynZh2+swxiX3WUE0s4yEHI6m+AwrK2UZOimIRl3X/4QctVqS8AiZjFqyOGrMXb/w==",
       "dependencies": [
         "boolbase"
       ]
     },
+    "ofetch@1.5.1": {
+      "integrity": "sha512-2W4oUZlVaqAPAil6FUg/difl6YhqhUR7x2eZY4bQCko22UXg3hptq9KLQdqFClV+Wu85UX7hNtdGTngi/1BxcA==",
+      "dependencies": [
+        "destr",
+        "node-fetch-native",
+        "ufo"
+      ]
+    },
     "package-json-from-dist@1.0.1": {
       "integrity": "sha512-UEZIS3/by4OC8vL3P2dTXRETpebLI2NiI5vIrjaD/5UtrkFX/tNbwjTSRAGC/+7CAo2pIcBaRgWmcBBHcsaCIw=="
+    },
+    "package-manager-detector@1.6.0": {
+      "integrity": "sha512-61A5ThoTiDG/C8s8UMZwSorAGwMJ0ERVGj2OjoW5pAalsNOg15+iQiPzrLJ4jhZ1HJzmC2PIHT2oEiH3R5fzNA=="
     },
     "parse5-htmlparser2-tree-adapter@7.1.0": {
       "integrity": "sha512-ruw5xyKs6lrpo9x9rCZqZZnIUntICjQAd0Wsmp396Ul9lN/h+ifgVV1x1gZHi8euej6wTfpqX8j+BFQxF0NS/g==",
@@ -537,8 +600,19 @@
         "minipass"
       ]
     },
+    "pathe@2.0.3": {
+      "integrity": "sha512-WUjGcAqP1gQacoQe+OBJsFA7Ld4DyXuUIjZ5cc75cLHvJ7dtNsTugphxIADwspS+AraAUePCKrSVtPLFj/F88w=="
+    },
     "picocolors@1.1.1": {
       "integrity": "sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA=="
+    },
+    "pkg-types@1.3.1": {
+      "integrity": "sha512-/Jm5M4RvtBFVkKWRu2BLUTNP8/M2a+UwuAX+ae4770q1qVGtfjG+WTCupoZixokjmHiry8uI+dlY8KXYV5HVVQ==",
+      "dependencies": [
+        "confbox",
+        "mlly",
+        "pathe"
+      ]
     },
     "postcss-selector-parser@6.1.2": {
       "integrity": "sha512-Q8qQfPiZ+THO/3ZrOrO0cJJKfpYCagtMUkXbnEfmgUjwXg6z/WBeOyS9APBBPCTSiDV+s4SwQGu8yFsiMRIudg==",
@@ -654,8 +728,14 @@
       ],
       "bin": true
     },
+    "tinyexec@1.0.2": {
+      "integrity": "sha512-W/KYk+NFhkmsYpuHq5JykngiOCnxeVL8v8dFnqxSD8qEEdRfXk1SDM6JzNqcERbcGYj9tMrDQBYV9cjgnunFIg=="
+    },
     "uc.micro@2.1.0": {
       "integrity": "sha512-ARDJmphmdvUk6Glw7y9DQ2bFkKBHwQHLi2lsaH6PPmz/Ka9sFOBsBluozhDltWmnv9u/cF6Rt87znRTPV+yp/A=="
+    },
+    "ufo@1.6.1": {
+      "integrity": "sha512-9a4/uxlTWJ4+a5i0ooc1rU7C7YOw3wT+UGqdeNNHWnOF9qcMBgLRS+4IYUqbczewFx4mLEig6gawh7X6mFlEkA=="
     },
     "undici-types@6.21.0": {
       "integrity": "sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ=="
@@ -994,6 +1074,8 @@
     ],
     "packageJson": {
       "dependencies": [
+        "npm:@iconify-json/solar@^1.2.5",
+        "npm:@unocss/preset-icons@^66.5.10",
         "npm:date-fns@^4.1.0",
         "npm:markdown-it-deflist@3",
         "npm:purgecss-from-html@*",

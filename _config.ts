@@ -1,7 +1,7 @@
 import toc, {
 	linkInsideHeader,
 } from "https://deno.land/x/lume_markdown_plugins@v0.9.0/toc.ts";
-import { presetTypography } from "@unocss/preset-typography";
+import presetIcons from "@unocss/preset-icons";
 import { presetWind4 } from "@unocss/preset-wind4";
 import cacheBusting from "lume/middlewares/cache_busting.ts";
 import lume from "lume/mod.ts";
@@ -86,12 +86,20 @@ site.use(
 					secondary: "var(--secondary)",
 					accent: "var(--accent)",
 					text: "var(--text)",
-					background: "var(--background)",	
+					background: "var(--background)",
 					surface: "var(--surface)",
 					border: "var(--border)",
 				},
 			},
-			presets: [presetWind4() as any],
+			presets: [presetWind4() as any, presetIcons()],
+			shortcuts: {
+				"nav-item":
+					"flex items-center p-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-[0.85rem] sm:text-[0.9rem] md:text-[0.95rem] font-medium tracking-wide opacity-80 hover:text-primary relative",
+				"nav-item-active":
+					"text-primary opacity-100 after:content-[''] after:absolute after:bottom-1 after:left-4 after:right-4 after:h-[2px] active",
+				"theme-toggle-btn":
+					"bg-transparent border border-solid border-border  p-2 md:p-3 cursor-pointer text-text transition-all duration-300 opacity-80 flex items-center justify-center shadow-sm hover:border-primary hover:text-primary hover:opacity-100 hover:-translate-y-0.5",
+			},
 		},
 	}),
 );

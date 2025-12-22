@@ -3,12 +3,12 @@ layout: base.vto
 ---
 
 <article
-    class="max-w-4xl mx-auto text-[18px] tracking-[0.01em]"
+    class="mx-auto text-[18px]"
     itemscope
     itemtype="https://schema.org/SoftwareApplication"
 >
     <header class="mb-8 pb-6 border-b-2 border-border">
-        <h1 class="text-4xl font-bold mb-4 text-primary leading-tight" itemprop="name">{{ title }}</h1>
+        <h1 class="text-4xl font-bold mb-4 text-primary leading-tight uppercase tracking-widest" itemprop="name">{{ title }}</h1>
         <div class="flex flex-wrap items-center gap-4">
             {{ if date }}
                 <time
@@ -20,14 +20,14 @@ layout: base.vto
             {{ if tags }}
                 <div class="flex flex-wrap gap-2" aria-label="Project tags">
                     {{ for tag of tags }}
-                        <span class="bg-primary text-background px-2.5 py-1 rounded-full text-xs font-medium">{{ tag }}</span>
+                        <span class="text-primary px-3 py-1 uppercase font-semibold text-xs tracking-wide transition-all duration-200 border-2 border-primary shadow-sm">{{ tag }}</span>
                     {{ /for }}
                 </div>
             {{ /if }}
             {{ if technologies }}
                 <div class="flex flex-wrap gap-2" aria-label="Technologies used">
                     {{ for tech of technologies }}
-                        <span class="bg-primary text-background px-2.5 py-1 rounded-full text-xs font-medium">{{ tech }}</span>
+                        <span class="text-primary px-3 py-1 uppercase font-semibold text-xs tracking-wide transition-all duration-200 border-2 border-primary shadow-sm">{{ tech }}</span>
                     {{ /for }}
                 </div>
             {{ /if }}

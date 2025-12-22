@@ -123,41 +123,41 @@
         ></script>
     </head>
 
-    <body class="p-8 text-lg leading-relaxed mx-auto max-w-[55rem] bg-background text-text tracking-tight">
+    <body class="p-8 text-lg leading-relaxed mx-auto max-w-[75rem] bg-background text-text">
         <header role="banner">
-            <nav class="navbar flex flex-row justify-between items-center mb-8 py-4 border-b border-solid border-border relative" role="navigation" aria-label="Main navigation">
-                <ul class="navbar__links flex items-center gap-1 list-none m-0 p-0" role="list">
+            <nav class="navbar flex flex-row justify-between items-center mb-8 py-3 md:py-4 border-b border-solid border-border relative uppercase" role="navigation" aria-label="Main navigation">
+                <ul class="navbar__links flex items-center gap-0 md:gap-1 list-none m-0 p-0" role="list">
                     <li>
                         <a
-                            class="navbar__item px-4 py-3 rounded-lg text-sm font-medium transition-all duration-300 opacity-80 hover:text-primary hover:bg-primary/8 hover:-translate-y-0.5 {{ if url == '/' }}text-primary opacity-100 bg-primary/12 after:content-[''] after:absolute after:bottom-1 after:left-4 after:right-4 after:h-[2px] after:bg-primary after:rounded-sm active{{ /if }}"
+                            class="nav-item {{ if url == '/' }}nav-item-active{{ /if }}"
                             href="/"
                             aria-current="{{ if url == '/' }}page{{ /if }}"
                         >home</a>
                     </li>
                     <li>
                         <a
-                            class="navbar__item px-4 py-3 rounded-lg text-sm font-medium transition-all duration-300 opacity-80 hover:text-primary hover:bg-primary/8 hover:-translate-y-0.5 {{ if url |> startsWith('/blog') }}text-primary opacity-100 bg-primary/12 after:content-[''] after:absolute after:bottom-1 after:left-4 after:right-4 after:h-[2px] after:bg-primary after:rounded-sm active{{ /if }}"
+                            class="nav-item {{ if url |> startsWith('/blog') }}nav-item-active{{ /if }}"
                             href="/blog/"
                             aria-current="{{ if url |> startsWith('/blog') }}page{{ /if }}"
                         >blog</a>
                     </li>
                     <li>
                         <a
-                            class="navbar__item px-4 py-3 rounded-lg text-sm font-medium transition-all duration-300 opacity-80 hover:text-primary hover:bg-primary/8 hover:-translate-y-0.5 {{ if url |> startsWith('/projects') }}text-primary opacity-100 bg-primary/12 after:content-[''] after:absolute after:bottom-1 after:left-4 after:right-4 after:h-[2px] after:bg-primary after:rounded-sm active{{ /if }}"
+                            class="nav-item {{ if url |> startsWith('/projects') }}nav-item-active{{ /if }}"
                             href="/projects/"
                             aria-current="{{ if url |> startsWith('/projects') }}page{{ /if }}"
                         >projects</a>
                     </li>
                     <li>
                         <a
-                            class="navbar__item px-4 py-3 rounded-lg text-sm font-medium transition-all duration-300 opacity-80 hover:text-primary hover:bg-primary/8 hover:-translate-y-0.5 {{ if url == '/now/' }}text-primary opacity-100 bg-primary/12 after:content-[''] after:absolute after:bottom-1 after:left-4 after:right-4 after:h-[2px] after:bg-primary after:rounded-sm active{{ /if }}"
+                            class="nav-item {{ if url == '/now/' }}nav-item-active{{ /if }}"
                             href="/now/"
                             aria-current="{{ if url == '/now/' }}page{{ /if }}"
                         >now</a>
                     </li>
                     <li>
                         <a
-                            class="navbar__item px-4 py-3 rounded-lg text-sm font-medium transition-all duration-300 opacity-80 hover:text-primary hover:bg-primary/8 hover:-translate-y-0.5"
+                            class="nav-item"
                             target="_blank"
                             href="https://github.com/Veirt"
                             rel="noopener noreferrer"
@@ -184,37 +184,13 @@
                     </li>
                 </ul>
                 <button
-                    class="theme__toggle bg-transparent border border-solid border-border rounded-lg p-3 cursor-pointer text-text transition-all duration-300 opacity-80 flex items-center justify-center shadow-sm hover:border-primary hover:text-primary hover:opacity-100 hover:-translate-y-0.5"
+                    class="theme-toggle-btn"
                     id="theme-toggle"
                     aria-label="Toggle between light and dark theme"
                     aria-pressed="false"
                 >
-                    <svg
-                        class="theme__icon theme__icon--sun w-[1.2em] h-[1.2em] transition-all duration-300"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="1em"
-                        height="1em"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                    >
-                        <path
-                            fill="currentColor"
-                            d="M12 2v2a8 8 0 0 0 0 16v2c5.523 0 10-4.477 10-10S17.523 2 12 2"
-                        />
-                    </svg>
-                    <svg
-                        class="theme__icon theme__icon--moon w-[1.2em] h-[1.2em] transition-all duration-300"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="1em"
-                        height="1em"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                    >
-                        <path
-                            fill="currentColor"
-                            d="M12 3a6 6 0 0 0 9 5.2A9 9 0 1 1 8.2 3A6 6 0 0 0 12 3"
-                        />
-                    </svg>
+                    <div class="theme__icon theme__icon--sun i-solar:sun-line-duotone"></div>
+                    <div class="theme__icon theme__icon--moon i-solar:moon-line-duotone"></div>
                 </button>
             </nav>
         </header>
