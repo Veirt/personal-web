@@ -3,6 +3,7 @@
         "@iconify-json/solar": "^1.2.5",
         "@unocss/preset-icons": "^66.5.10",
         "date-fns": "^4.1.0",
+        "highlight.js": "11.11.1",
         "markdown-it-deflist": "^3.0.0",
         "purgecss": "npm:purgecss",
         "purgecss-from-html": "npm:purgecss-from-html",

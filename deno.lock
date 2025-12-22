@@ -41,6 +41,7 @@
     "npm:@unocss/preset-wind4@^66.5.10": "66.5.10",
     "npm:date-fns@^4.1.0": "4.1.0",
     "npm:estree-walker@3.0.3": "3.0.3",
+    "npm:highlight.js@11.11.1": "11.11.1",
     "npm:lightningcss-wasm@1.30.1": "1.30.1",
     "npm:markdown-it-attrs@4.3.1": "4.3.1_markdown-it@14.1.0",
     "npm:markdown-it-deflist@3": "3.0.0",
@@ -462,6 +463,9 @@
         "path-scurry"
       ],
       "bin": true
+    },
+    "highlight.js@11.11.1": {
+      "integrity": "sha512-Xwwo44whKBVCYoliBQwaPvtd/2tYFkRQtXDWj1nackaV2JPXx3L0+Jvd8/qCJ2p+ML0/XVkJ2q+Mr+UVdpJK5w=="
     },
     "is-fullwidth-code-point@3.0.0": {
       "integrity": "sha512-zymm5+u+sCsSWyD9qNaejV3DFvhCKclKdizYaJUuHA83RLjb7nSuGnddCHGv0hk+KY7BMAlsWeK4Ueg6EV6XQg=="
@@ -1077,6 +1081,7 @@
         "npm:@iconify-json/solar@^1.2.5",
         "npm:@unocss/preset-icons@^66.5.10",
         "npm:date-fns@^4.1.0",
+        "npm:highlight.js@11.11.1",
         "npm:markdown-it-deflist@3",
         "npm:purgecss-from-html@*",
         "npm:purgecss@*",
