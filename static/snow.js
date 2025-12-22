@@ -1,178 +1,126 @@
-const snowPool = [];
-const maxPoolSize = 50;
+const rand = (min, max) => Math.random() * (max - min) + min;
+const sample = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
-function getSnowFromPool() {
-    return snowPool.pop() || document.createElement("div");
-}
-
-function returnSnowToPool(snow) {
-    if (snowPool.length < maxPoolSize) {
-        snow.style.animation = "";
-        snow.style.transform = "";
-        snow.style.opacity = "";
-        snow.style.width = "";
-        snow.style.height = "";
-        snow.style.top = "";
-        snow.style.left = "";
-        snow.className = "snow";
-        snowPool.push(snow);
-    }
-}
+const ANIMATIONS = ["fall1", "fall2", "fall3", "fall4", "fall5"];
 
 function createSnow(options = {}) {
-    const snow = getSnowFromPool();
-    snow.className = "snow";
+	const snow = document.createElement("div");
+	const { smallSize, transparent } = options;
 
-    const sizeRange = options.smallSize ? 2 : 6;
-    const baseSize = options.smallSize ? 1 : 2;
-    const size = Math.random() * sizeRange + baseSize;
-    const sizeStr = `${size}px`;
+	const baseSize = smallSize ? 1 : 2;
+	const size = rand(baseSize, baseSize + (smallSize ? 2 : 6));
+	const sizeClass = size < 2.5 ? "small" : size < 4.5 ? "medium" : "large";
 
-    snow.style.width = sizeStr;
-    snow.style.height = sizeStr;
-    snow.style.top = `${-Math.random() * 130}px`;
-    snow.style.left = `${Math.random() * 120 - 10}%`;
+	const r = Math.random();
+	const depth = r < 0.2 ? "near" : r < 0.6 ? "mid" : "far";
 
-    const animations = ["fall1", "fall2", "fall3", "fall4", "fall5"];
+	snow.className = `snow snow--${sizeClass} snow--${depth}`;
 
-    const sizeVariation = size < 2.5
-        ? "small"
-        : size < 4.5
-        ? "medium"
-        : "large";
-    snow.classList.add(`snow--${sizeVariation}`);
+	const sizePx = `${size.toFixed(1)}px`;
+	snow.style.width = sizePx;
+	snow.style.height = sizePx;
+	snow.style.left = `${rand(-10, 110)}%`;
+	snow.style.top = `${-rand(20, 100)}px`;
 
-    const depthRandom = Math.random();
-    let depthLayer;
-    if (depthRandom < 0.2) {
-        depthLayer = "near";
-    } else if (depthRandom < 0.6) {
-        depthLayer = "mid";
-    } else {
-        depthLayer = "far";
-    }
-    snow.classList.add(`snow--${depthLayer}`);
+	let baseOp = depth === "near" ? 0.7 : depth === "mid" ? 0.5 : 0.2;
+	if (transparent) {
+		baseOp = depth === "near" ? 0.3 : depth === "mid" ? 0.2 : 0.1;
+	}
+	snow.style.opacity = (baseOp + rand(0, 0.2)).toFixed(2);
 
-    if (options.transparent) {
-        const baseOpacity = depthLayer === "near"
-            ? 0.3
-            : depthLayer === "mid"
-            ? 0.2
-            : 0.1;
-        snow.style.opacity = `${baseOpacity + Math.random() * 0.2}`;
-    } else if (depthLayer === "far") {
-        snow.style.opacity = `${0.2 + Math.random() * 0.2}`;
-    } else if (depthLayer === "mid") {
-        snow.style.opacity = `${0.5 + Math.random() * 0.2}`;
-    } else {
-        snow.style.opacity = `${0.7 + Math.random() * 0.2}`;
-    }
+	const anim = sample(ANIMATIONS);
+	const baseDuration = depth === "near" ? 12 : depth === "mid" ? 15 : 18;
+	const duration = baseDuration - size / 3 + rand(0, 4);
 
-    const anim = animations[Math.floor(Math.random() * animations.length)];
-    const baseDuration = depthLayer === "near"
-        ? 12
-        : depthLayer === "mid"
-        ? 15
-        : 18;
-    const duration = baseDuration - size / 3 + Math.random() * 4;
+	snow.style.animation = `${anim} ${duration.toFixed(1)}s linear forwards`;
+	snow.onanimationend = () => snow.remove();
 
-    snow.style.animation = `${anim} ${duration}s linear forwards`;
+	return snow;
+}
 
-    const cleanup = () => {
-        snow.removeEventListener("animationend", cleanup);
-        if (snow.parentNode) {
-            snow.parentNode.removeChild(snow);
-        }
-        returnSnowToPool(snow);
-    };
+function startLoop(callback, interval) {
+	let last = performance.now();
+	let id;
 
-    snow.addEventListener("animationend", cleanup);
-    return snow;
+	const loop = (now) => {
+		const delta = now - last;
+		if (delta >= interval) {
+			callback();
+			last += interval;
+			// Prevent burst after tab suspension
+			if (now - last > interval) last = now;
+		}
+		id = requestAnimationFrame(loop);
+	};
+
+	id = requestAnimationFrame(loop);
+	return () => cancelAnimationFrame(id);
 }
 
 document.addEventListener("turbo:load", () => {
-    const intervals = [];
-    let hoverSnowInterval;
+	const cleanups = [];
+	let hoverCleanup = null;
 
-    const stopPermanentSnow = () => {
-        intervals.forEach((interval) => clearInterval(interval));
-        intervals.length = 0;
-    };
+	const cleanupAll = () => {
+		cleanups.forEach((fn) => fn());
+		cleanups.length = 0;
+		if (hoverCleanup) {
+			hoverCleanup();
+			hoverCleanup = null;
+		}
+	};
 
-    const startPermanentSnow = () => {
-        stopPermanentSnow();
+	// Permanent Snow (Banner)
+	const nowBanner = document.querySelector(".now__banner");
+	if (nowBanner) {
+		nowBanner.classList.add("snow__container");
+		cleanups.push(
+			startLoop(() => {
+				const fragment = document.createDocumentFragment();
+				for (let i = 0; i < 3; i++) fragment.appendChild(createSnow());
+				nowBanner.appendChild(fragment);
+			}, 800),
+		);
+	}
 
-        const nowBanner = document.querySelector(".now__banner");
-        if (nowBanner) {
-            nowBanner.classList.add("snow__container");
+	// Permanent Snow (Header)
+	const pageHeader = document.querySelector(".page__header");
+	if (pageHeader) {
+		pageHeader.classList.add("snow__container");
+		cleanups.push(
+			startLoop(() => {
+				const fragment = document.createDocumentFragment();
+				for (let i = 0; i < 2; i++) {
+					fragment.appendChild(
+						createSnow({ smallSize: true, transparent: true }),
+					);
+				}
+				pageHeader.appendChild(fragment);
+			}, 1200),
+		);
+	}
 
-            const bannerInterval = setInterval(() => {
-                const fragment = document.createDocumentFragment();
-                for (let i = 0; i < 3; i++) {
-                    fragment.appendChild(createSnow());
-                }
-                nowBanner.appendChild(fragment);
-            }, 800);
-            intervals.push(bannerInterval);
-        }
+	// Hover Effects
+	document
+		.querySelectorAll(".snow__container:not(.now__banner)")
+		.forEach((container) => {
+			container.addEventListener("mouseenter", () => {
+				if (!hoverCleanup) {
+					hoverCleanup = startLoop(() => {
+						const fragment = document.createDocumentFragment();
+						for (let i = 0; i < 5; i++) fragment.appendChild(createSnow());
+						container.appendChild(fragment);
+					}, 500);
+				}
+			});
 
-        const pageHeader = document.querySelector(".page__header");
-        if (pageHeader) {
-            pageHeader.classList.add("snow__container");
+			container.addEventListener("mouseleave", () => {
+				if (hoverCleanup) {
+					hoverCleanup();
+					hoverCleanup = null;
+				}
+			});
+		});
 
-            const headerInterval = setInterval(() => {
-                const fragment = document.createDocumentFragment();
-                for (let i = 0; i < 2; i++) {
-                    fragment.appendChild(
-                        createSnow({ smallSize: true, transparent: true }),
-                    );
-                }
-                pageHeader.appendChild(fragment);
-            }, 1200);
-            intervals.push(headerInterval);
-        }
-    };
-
-    const cleanup = () => {
-        stopPermanentSnow();
-        if (hoverSnowInterval) {
-            clearInterval(hoverSnowInterval);
-            hoverSnowInterval = null;
-        }
-    };
-
-    document.addEventListener("turbo:before-visit", cleanup);
-
-    document
-        .querySelectorAll(".snow__container:not(.now__banner)")
-        .forEach((container) => {
-            container.addEventListener("mouseenter", () => {
-                if (!hoverSnowInterval) {
-                    hoverSnowInterval = setInterval(() => {
-                        const fragment = document.createDocumentFragment();
-                        for (let i = 0; i < 5; i++) {
-                            fragment.appendChild(createSnow());
-                        }
-                        container.appendChild(fragment);
-                    }, 500);
-                }
-            });
-
-            container.addEventListener("mouseleave", () => {
-                if (hoverSnowInterval) {
-                    clearInterval(hoverSnowInterval);
-                    hoverSnowInterval = null;
-                }
-            });
-        });
-
-    document.addEventListener("visibilitychange", () => {
-        if (document.hidden) {
-            cleanup();
-        } else {
-            startPermanentSnow();
-        }
-    });
-
-    startPermanentSnow();
+	document.addEventListener("turbo:before-visit", cleanupAll, { once: true });
 });
