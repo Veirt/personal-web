@@ -172,17 +172,6 @@
   color: var(--accent);
 }
 
-.now__intro a {
-  color: var(--primary);
-  text-decoration: none;
-  border-bottom: 1px solid transparent;
-  transition: all 0.2s ease;
-}
-
-.now__intro a:hover {
-  border-bottom-color: var(--primary);
-}
-
 .now__footer {
   text-align: center;
   margin-top: 4rem;
@@ -205,6 +194,17 @@
 
 [data-theme="light"] .theme__icon--moon {
   display: none;
+}
+
+a:not(.nav-item) {
+  color: var(--primary);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+a:not(.nav-item):hover {
+  border-bottom-color: var(--primary);
 }
 
 img {

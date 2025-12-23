@@ -19,7 +19,7 @@ layout: base.vto
                 <header class="mb-5">
                      <h2 class="m-0 text-xl font-semibold leading-snug uppercase tracking-widest">
                         <a
-                            class="link group text-primary no-underline border-b border-b-transparent inline-flex items-center gap-2 transition-all duration-300 ease-out hover:border-b-primary/60"
+                            class="text-primary inline-flex items-center gap-2"
                             href="{{ project.url }}"
                             aria-describedby="project-{{ project.title |> slugify }}-desc"
                         >
@@ -42,7 +42,7 @@ layout: base.vto
                     {{ if project.github_url }}
                         <div class="mt-2" aria-label="Project links">
                             <a
-                                class="inline-flex items-center gap-1.5 text-accent text-sm no-underline transition-all duration-300 py-1 opacity-80 hover:text-primary hover:opacity-100"
+                                class="inline-flex items-center gap-1.5 text-primary text-sm transition-all duration-300 py-1 opacity-80"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 href="{{ project.github_url }}"

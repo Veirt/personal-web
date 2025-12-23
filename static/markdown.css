@@ -29,8 +29,13 @@
 
 .markdown-content a {
   color: var(--primary);
-  text-decoration: underline;
-  text-underline-offset: 0.2em;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.markdown-content a:hover {
+  border-bottom-color: var(--primary);
 }
 
 .markdown-content blockquote {

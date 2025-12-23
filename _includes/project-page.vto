@@ -32,15 +32,15 @@ layout: base.vto
                 </div>
             {{ /if }}
             {{ if github_url }}
-                <div class="flex items-center" aria-label="Project links">
-                    <a
-                        class="text-primary no-underline font-medium inline-flex items-center gap-1.5 transition-all duration-200 hover:text-secondary"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href="{{ github_url }}"
-                        itemprop="codeRepository"
-                        aria-label="View source code on GitHub (opens in new tab)"
-                    >
+                <div class="flex items-center project-links" aria-label="Project links">
+<a
+                    class="text-primary font-medium inline-flex items-center gap-1.5"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="{{ github_url }}"
+                    itemprop="codeRepository"
+                    aria-label="View source code on GitHub (opens in new tab)"
+                >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="1em"
