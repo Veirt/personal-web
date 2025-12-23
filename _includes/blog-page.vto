@@ -2,9 +2,9 @@
 layout: base.vto
 ---
 
-<article class="mx-auto text-[18px]" itemscope itemtype="https://schema.org/BlogPosting">
+<article class="mx-auto text-base sm:text-[18px]" itemscope itemtype="https://schema.org/BlogPosting">
     <header class="mb-8 pb-6 border-b-2  border-border">
-        <h1 class="text-4xl font-bold mb-4 text-primary leading-tight uppercase tracking-widest" itemprop="headline">{{ title }}</h1>
+        <h1 class="text-3xl sm:text-4xl font-bold mb-4 text-primary leading-tight uppercase tracking-widest" itemprop="headline">{{ title }}</h1>
         <div class="flex flex-wrap items-center gap-4">
             <time
                 class="text-accent text-sm"
@@ -18,7 +18,7 @@ layout: base.vto
             {{ if tags }}
                 <div class="flex flex-wrap gap-2" aria-label="Post tags">
                     {{ for tag of tags }}
-                        <span class="text-primary px-3 py-1 uppercase font-semibold text-xs tracking-wide transition-all duration-200 border-2 border-primary shadow-sm" itemprop="keywords">{{
+                        <span class="text-primary px-2 py-0.5 sm:px-3 sm:py-1 uppercase font-semibold text-[10px] sm:text-xs tracking-wide transition-all duration-200 border-2 border-primary shadow-sm" itemprop="keywords">{{
                             tag
                         }}</span>
                     {{ /for }}

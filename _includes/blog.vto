@@ -11,9 +11,9 @@ layout: base.vto
 {{ else }}
     <section class="flex flex-col gap-5" role="region" aria-label="Blog posts">
         {{ for post of search.pages("type=blog", "date=desc") }}
-            <article class="snow__container h-auto min-h-30 p-7 border border-primary overflow-hidden">
+            <article class="snow__container h-auto min-h-30 p-5 sm:p-7 border border-primary overflow-hidden">
                 <header>
-                    <h2 class="mt-0 mb-3 text-2xl font-semibold leading-snug uppercase tracking-widest">
+                    <h2 class="mt-0 mb-3 text-xl sm:text-2xl font-semibold leading-snug uppercase tracking-widest">
                         <a
                             class="text-primary no-underline border-b border-b-transparent inline-flex items-center gap-2 transition-all duration-300 ease-out hover:border-b-primary/60"
                             href="{{ post.url }}"
@@ -40,7 +40,7 @@ layout: base.vto
                     </div>
                 </header>
                 <p
-                    class="line-clamp-2 overflow-hidden text-ellipsis leading-normal text-text/85"
+                    class="line-clamp-2 overflow-hidden text-ellipsis leading-normal text-sm sm:text-base text-text/85"
                     id="post-{{ post.title |> slugify }}-desc"
                 >
                     {{ post.description }}
