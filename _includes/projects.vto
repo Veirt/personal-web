@@ -5,19 +5,19 @@ layout: base.vto
 {{ include "page-header.vto" { title, subtitle } }}
 
 {{ if search.pages("type=project").length == 0 }}
-    <section class="empty__state text-center py-16 px-8 text-accent opacity-80 italic" role="status" aria-live="polite">
+    <section class="text-center py-16 px-8 text-accent opacity-80 italic" role="status" aria-live="polite">
         <p>No projects yet.</p>
     </section>
 {{ else }}
     <section
-        class="project__container grid grid-cols-[repeat(auto-fit,minmax(450px,1fr))] gap-7 mt-8"
+        class="grid grid-cols-[repeat(auto-fit,minmax(450px,1fr))] gap-7 mt-8"
         role="region"
         aria-label="Project listings"
     >
         {{ for project of search.pages("type=project", "date=desc") }}
-            <article class="project__item snow__container p-7 border border-primary relative overflow-hidden flex flex-col">
-                <header class="project__header mb-5">
-                    <h2 class="project__name m-0 text-xl font-semibold leading-snug uppercase tracking-widest">
+            <article class="snow__container p-7 border border-primary relative overflow-hidden flex flex-col">
+                <header class="mb-5">
+                     <h2 class="m-0 text-xl font-semibold leading-snug uppercase tracking-widest">
                         <a
                             class="link group text-primary no-underline border-b border-b-transparent inline-flex items-center gap-2 transition-all duration-300 ease-out hover:border-b-primary/60"
                             href="{{ project.url }}"
@@ -25,7 +25,7 @@ layout: base.vto
                         >
                             {{ project.title }}
                             <svg
-                                class="project__arrow opacity-70 transition-all duration-200 ease-out group-hover:opacity-100 group-hover:translate-x-0.5"
+                                class="opacity-70 transition-all duration-200 ease-out group-hover:opacity-100 group-hover:translate-x-0.5"
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="0.8em"
                                 height="0.8em"
@@ -67,19 +67,19 @@ layout: base.vto
                 </header>
 
                 <p
-                    class="project__description text-text/75 leading-relaxed mb-6 text-base flex-grow"
+                    class="text-text/75 leading-relaxed mb-6 text-base flex-grow"
                     id="project-{{ project.title |> slugify }}-desc"
                 >
                     {{ project.description }}
                 </p>
 
-                <footer class="project__footer mt-auto flex justify-between items-end gap-4">
+                 <footer class="mt-auto flex justify-between items-end gap-4">
                     {{ if project.technologies }}
-                        <div
-                            class="project__skills flex flex-wrap gap-2"
-                            role="list"
-                            aria-label="Technologies used"
-                        >
+                         <div
+                             class="flex flex-wrap gap-2"
+                             role="list"
+                             aria-label="Technologies used"
+                         >
                             {{ for tech of project.technologies }}
                                 <span
                                     class="text-primary px-3 py-1 uppercase font-semibold text-xs tracking-wide transition-all duration-200 border-2  border-primary shadow-sm"
