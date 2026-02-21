@@ -16,9 +16,9 @@ layout: base.vto
                     |> readingTime
                 }} min read</span>
             {{ if tags }}
-                <div class="flex flex-wrap gap-2" aria-label="Post tags">
+                <div class="flex flex-wrap gap-1.5" aria-label="Post tags">
                     {{ for tag of tags }}
-                        <span class="text-primary px-2 py-0.5 sm:px-3 sm:py-1 uppercase font-semibold text-[10px] sm:text-xs tracking-wide transition-all duration-200 border-2 border-primary shadow-sm" itemprop="keywords">{{
+                        <span class="font-mono text-[0.6rem] tracking-widest uppercase text-accent border border-border px-2 py-0.5" itemprop="keywords">{{
                             tag
                         }}</span>
                     {{ /for }}
