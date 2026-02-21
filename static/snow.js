@@ -59,15 +59,10 @@ function startLoop(callback, interval) {
 
 document.addEventListener("turbo:load", () => {
 	const cleanups = [];
-	let hoverCleanup = null;
 
 	const cleanupAll = () => {
 		cleanups.forEach((fn) => fn());
 		cleanups.length = 0;
-		if (hoverCleanup) {
-			hoverCleanup();
-			hoverCleanup = null;
-		}
 	};
 
 	// Permanent Snow (Banner)
@@ -99,28 +94,6 @@ document.addEventListener("turbo:load", () => {
 			}, 1200),
 		);
 	}
-
-	// Hover Effects
-	document
-		.querySelectorAll(".snow__container:not(.now__banner)")
-		.forEach((container) => {
-			container.addEventListener("mouseenter", () => {
-				if (!hoverCleanup) {
-					hoverCleanup = startLoop(() => {
-						const fragment = document.createDocumentFragment();
-						for (let i = 0; i < 5; i++) fragment.appendChild(createSnow());
-						container.appendChild(fragment);
-					}, 500);
-				}
-			});
-
-			container.addEventListener("mouseleave", () => {
-				if (hoverCleanup) {
-					hoverCleanup();
-					hoverCleanup = null;
-				}
-			});
-		});
 
 	document.addEventListener("turbo:before-visit", cleanupAll, { once: true });
 });

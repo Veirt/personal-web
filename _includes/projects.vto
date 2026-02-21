@@ -15,7 +15,7 @@ layout: base.vto
         aria-label="Project listings"
     >
         {{ for project of search.pages("type=project", "date=desc") }}
-            <article class="snow__container group flex flex-col border border-border hover:border-primary/40 transition-colors duration-200 overflow-hidden cursor-pointer">
+            <article class="group flex flex-col border border-border hover:border-primary/40 transition-colors duration-200 overflow-hidden cursor-pointer">
                 <!-- Preview image -->
                 <a
                     class="card-title-link block relative overflow-hidden bg-surface"
