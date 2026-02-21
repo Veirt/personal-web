@@ -6,6 +6,7 @@ description: Fish shell plugin to do a web search
 github_url: https://github.com/Veirt/web-search.fish
 technologies: ["Fish", "Shell Scripting"]
 date: 2024-10-14
+screenshot: https://veirt.github.io/web-search.fish/demo.gif
 ---
 
 <img src="https://veirt.github.io/web-search.fish/demo.gif" alt="Preview" />

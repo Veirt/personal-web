@@ -6,6 +6,7 @@ description: Personalized tutoring platform connecting learners with skilled tut
 github_url: https://github.com/Tutortoise
 technologies: ["TypeScript", "Express.js", "PostgreSQL"]
 date: 2024-12-12
+screenshot: /projects/tutortoise/pitchdeck.png
 ---
 
 <img alt="Pitch Deck" src="/projects/tutortoise/pitchdeck.png" transform-images="avif" />
