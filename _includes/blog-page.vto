@@ -4,14 +4,14 @@ layout: base.vto
 
 <article class="mx-auto text-base sm:text-[18px]" itemscope itemtype="https://schema.org/BlogPosting">
     <header class="mb-8 pb-6 border-b-2  border-border">
-        <h1 class="text-3xl sm:text-4xl font-bold mb-4 text-primary leading-tight uppercase tracking-widest" itemprop="headline">{{ title }}</h1>
+        <h1 class="text-3xl sm:text-4xl font-bold mb-4 text-text leading-tight tracking-tight" itemprop="headline">{{ title }}</h1>
         <div class="flex flex-wrap items-center gap-4">
             <time
-                class="text-accent text-sm"
+                class="font-mono text-xs text-accent/60 tracking-wide"
                 datetime="{{ date |> date('DATETIME') }}"
                 itemprop="datePublished"
             >{{ date |> date("HUMAN_DATE") }}</time>
-            <span class="text-accent text-sm" aria-label="Estimated reading time">{{
+            <span class="font-mono text-xs text-accent/60 tracking-wide" aria-label="Estimated reading time">{{
                     content
                     |> readingTime
                 }} min read</span>

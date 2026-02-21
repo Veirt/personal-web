@@ -165,7 +165,7 @@
                 <div class="flex-1 flex flex-col justify-center pl-8 pr-4">
                     <p
                         href="/"
-                        class="font-mono text-sm font-semibold text-text tracking-widest hover:text-text/90 transition-colors duration-200 mb-8 inline-block"
+                        class="font-mono text-sm font-semibold text-text tracking-widest hover:text-text/90 transition-colors duration-200 mb-8"
                     >veirt.</p>
 
                     <nav aria-label="Primary navigation">
@@ -200,18 +200,18 @@
                             </li>
                         </ul>
                     </nav>
-                </div>
 
-                <div class="pb-8 pl-8">
-                    <button
-                        class="theme-toggle-btn"
-                        id="theme-toggle"
-                        aria-label="Toggle between light and dark theme"
-                        aria-pressed="false"
-                    >
-                        <div class="theme__icon theme__icon--sun i-solar:sun-line-duotone text-base"></div>
-                        <div class="theme__icon theme__icon--moon i-solar:moon-line-duotone text-base"></div>
-                    </button>
+                    <div class="mt-6">
+                        <button
+                            class="theme-toggle-btn"
+                            id="theme-toggle"
+                            aria-label="Toggle between light and dark theme"
+                            aria-pressed="false"
+                        >
+                            <div class="theme__icon theme__icon--sun i-solar:sun-line-duotone text-base"></div>
+                            <div class="theme__icon theme__icon--moon i-solar:moon-line-duotone text-base"></div>
+                        </button>
+                    </div>
                 </div>
             </aside>
 
@@ -232,17 +232,17 @@
                         <li><a class="sidebar-nav-item {{ if url |> startsWith('/blog') }}sidebar-nav-item-active{{ /if }}" href="/blog/">Blog</a></li>
                         <li><a class="sidebar-nav-item {{ if url == '/now/' }}sidebar-nav-item-active{{ /if }}" href="/now/">Now</a></li>
                     </ul>
-                </div>
-                <div class="pb-8 pl-7">
-                    <button
-                        class="theme-toggle-btn"
-                        id="theme-toggle-mobile-sidebar"
-                        aria-label="Toggle between light and dark theme"
-                        aria-pressed="false"
-                    >
-                        <div class="theme__icon theme__icon--sun i-solar:sun-line-duotone text-base"></div>
-                        <div class="theme__icon theme__icon--moon i-solar:moon-line-duotone text-base"></div>
-                    </button>
+                    <div class="mt-6">
+                        <button
+                            class="theme-toggle-btn"
+                            id="theme-toggle-mobile-sidebar"
+                            aria-label="Toggle between light and dark theme"
+                            aria-pressed="false"
+                        >
+                            <div class="theme__icon theme__icon--sun i-solar:sun-line-duotone text-base"></div>
+                            <div class="theme__icon theme__icon--moon i-solar:moon-line-duotone text-base"></div>
+                        </button>
+                    </div>
                 </div>
             </aside>
 
