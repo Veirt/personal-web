@@ -9,42 +9,47 @@ layout: base.vto
         <p>No posts yet.</p>
     </section>
 {{ else }}
-    <section class="flex flex-col gap-5" role="region" aria-label="Blog posts">
+    <section class="flex flex-col divide-y divide-border" role="region" aria-label="Blog posts">
         {{ for post of search.pages("type=blog", "date=desc") }}
-            <article class="snow__container h-auto min-h-30 p-5 sm:p-7 border border-primary overflow-hidden">
-                <header>
-                    <h2 class="mt-0 mb-3 text-xl sm:text-2xl font-semibold leading-snug uppercase tracking-widest">
-                        <a
-                            class="text-primary inline-flex items-center gap-2"
-                            href="{{ post.url }}"
-                            aria-describedby="post-{{ post.title |> slugify }}-desc"
-                        >{{ post.title }}</a>
-                    </h2>
-                    <div class="flex items-center gap-2 text-accent text-sm mb-4 opacity-90">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="1em"
-                            height="1em"
-                            viewBox="0 0 24 24"
-                            aria-hidden="true"
-                        >
-                            <path
-                                fill="currentColor"
-                                d="M15 2h2v2h4v18H3V4h4V2h2v2h6zM5 8h14V6H5zm0 2v10h14V10z"
-                            />
-                        </svg>
-                        <time datetime="{{ post.date |> date('DATETIME') }}">{{
-                            post.date
-                            |> date("HUMAN_DATE")
-                        }}</time>
-                    </div>
-                </header>
-                <p
-                    class="line-clamp-2 overflow-hidden text-ellipsis leading-normal text-sm sm:text-base text-text/85"
-                    id="post-{{ post.title |> slugify }}-desc"
+            <article class="snow__container group py-7 first:pt-0 overflow-hidden relative cursor-pointer" aria-label="{{ post.title }}">
+                <a
+                    class="card-title-link block"
+                    href="{{ post.url }}"
+                    aria-describedby="post-{{ post.title |> slugify }}-desc"
                 >
-                    {{ post.description }}
-                </p>
+                    <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-6">
+                        <div class="flex-1 min-w-0">
+                            <h2 class="mt-0 mb-2 text-lg sm:text-xl font-semibold leading-snug tracking-tight text-text group-hover:text-primary transition-colors duration-200">
+                                {{ post.title }}
+                            </h2>
+                            <p
+                                class="line-clamp-2 text-sm leading-relaxed text-accent/80 m-0"
+                                id="post-{{ post.title |> slugify }}-desc"
+                            >
+                                {{ post.description }}
+                            </p>
+                        </div>
+                        <div class="flex sm:flex-col sm:items-end gap-3 shrink-0">
+                            <time
+                                class="font-mono text-xs text-accent/60 tracking-wide whitespace-nowrap"
+                                datetime="{{ post.date |> date('DATETIME') }}"
+                            >{{ post.date |> date("HUMAN_DATE") }}</time>
+                            <span class="inline-flex items-center gap-1 text-primary text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-200 sm:mt-auto">
+                                Read
+                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path fill="currentColor" d="M8.59 16.59L13.17 12L8.59 7.41L10 6l6 6l-6 6l-1.41-1.41z"/>
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+                    {{ if post.tags }}
+                        <div class="flex flex-wrap gap-2 mt-3" aria-label="Tags">
+                            {{ for tag of post.tags }}
+                                <span class="font-mono text-[0.65rem] tracking-widest uppercase text-accent border border-border px-2 py-0.5">{{ tag }}</span>
+                            {{ /for }}
+                        </div>
+                    {{ /if }}
+                </a>
             </article>
         {{ /for }}
     </section>

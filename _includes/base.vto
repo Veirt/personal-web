@@ -123,80 +123,179 @@
         ></script>
     </head>
 
-    <body class="p-5 sm:p-8 text-base sm:text-lg leading-relaxed mx-auto max-w-[75rem] bg-background text-text">
-        <header role="banner">
-            <nav class="navbar flex flex-row justify-between items-center mb-8 py-3 md:py-4 border-b border-solid border-border relative uppercase" role="navigation" aria-label="Main navigation">
-                <ul class="navbar__links flex items-center flex-wrap gap-0 md:gap-1 list-none m-0 p-0" role="list">
-                    <li>
-                        <a
-                            class="nav-item {{ if url == '/' }}nav-item-active{{ /if }}"
-                            href="/"
-                            aria-current="{{ if url == '/' }}page{{ /if }}"
-                        >home</a>
-                    </li>
-                    <li>
-                        <a
-                            class="nav-item {{ if url |> startsWith('/blog') }}nav-item-active{{ /if }}"
-                            href="/blog/"
-                            aria-current="{{ if url |> startsWith('/blog') }}page{{ /if }}"
-                        >blog</a>
-                    </li>
-                    <li>
-                        <a
-                            class="nav-item {{ if url |> startsWith('/projects') }}nav-item-active{{ /if }}"
-                            href="/projects/"
-                            aria-current="{{ if url |> startsWith('/projects') }}page{{ /if }}"
-                        >projects</a>
-                    </li>
-                    <li>
-                        <a
-                            class="nav-item {{ if url == '/now/' }}nav-item-active{{ /if }}"
-                            href="/now/"
-                            aria-current="{{ if url == '/now/' }}page{{ /if }}"
-                        >now</a>
-                    </li>
-                    <li>
-                        <a
-                            class="nav-item"
-                            target="_blank"
-                            href="https://github.com/Veirt"
-                            rel="noopener noreferrer"
-                            aria-label="Visit my GitHub profile (opens in new tab)"
-                        >
-                            github
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="1em"
-                                height="1em"
-                                viewBox="0 0 24 24"
-                                aria-hidden="true"
-                            >
-                                <g>
-                                    <path
-                                        d="M15.64 7.025h-3.622v-2h7v7h-2v-3.55l-4.914 4.914l-1.414-1.414z"
-                                    />
-                                    <path
-                                        d="M10.982 6.975h-6v12h12v-6h-2v4h-8v-8h4z"
-                                    />
-                                </g>
-                            </svg>
-                        </a>
-                    </li>
-                </ul>
+    <body class="bg-background text-text text-base leading-relaxed">
+
+        <!-- Mobile top bar -->
+        <header class="md:hidden flex items-center justify-between px-5 py-4 border-b border-border sticky top-0 bg-background z-50" role="banner">
+            <a href="/" class="font-mono text-sm font-semibold text-text/70 tracking-widest">veirt.</a>
+            <div class="flex items-center gap-2">
                 <button
                     class="theme-toggle-btn"
-                    id="theme-toggle"
+                    id="theme-toggle-mobile"
                     aria-label="Toggle between light and dark theme"
                     aria-pressed="false"
                 >
-                    <div class="theme__icon theme__icon--sun i-solar:sun-line-duotone"></div>
-                    <div class="theme__icon theme__icon--moon i-solar:moon-line-duotone"></div>
+                    <div class="theme__icon theme__icon--sun i-solar:sun-line-duotone text-base"></div>
+                    <div class="theme__icon theme__icon--moon i-solar:moon-line-duotone text-base"></div>
                 </button>
-            </nav>
+                <button
+                    class="border border-border p-2 cursor-pointer text-text hover:text-primary hover:border-primary transition-colors duration-200"
+                    id="mobile-menu-toggle"
+                    aria-label="Toggle navigation menu"
+                    aria-expanded="false"
+                    aria-controls="sidebar-mobile"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" id="menu-icon-open">
+                        <path fill="currentColor" d="M3 18v-2h18v2zm0-5v-2h18v2zm0-5V6h18v2z"/>
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" id="menu-icon-close" class="hidden">
+                        <path fill="currentColor" d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12z"/>
+                    </svg>
+                </button>
+            </div>
         </header>
 
-        <main class="main-content" role="main">
-            {{ content }}
-        </main>
+        <div class="flex min-h-screen">
+            <aside
+                id="sidebar"
+                class="hidden md:flex flex-col w-56 fixed top-0 left-0 h-screen z-40 bg-background"
+                role="navigation"
+                aria-label="Main navigation"
+            >
+                <div class="flex-1 flex flex-col justify-center pl-8 pr-4">
+                    <p
+                        href="/"
+                        class="font-mono text-sm font-semibold text-text tracking-widest hover:text-text/90 transition-colors duration-200 mb-8 inline-block"
+                    >veirt.</p>
+
+                    <nav aria-label="Primary navigation">
+                        <ul class="flex flex-col gap-0.5 list-none m-0 p-0" role="list">
+                            <li>
+                                <a
+                                    class="sidebar-nav-item {{ if url == '/' }}sidebar-nav-item-active{{ /if }}"
+                                    href="/"
+                                    aria-current="{{ if url == '/' }}page{{ /if }}"
+                                >Home</a>
+                            </li>
+                            <li>
+                                <a
+                                    class="sidebar-nav-item {{ if url |> startsWith('/projects') }}sidebar-nav-item-active{{ /if }}"
+                                    href="/projects/"
+                                    aria-current="{{ if url |> startsWith('/projects') }}page{{ /if }}"
+                                >Projects</a>
+                            </li>
+                            <li>
+                                <a
+                                    class="sidebar-nav-item {{ if url |> startsWith('/blog') }}sidebar-nav-item-active{{ /if }}"
+                                    href="/blog/"
+                                    aria-current="{{ if url |> startsWith('/blog') }}page{{ /if }}"
+                                >Blog</a>
+                            </li>
+                            <li>
+                                <a
+                                    class="sidebar-nav-item {{ if url == '/now/' }}sidebar-nav-item-active{{ /if }}"
+                                    href="/now/"
+                                    aria-current="{{ if url == '/now/' }}page{{ /if }}"
+                                >Now</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <div class="pb-8 pl-8">
+                    <button
+                        class="theme-toggle-btn"
+                        id="theme-toggle"
+                        aria-label="Toggle between light and dark theme"
+                        aria-pressed="false"
+                    >
+                        <div class="theme__icon theme__icon--sun i-solar:sun-line-duotone text-base"></div>
+                        <div class="theme__icon theme__icon--moon i-solar:moon-line-duotone text-base"></div>
+                    </button>
+                </div>
+            </aside>
+
+            <div id="sidebar-overlay" class="fixed inset-0 bg-background/80 backdrop-blur-sm z-30 hidden md:hidden" aria-hidden="true"></div>
+
+            <aside
+                id="sidebar-mobile"
+                class="hidden flex-col w-64 border-r border-border fixed top-0 left-0 h-screen z-40 bg-background overflow-y-auto md:hidden"
+                style="transform: translateX(-100%); transition: transform 0.3s ease;"
+                role="navigation"
+                aria-label="Mobile navigation"
+            >
+                <div class="flex-1 flex flex-col justify-center pl-7 pr-4">
+                    <a href="/" class="font-mono text-sm font-semibold text-text/60 tracking-widest mb-8 inline-block">veirt.</a>
+                    <ul class="flex flex-col gap-0.5 list-none m-0 p-0" role="list">
+                        <li><a class="sidebar-nav-item {{ if url == '/' }}sidebar-nav-item-active{{ /if }}" href="/">Home</a></li>
+                        <li><a class="sidebar-nav-item {{ if url |> startsWith('/projects') }}sidebar-nav-item-active{{ /if }}" href="/projects/">Projects</a></li>
+                        <li><a class="sidebar-nav-item {{ if url |> startsWith('/blog') }}sidebar-nav-item-active{{ /if }}" href="/blog/">Blog</a></li>
+                        <li><a class="sidebar-nav-item {{ if url == '/now/' }}sidebar-nav-item-active{{ /if }}" href="/now/">Now</a></li>
+                    </ul>
+                </div>
+                <div class="pb-8 pl-7">
+                    <button
+                        class="theme-toggle-btn"
+                        id="theme-toggle-mobile-sidebar"
+                        aria-label="Toggle between light and dark theme"
+                        aria-pressed="false"
+                    >
+                        <div class="theme__icon theme__icon--sun i-solar:sun-line-duotone text-base"></div>
+                        <div class="theme__icon theme__icon--moon i-solar:moon-line-duotone text-base"></div>
+                    </button>
+                </div>
+            </aside>
+
+            <main
+                class="flex-1 md:ml-56 min-h-screen p-6 sm:p-10 lg:p-14"
+                role="main"
+            >
+                {{ content }}
+            </main>
+
+        </div>
+
+        <script>
+            (function () {
+                var toggle = document.getElementById('mobile-menu-toggle');
+                var sidebar = document.getElementById('sidebar-mobile');
+                var overlay = document.getElementById('sidebar-overlay');
+                var iconOpen = document.getElementById('menu-icon-open');
+                var iconClose = document.getElementById('menu-icon-close');
+
+                if (!toggle || !sidebar) return;
+
+                function openMenu() {
+                    sidebar.classList.remove('hidden');
+                    sidebar.classList.add('flex');
+                    requestAnimationFrame(function () {
+                        sidebar.style.transform = 'translateX(0)';
+                    });
+                    overlay.classList.remove('hidden');
+                    toggle.setAttribute('aria-expanded', 'true');
+                    iconOpen.classList.add('hidden');
+                    iconClose.classList.remove('hidden');
+                }
+
+                function closeMenu() {
+                    sidebar.style.transform = 'translateX(-100%)';
+                    overlay.classList.add('hidden');
+                    toggle.setAttribute('aria-expanded', 'false');
+                    iconOpen.classList.remove('hidden');
+                    iconClose.classList.add('hidden');
+                    setTimeout(function () {
+                        sidebar.classList.add('hidden');
+                        sidebar.classList.remove('flex');
+                    }, 300);
+                }
+
+                toggle.addEventListener('click', function () {
+                    var isOpen = toggle.getAttribute('aria-expanded') === 'true';
+                    if (isOpen) closeMenu(); else openMenu();
+                });
+
+                overlay.addEventListener('click', closeMenu);
+            })();
+        </script>
     </body>
 </html>

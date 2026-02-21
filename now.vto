@@ -1,0 +1,54 @@
+---
+layout: base.vto
+title: now
+subtitle: what i'm up to these days
+url: /now/
+last_updated: Dec 26, 2025
+sections:
+  - title: Learning & Growth
+    items:
+      - Exploring niche blogs like [bearblog.dev](https://bearblog.dev)
+      - Reading more classic literature
+      - Writing regularly and keeping a journal
+      - Working on improving my communication skills
+
+  - title: Health & Wellness
+    items:
+      - Walking more regularly
+
+  - title: Projects & Tech
+    items:
+      - "Tinkering with my homelab setup — planning to replace Flux with ArgoCD"
+      - Learning more advanced backend topics
+      - Preparing for AWS certifications (CCP, SAA-C03) and Google (PCA)
+---
+
+<header class="page__header mb-10 relative overflow-hidden pb-6 border-b border-border">
+    <h1 class="text-2xl sm:text-3xl font-semibold leading-tight tracking-tight text-text m-0">{{ title }}</h1>
+    <p class="text-sm text-accent/70 mt-2 m-0 leading-relaxed">{{ subtitle }}</p>
+</header>
+
+<p class="text-sm text-accent/70 leading-relaxed mt-0 mb-10">
+    This is my <a href="https://nownownow.com/about" rel="external" class="text-primary">now page</a> —
+    a snapshot of what I'm currently focused on.
+</p>
+
+<div class="flex flex-col gap-px border border-border">
+    {{ for i, section of sections }}
+        <section class="snow__container group p-6 bg-background hover:bg-surface transition-colors duration-200">
+            <p class="font-mono text-[0.6rem] tracking-[0.18em] uppercase text-accent/70 m-0 mb-4">
+                <span class="text-primary">#{{ i + 1 }}</span> {{ section.title }}
+            </p>
+            <ul class="flex flex-col gap-2.5 m-0 p-0 list-none">
+                {{ for item of section.items }}
+                    <li class="flex items-baseline gap-3 text-sm text-text/80 leading-relaxed">
+                        <span class="text-border shrink-0">—</span>
+                        <span>{{ item |> md(true) }}</span>
+                    </li>
+                {{ /for }}
+            </ul>
+        </section>
+    {{ /for }}
+</div>
+
+<p class="font-mono text-xs text-accent/50 mt-6">updated {{ last_updated }}</p>

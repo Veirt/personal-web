@@ -1,17 +1,21 @@
-(function () {
-    const htmlElement = document.documentElement;
-    const savedTheme = localStorage.getItem("theme") || "dark";
-    htmlElement.setAttribute("data-theme", savedTheme);
+(() => {
+	const htmlElement = document.documentElement;
+	const savedTheme = localStorage.getItem("theme") || "dark";
+	htmlElement.setAttribute("data-theme", savedTheme);
 })();
 
-document.addEventListener("turbo:load", function () {
-    const themeToggle = document.getElementById("theme-toggle");
-    const htmlElement = document.documentElement;
-    themeToggle.addEventListener("click", function () {
-        const currentTheme = htmlElement.getAttribute("data-theme");
-        const newTheme = currentTheme === "dark" ? "light" : "dark";
+document.addEventListener("turbo:load", () => {
+	const htmlElement = document.documentElement;
 
-        htmlElement.setAttribute("data-theme", newTheme);
-        localStorage.setItem("theme", newTheme);
-    });
+	function applyThemeToggle() {
+		const currentTheme = htmlElement.getAttribute("data-theme");
+		const newTheme = currentTheme === "dark" ? "light" : "dark";
+		htmlElement.setAttribute("data-theme", newTheme);
+		localStorage.setItem("theme", newTheme);
+	}
+
+	// Bind all theme toggle buttons
+	document.querySelectorAll('[id^="theme-toggle"]').forEach((btn) => {
+		btn.addEventListener("click", applyThemeToggle);
+	});
 });

@@ -6,6 +6,7 @@ description: Website for managing my college schedule with automated reminders v
 github_url: https://github.com/Veirt/schedula
 technologies: ["Svelte", "TypeScript", "SQLite", "Hono"]
 date: 2024-04-13
+screenshot: /projects/schedula/screenshot.png
 ---
 
 <img src="/projects/schedula/screenshot.png" alt="Schedula Screenshot" transform-images="avif">

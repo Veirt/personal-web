@@ -6,6 +6,7 @@ description: A simple web app to generate strong passwords.
 github_url: https://github.com/Veirt/vue-pw-generator
 technologies: ["Vue", "TypeScript", "TailwindCSS"]
 date: 2021-03-04
+screenshot: /projects/vue-pw-generator/screenshot.png
 ---
 
 A simple single-page app built to generate secure passwords based on

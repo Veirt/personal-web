@@ -6,6 +6,7 @@ description: Simple, lightweight dashboard for home server
 github_url: https://github.com/Veirt/Vesta
 technologies: ["Rust", "Axum", "TailwindCSS"]
 date: 2024-08-16
+screenshot: /projects/vesta/screenshot.png
 ---
 
 <img src="/projects/vesta/screenshot.png" alt="Preview" transform-images="avif" />

@@ -5,27 +5,71 @@ layout: base.vto
 <div class="now__banner" role="img" aria-label="Decorative banner"></div>
 
 <section class="mx-auto" role="main">
-    <header class="mb-6">
-        <h1 class="text-2xl font-medium leading-relaxed tracking-tight">
-            Hey, I'm <span class="text-primary">Veirt</span>. 
+    <header class="mb-8">
+        <h1 class="font-mono text-2xl font-semibold leading-snug tracking-tight">
+            hey, i'm <span class="text-primary">veirt</span>.
         </h1>
-        <h2 class="text-xl">
-            I like building things, breaking stuff <span class="text-accent text-lg font-italic">(sometimes)</span>,
-            and figuring out how things work.
-        </h2>
     </header>
 
-    <div class="text-base leading-relaxed mb-8 text-text">
+    <div class="text-sm sm:text-base leading-relaxed text-text/85 flex flex-col gap-4">
         <p>
-            I enjoy automating tasks, learning new things, and playing around
-            with different tools and languages. Most of the stuff I build starts
-            from me just trying to solve my own problems. 
+            I like building things, breaking stuff <span class="text-accent italic">(sometimes)</span>, and figuring out how things work.
         </p>
-        <br />
         <p>
-            I also run a small home server just for fun—it's a nice way to tinker and try new
-            setups. Outside of that, I watch anime and spend way too much time
-            on typing websites—<a class="text-primary inline-flex items-center gap-2" href="https://typingstats.com/profile/veirt" rel="external">proof</a>.
+            Most of what I build comes from trying to solve my own problems or just messing around
+            with ideas that seem interesting. I automate tasks, tinker with tools, and run a small
+            home server because it's fun.
         </p>
+        <p>
+            Outside of that, I watch anime and occasionally spend time on typing websites.
+        </p>
+    </div>
+
+    {{# Social links #}}
+    <div class="flex items-center gap-5 mt-8">
+        <a
+            href="https://github.com/Veirt"
+            rel="external"
+            class="card-title-link inline-flex items-center gap-2 text-sm text-text/55 hover:text-primary transition-colors duration-150"
+            aria-label="GitHub profile"
+        >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
+                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+            </svg>
+            <span>GitHub</span>
+        </a>
+        <a
+            id="email-link"
+            href="#"
+            data-u="veirt"
+            data-d="duck.com"
+            class="card-title-link inline-flex items-center gap-2 text-sm text-text/55 hover:text-primary transition-colors duration-150"
+            aria-label="Send email"
+        >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="20" height="16" x="2" y="4" rx="0" ry="0"/>
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+            </svg>
+            <span id="email-label">email</span>
+        </a>
+        <script>
+            (function() {
+                var el = document.getElementById("email-link");
+                var addr = el.dataset.u + "@" + el.dataset.d;
+                el.href = "mailto:" + addr;
+                document.getElementById("email-label").textContent = addr;
+            })();
+        </script>
+    </div>
+
+    {{# PGP fingerprint #}}
+    <div class="mt-10">
+        <p class="font-mono text-[0.65rem] tracking-[0.18em] uppercase text-accent/60 mb-3">PGP</p>
+        <a
+            href="https://github.com/veirt.gpg"
+            rel="external"
+            class="card-title-link font-mono text-xs text-accent/60 hover:text-primary transition-colors duration-150 tracking-wider break-all"
+            aria-label="Download PGP public key"
+        >003C A58A 7E5D 9767 5964  832E 0415 622A E760 D716</a>
     </div>
 </section>
