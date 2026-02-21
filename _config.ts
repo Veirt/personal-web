@@ -94,7 +94,7 @@ site.use(
 			presets: [presetWind4() as any, presetIcons()],
 			shortcuts: {
 				"sidebar-nav-item":
-					"block py-1.5 text-[0.82rem] font-medium tracking-wide text-text/55 hover:text-text transition-colors duration-150 cursor-pointer",
+					"block py-1.5 text-base font-medium tracking-wide text-text/55 hover:text-text transition-colors duration-150 cursor-pointer",
 				"sidebar-nav-item-active": "text-primary! opacity-100",
 				"theme-toggle-btn":
 					"bg-transparent border border-solid border-border p-2 cursor-pointer text-text/60 transition-all duration-200 flex items-center justify-center hover:border-primary hover:text-primary",
