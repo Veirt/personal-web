@@ -75,21 +75,24 @@
   padding: 0.2em 0.4em;
   border-radius: 4px;
   font-size: 0.875em;
-  font-family: monospace;
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
 }
 
 .markdown-content pre {
   background: var(--surface);
   border: 1px solid var(--border);
-  padding: 1.25rem;
   border-radius: var(--radius);
   margin: 1.5rem 0;
   overflow-x: auto;
   max-width: 100%;
+  padding: 1.25rem;
 }
 
 .markdown-content pre code {
   background: transparent;
   padding: 0;
   font-size: 0.875em;
+  border-radius: var(--radius);
 }

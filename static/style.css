@@ -12,6 +12,44 @@
 	--radius: 0;
 	--shadow:
 		0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+
+	/* Highlight.js — Nord (dark) */
+	--hljs-fg: #d8dee9;
+	--hljs-keyword: #81a1c1;
+	--hljs-builtin: #8fbcbb;
+	--hljs-function: #88c0d0;
+	--hljs-number: #b48ead;
+	--hljs-regexp: #ebcb8b;
+	--hljs-string: #a3be8c;
+	--hljs-comment: #4c566a;
+	--hljs-meta: #5e81ac;
+	--hljs-meta-keyword: #5e81ac;
+	--hljs-type: #8fbcbb;
+	--hljs-title: #8fbcbb;
+	--hljs-section: #88c0d0;
+	--hljs-tag: #81a1c1;
+	--hljs-name: #81a1c1;
+	--hljs-attr: #8fbcbb;
+	--hljs-variable: #d8dee9;
+	--hljs-template-variable: #d8dee9;
+	--hljs-template-tag: #5e81ac;
+	--hljs-bullet: #81a1c1;
+	--hljs-quote: #4c566a;
+	--hljs-symbol: #81a1c1;
+	--hljs-literal: #81a1c1;
+	--hljs-selector-tag: #81a1c1;
+	--hljs-selector-id: #8fbcbb;
+	--hljs-selector-class: #8fbcbb;
+	--hljs-selector-attr: #8fbcbb;
+	--hljs-selector-pseudo: #88c0d0;
+	--hljs-property: #88c0d0;
+	--hljs-doctag: #8fbcbb;
+	--hljs-code: #8fbcbb;
+	--hljs-operator: var(--hljs-fg);
+	--hljs-addition-fg: currentColor;
+	--hljs-addition-bg: rgba(163, 190, 140, 0.5);
+	--hljs-deletion-fg: currentColor;
+	--hljs-deletion-bg: rgba(191, 97, 106, 0.5);
 }
 
 [data-theme="light"] {
@@ -24,12 +62,59 @@
 	--border: #e2e8f0;
 	--shadow:
 		0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+
+	/* Highlight.js — GitHub (light) */
+	--hljs-fg: #24292e;
+	--hljs-keyword: #d73a49;
+	--hljs-builtin: #e36209;
+	--hljs-function: #6f42c1;
+	--hljs-number: #005cc5;
+	--hljs-regexp: #032f62;
+	--hljs-string: #032f62;
+	--hljs-comment: #6a737d;
+	--hljs-meta: #005cc5;
+	--hljs-meta-keyword: #d73a49;
+	--hljs-type: #d73a49;
+	--hljs-title: #6f42c1;
+	--hljs-section: #005cc5;
+	--hljs-tag: var(--hljs-fg);
+	--hljs-name: #22863a;
+	--hljs-attr: #005cc5;
+	--hljs-variable: #005cc5;
+	--hljs-template-variable: #d73a49;
+	--hljs-template-tag: #d73a49;
+	--hljs-bullet: #735c0f;
+	--hljs-quote: #22863a;
+	--hljs-symbol: #e36209;
+	--hljs-literal: #005cc5;
+	--hljs-selector-tag: #22863a;
+	--hljs-selector-id: #005cc5;
+	--hljs-selector-class: #005cc5;
+	--hljs-selector-attr: #005cc5;
+	--hljs-selector-pseudo: #22863a;
+	--hljs-property: var(--hljs-fg);
+	--hljs-doctag: #d73a49;
+	--hljs-code: #6a737d;
+	--hljs-operator: #005cc5;
+	--hljs-addition-fg: #22863a;
+	--hljs-addition-bg: #f0fff4;
+	--hljs-deletion-fg: #b31d28;
+	--hljs-deletion-bg: #ffeef0;
 }
 
 * {
 	font-family:
 		system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial,
 		sans-serif;
+}
+
+code,
+pre,
+kbd,
+samp {
+	font-family:
+		ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+		"Courier New", monospace;
 }
 
 /* Page Header Snowfall Effect */

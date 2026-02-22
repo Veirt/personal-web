@@ -1,0 +1,146 @@
+pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 1em;
+}
+code.hljs {
+  padding: 3px 5px;
+}
+
+.hljs {
+  color: var(--hljs-fg);
+}
+.hljs-subst {
+  color: var(--hljs-fg);
+}
+.hljs-emphasis {
+  color: var(--hljs-fg);
+  font-style: italic;
+}
+.hljs-strong {
+  color: var(--hljs-fg);
+  font-weight: bold;
+}
+.hljs-link:hover {
+  text-decoration: underline;
+}
+
+.hljs-keyword,
+.hljs-tag {
+  color: var(--hljs-keyword);
+}
+.hljs-literal {
+  color: var(--hljs-literal);
+}
+.hljs-selector-tag {
+  color: var(--hljs-selector-tag);
+}
+.hljs-selector-id {
+  color: var(--hljs-selector-id);
+  font-weight: bold;
+}
+.hljs-selector-class,
+.hljs-selector-attr {
+  color: var(--hljs-selector-class);
+}
+.hljs-selector-pseudo {
+  color: var(--hljs-selector-pseudo);
+}
+.hljs-property {
+  color: var(--hljs-property);
+}
+.hljs-addition {
+  color: var(--hljs-addition-fg);
+  background-color: var(--hljs-addition-bg);
+}
+.hljs-deletion {
+  color: var(--hljs-deletion-fg);
+  background-color: var(--hljs-deletion-bg);
+}
+.hljs-built_in {
+  color: var(--hljs-builtin);
+}
+.hljs-type {
+  color: var(--hljs-type);
+}
+.hljs-class {
+  color: var(--hljs-builtin);
+}
+.hljs-function,
+.hljs-title.hljs-function,
+.hljs-function > .hljs-title {
+  color: var(--hljs-function);
+}
+.hljs-title {
+  color: var(--hljs-title);
+}
+.hljs-title.class_,
+.hljs-title.class_.inherited__ {
+  color: var(--hljs-title);
+}
+.hljs-title.function_ {
+  color: var(--hljs-function);
+}
+.hljs-number {
+  color: var(--hljs-number);
+}
+.hljs-operator {
+  color: var(--hljs-operator);
+}
+.hljs-regexp {
+  color: var(--hljs-regexp);
+}
+.hljs-string,
+.hljs-meta .hljs-string {
+  color: var(--hljs-string);
+}
+.hljs-params,
+.hljs-variable,
+.hljs-attribute {
+  color: var(--hljs-variable);
+}
+.hljs-template-variable,
+.hljs-variable.language_ {
+  color: var(--hljs-template-variable);
+}
+.hljs-bullet {
+  color: var(--hljs-bullet);
+}
+.hljs-code,
+.hljs-formula {
+  color: var(--hljs-code);
+}
+.hljs-quote {
+  color: var(--hljs-quote);
+}
+.hljs-comment {
+  color: var(--hljs-comment);
+}
+.hljs-doctag {
+  color: var(--hljs-doctag);
+}
+.hljs-meta {
+  color: var(--hljs-meta);
+}
+.hljs-meta .hljs-keyword {
+  color: var(--hljs-meta-keyword);
+}
+.hljs-attr {
+  color: var(--hljs-attr);
+}
+.hljs-attribute {
+  color: var(--hljs-variable);
+}
+.hljs-name {
+  color: var(--hljs-name);
+}
+.hljs-section {
+  color: var(--hljs-section);
+  font-weight: bold;
+}
+.hljs-template-tag {
+  color: var(--hljs-template-tag);
+}
+.hljs-symbol {
+  color: var(--hljs-symbol);
+}
