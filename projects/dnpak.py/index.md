@@ -6,6 +6,7 @@ description: A Python package to manipulate Dragon Nest PAK file
 github_url: https://pypi.org/project/dnpak.py
 technologies: ["Python"]
 date: 2021-09-30
+screenshot: /projects/dnpak.py/screenshot.png
 ---
 
 > My first reverse engineering library. Originally written in Python and now

@@ -6,6 +6,7 @@ description: A collection of Dragon Nest modding/development utilities
 github_url: https://github.com/Veirt/dnutils
 technologies: ["Rust"]
 date: 2022-04-11
+screenshot: /projects/dnutils/screenshot.png
 ---
 
 **dnutils** is a bunch of command-line tools I made for modding and poking
