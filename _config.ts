@@ -1,6 +1,6 @@
 import toc, {
 	linkInsideHeader,
-} from "https://deno.land/x/lume_markdown_plugins@v0.9.0/toc.ts";
+} from "https://cdn.jsdelivr.net/gh/lumeland/markdown-plugins@0.11.1/toc.ts";
 import presetIcons from "@unocss/preset-icons";
 import { presetWind4 } from "@unocss/preset-wind4";
 import cacheBusting from "lume/middlewares/cache_busting.ts";
@@ -10,22 +10,29 @@ import check_urls from "lume/plugins/check_urls.ts";
 import code_highlight from "lume/plugins/code_highlight.ts";
 import date from "lume/plugins/date.ts";
 import esbuild from "lume/plugins/esbuild.ts";
+import extract_date from "lume/plugins/extract_date.ts";
 import favicon from "lume/plugins/favicon.ts";
 import feed from "lume/plugins/feed.ts";
+import gzip from "lume/plugins/gzip.ts";
 import icons from "lume/plugins/icons.ts";
+import image_size from "lume/plugins/image_size.ts";
 import json_ld from "lume/plugins/json_ld.ts";
 import lightningcss from "lume/plugins/lightningcss.ts";
 import metas from "lume/plugins/metas.ts";
 import minify_html from "lume/plugins/minify_html.ts";
+import og_images from "lume/plugins/og_images.ts";
 import picture from "lume/plugins/picture.ts";
 import purgecss from "lume/plugins/purgecss.ts";
+import reading_info from "lume/plugins/reading_info.ts";
 import robots from "lume/plugins/robots.ts";
+import seo from "lume/plugins/seo.ts";
 import sitemap from "lume/plugins/sitemap.ts";
 import slugifyUrls from "lume/plugins/slugify_urls.ts";
 import svgo from "lume/plugins/svgo.ts";
 import terser from "lume/plugins/terser.ts";
 import transformImages from "lume/plugins/transform_images.ts";
 import unocss from "lume/plugins/unocss.ts";
+import validate_html from "lume/plugins/validate_html.ts";
 
 const site = lume(
 	{
@@ -48,6 +55,8 @@ const site = lume(
 
 // Plugins
 site.use(date());
+site.use(extract_date());
+site.use(reading_info());
 site.use(
 	code_highlight({
 		theme: {
@@ -91,6 +100,14 @@ site.use(
 					border: "var(--border)",
 				},
 			},
+			extendTheme: (theme: any) => ({
+				...theme,
+				breakpoints: {
+					...theme.breakpoints,
+					"3xl": "1792px",
+					"4xl": "2048px",
+				},
+			}),
 			presets: [presetWind4() as any, presetIcons()],
 			shortcuts: {
 				"sidebar-nav-item":
@@ -109,27 +126,25 @@ site.use(svgo());
 site.use(purgecss());
 site.use(minify_html());
 site.use(brotli());
+site.use(gzip());
 
 // SEO
 site.use(json_ld());
+site.use(og_images());
 site.use(metas());
 site.use(sitemap());
 site.use(robots());
+site.use(seo());
+site.use(validate_html());
 
 // Other
 site.use(check_urls());
 site.use(favicon({ input: "static/favicon.png" }));
 site.use(slugifyUrls());
+site.use(image_size());
 site.use(picture());
 site.use(transformImages());
 site.use(icons());
-
-site.filter("readingTime", (content: string) => {
-	const wordsPerMinute = 275;
-	const words = content.replace(/<[^>]*>/g, "").split(/\s+/).length;
-	const minutes = Math.ceil(words / wordsPerMinute);
-	return minutes;
-});
 
 // Set up site data
 site.data("site", {

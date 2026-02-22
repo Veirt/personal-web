@@ -12,8 +12,7 @@ layout: base.vto
                 itemprop="datePublished"
             >{{ date |> date("HUMAN_DATE") }}</time>
             <span class="font-mono text-xs text-accent/60 tracking-wide" aria-label="Estimated reading time">{{
-                    content
-                    |> readingTime
+                    readingInfo.minutes
                 }} min read</span>
             {{ if tags }}
                 <div class="flex flex-wrap gap-1.5" aria-label="Post tags">
