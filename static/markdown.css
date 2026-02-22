@@ -84,7 +84,8 @@
   padding: 1.25rem;
   border-radius: var(--radius);
   margin: 1.5rem 0;
-  overflow: auto;
+  overflow-x: auto;
+  max-width: 100%;
 }
 
 .markdown-content pre code {
