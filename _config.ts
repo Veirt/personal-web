@@ -70,17 +70,6 @@ site.use(
 		anchor: linkInsideHeader(),
 	}),
 );
-site.use(
-	feed({
-		output: "/feed.xml",
-		query: "type=blog",
-		info: {
-			title: "veirt's blog",
-			description:
-				"wandering the web, building and taking things apart — mostly to learn, sometimes to solve.",
-		},
-	}),
-);
 
 site.use(esbuild());
 site.use(terser());
@@ -100,18 +89,10 @@ site.use(
 					border: "var(--border)",
 				},
 			},
-			extendTheme: (theme: any) => ({
-				...theme,
-				breakpoints: {
-					...theme.breakpoints,
-					"3xl": "1792px",
-					"4xl": "2048px",
-				},
-			}),
-			presets: [presetWind4() as any, presetIcons()],
+			presets: [presetWind4(), presetIcons()],
 			shortcuts: {
 				"sidebar-nav-item":
-					"block py-1.5 text-base font-medium tracking-wide text-text/55 hover:text-text transition-colors duration-150 cursor-pointer",
+					"block py-1.5 text-base font-medium tracking-wide text-text/65 hover:text-text transition-colors duration-150 cursor-pointer",
 				"sidebar-nav-item-active": "text-primary! opacity-100",
 				"theme-toggle-btn":
 					"bg-transparent border border-solid border-border p-2 cursor-pointer text-text/60 transition-all duration-200 flex items-center justify-center hover:border-primary hover:text-primary",
@@ -127,10 +108,13 @@ site.use(purgecss());
 site.use(minify_html());
 site.use(brotli());
 site.use(gzip());
+site.use(slugifyUrls());
+site.use(og_images());
+site.use(picture());
+site.use(transformImages());
 
 // SEO
 site.use(json_ld());
-site.use(og_images());
 site.use(metas());
 site.use(sitemap());
 site.use(robots());
@@ -140,11 +124,20 @@ site.use(validate_html());
 // Other
 site.use(check_urls());
 site.use(favicon({ input: "static/favicon.png" }));
-site.use(slugifyUrls());
 site.use(image_size());
-site.use(picture());
-site.use(transformImages());
 site.use(icons());
+
+site.use(
+	feed({
+		output: "/feed.xml",
+		query: "type=blog",
+		info: {
+			title: "veirt's blog",
+			description:
+				"wandering the web, building and taking things apart — mostly to learn, sometimes to solve.",
+		},
+	}),
+);
 
 // Set up site data
 site.data("site", {
