@@ -1,7 +1,7 @@
 {
   "name": "Veirt's Website",
   "short_name": "Veirt",
-  "description": "wandering the web, building and taking things apart — mostly to learn, sometimes to solve.",
+  "description": "wandering the web, building and breaking things, sometimes to solve a problem, sometimes to try an interesting idea.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#060709",

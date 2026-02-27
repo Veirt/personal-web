@@ -134,7 +134,7 @@ site.use(
 		info: {
 			title: "veirt's blog",
 			description:
-				"wandering the web, building and taking things apart — mostly to learn, sometimes to solve.",
+				"wandering the web, building and breaking things, sometimes to solve a problem, sometimes to try an interesting idea.",
 		},
 	}),
 );
@@ -143,7 +143,7 @@ site.use(
 site.data("site", {
 	title: "veirt's website",
 	description:
-		"wandering the web, building and taking things apart — mostly to learn, sometimes to solve.",
+		"wandering the web, building and breaking things, sometimes to solve a problem, sometimes to try an interesting idea.",
 	url: "https://veirt.is-a.dev",
 	author: {
 		name: "veirt",

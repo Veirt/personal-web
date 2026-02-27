@@ -3,7 +3,7 @@ export default function ({ title, description, site, screenshot }) {
 	const pageDescription =
 		description ||
 		site?.description ||
-		"wandering the web, building and taking things apart.";
+		"wandering the web, building and breaking things, sometimes to solve a problem, sometimes to try an interesting idea.";
 	const domain = site?.url?.replace("https://", "") ?? "veirt.is-a.dev";
 	const author = site?.author?.name ?? "veirt";
 
