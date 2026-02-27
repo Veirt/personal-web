@@ -23,41 +23,6 @@
             content="a5qBFQJgk8sV0G6bSwwx4D53rpPMXScRcsSu2SXxDEs"
         />
 
-        <!-- Open Graph -->
-        <meta
-            property="og:type"
-            content="{{ if type == 'blog' }}article{{ else }}website{{ /if }}"
-        >
-        <meta property="og:url" content="{{ site.url }}{{ url }}">
-        <meta property="og:title" content="{{ title || site.title }}">
-        <meta
-            property="og:description"
-            content="{{ description || site.description }}"
-        >
-        <meta property="og:site_name" content="{{ site.title }}">
-        <meta property="og:locale" content="en_US">
-        {{ if og_image }}
-            <meta property="og:image" content="{{ site.url }}{{ og_image }}">
-        {{ else }}
-            <meta property="og:image" content="{{ site.url }}/favicon.png">
-        {{ /if }}
-        <meta property="og:image:width" content="512">
-        <meta property="og:image:height" content="512">
-        <meta property="og:image:type" content="image/png">
-
-        <!-- Twitter Card -->
-        <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:title" content="{{ title || site.title }}">
-        <meta
-            name="twitter:description"
-            content="{{ description || site.description }}"
-        >
-        <meta name="twitter:url" content="{{ site.url }}{{ url }}">
-        {{ if og_image }}
-            <meta name="twitter:image" content="{{ site.url }}{{ og_image }}">
-        {{ else }}
-            <meta name="twitter:image" content="{{ site.url }}/favicon.png">
-        {{ /if }}
         {{ if type == 'blog' }}
             <meta property="article:author" content="{{ site.author.name }}">
             <meta
