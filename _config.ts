@@ -93,9 +93,10 @@ site.use(
 			shortcuts: {
 				"sidebar-nav-item":
 					"block py-1.5 text-base font-medium tracking-wide text-text/65 hover:text-text transition-colors duration-150 cursor-pointer",
-				"sidebar-nav-item-active": "text-primary! opacity-100",
+				"sidebar-nav-item-active":
+					"text-primary! opacity-100 border-l-2 border-primary pl-4",
 				"theme-toggle-btn":
-					"bg-transparent border border-solid border-border p-2 cursor-pointer text-text/60 transition-all duration-200 flex items-center justify-center hover:border-primary hover:text-primary",
+					"bg-transparent border border-solid border-border min-h-11 min-w-11 p-3 cursor-pointer text-text/60 transition-all duration-200 flex items-center justify-center hover:border-primary hover:text-primary",
 			},
 		},
 	}),

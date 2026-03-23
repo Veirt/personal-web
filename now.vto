@@ -5,47 +5,24 @@ subtitle: what i'm up to these days
 description: A snapshot of what I am currently focused on
 url: /now/
 last_updated: Mar 24, 2026
-sections:
-  - title: Learning & Growth
-    items:
-      - Writing regularly and keeping a journal
-      - Working on my undergraduate thesis
-      - Exploring niche blogs like [bearblog.dev](https://bearblog.dev)
-      - Reading more classic literature
-
-  - title: Health & Wellness
-    items:
-      - Walking more regularly
-
-  - title: Projects & Tech
-    items:
-      - Preparing for AWS certifications (SAA-C03)
-      - "Tinkering with my homelab setup - planning to replace Flux with Argo CD"
+items:
+  - Writing regularly and keeping a journal
+  - Working on my undergraduate thesis
+  - Exploring niche blogs like [bearblog.dev](https://bearblog.dev)
+  - Reading more classic literature
+  - Walking more regularly
+  - Preparing for AWS certifications (SAA-C03)
+  - "Tinkering with my homelab setup — planning to replace Flux with Argo CD"
 ---
 
-{{ include "page-header.vto" { title, subtitle } }}
+{{ include "page-header.vto" { title, subtitle, disableAtmosphere: true } }}
 
-<p class="text-sm text-accent leading-relaxed mt-0 mb-10">
-    This is my <a href="https://nownownow.com/about" rel="external" class="text-primary">now page</a> —
-    a snapshot of what I'm currently focused on.
-</p>
+<div class="now__banner" role="img" aria-label="A quiet snowy night sky with distant mountains"></div>
 
-<div class="flex flex-col gap-px border border-border">
-    {{ for i, section of sections }}
-        <section class="snow__container group p-6 bg-background hover:bg-surface transition-colors duration-200">
-            <p class="font-mono text-[0.6rem] tracking-widest uppercase text-accent/60 m-0 mb-4">
-                <span class="text-accent/40">#{{ i + 1 }}</span> {{ section.title }}
-            </p>
-            <ul class="flex flex-col gap-2.5 m-0 p-0 list-none">
-                {{ for item of section.items }}
-                    <li class="flex items-baseline gap-3 text-sm text-text/80 leading-relaxed">
-                        <span class="text-border shrink-0">—</span>
-                        <span>{{ item |> md(true) }}</span>
-                    </li>
-                {{ /for }}
-            </ul>
-        </section>
+<ul class="mt-0 mb-0 max-w-2xl pl-5 list-disc text-sm sm:text-base text-text/82 leading-relaxed space-y-3">
+    {{ for item of items }}
+        <li>{{ item |> md(true) }}</li>
     {{ /for }}
-</div>
+</ul>
 
-<p class="font-mono text-xs text-accent/50 mt-6">updated {{ last_updated }}</p>
+<p class="font-mono text-sm text-accent/65 mt-8">updated {{ last_updated }}</p>

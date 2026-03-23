@@ -1,12 +1,12 @@
 ---
 layout: index.vto
 title: welcome
-description: "wandering the web, building and breaking things, sometimes to solve a problem, sometimes to try an interesting idea."
+description: "software, devops, and a quiet corner of the web."
 jsonLd:
   "@type": "Person"
   name: "veirt"
   jobTitle: "Software Engineer"
-  description: "wandering the web, building and breaking things, sometimes to solve a problem, sometimes to try an interesting idea."
+  description: "software, devops, and a quiet corner of the web."
   url: "https://veirt.is-a.dev"
   sameAs:
     - "https://github.com/Veirt"

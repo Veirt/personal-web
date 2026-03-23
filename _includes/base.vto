@@ -104,7 +104,7 @@
                     <div class="theme__icon theme__icon--moon i-solar:moon-line-duotone text-base"></div>
                 </button>
                 <button
-                    class="border border-border p-2 cursor-pointer text-text hover:text-primary hover:border-primary transition-colors duration-200"
+                    class="border border-border min-h-11 min-w-11 p-3 cursor-pointer text-text hover:text-primary hover:border-primary transition-colors duration-200"
                     id="mobile-menu-toggle"
                     aria-label="Toggle navigation menu"
                     aria-expanded="false"
@@ -129,7 +129,7 @@
             >
                 <div class="flex-1 flex flex-col justify-center pl-8 pr-4">
                     <p
-                        class="font-mono text-sm font-semibold text-text tracking-widest hover:text-text/90 transition-colors duration-200 mb-8"
+                        class="font-mono text-sm font-semibold text-text tracking-widest hover:text-text/90 transition-colors duration-200 mb-8 inline-block"
                     >veirt.</p>
 
                     <nav aria-label="Primary navigation">
@@ -138,28 +138,28 @@
                                 <a
                                     class="sidebar-nav-item {{ if url == '/' }}sidebar-nav-item-active{{ /if }}"
                                     href="/"
-                                    aria-current="{{ if url == '/' }}page{{ /if }}"
+                                    {{ if url == '/' }}aria-current="page"{{ /if }}
                                 >Home</a>
                             </li>
                             <li>
                                 <a
                                     class="sidebar-nav-item {{ if url |> startsWith('/projects') }}sidebar-nav-item-active{{ /if }}"
                                     href="/projects/"
-                                    aria-current="{{ if url |> startsWith('/projects') }}page{{ /if }}"
+                                    {{ if url |> startsWith('/projects') }}aria-current="page"{{ /if }}
                                 >Projects</a>
                             </li>
                             <li>
                                 <a
                                     class="sidebar-nav-item {{ if url |> startsWith('/blog') }}sidebar-nav-item-active{{ /if }}"
                                     href="/blog/"
-                                    aria-current="{{ if url |> startsWith('/blog') }}page{{ /if }}"
+                                    {{ if url |> startsWith('/blog') }}aria-current="page"{{ /if }}
                                 >Blog</a>
                             </li>
                             <li>
                                 <a
                                     class="sidebar-nav-item {{ if url == '/now/' }}sidebar-nav-item-active{{ /if }}"
                                     href="/now/"
-                                    aria-current="{{ if url == '/now/' }}page{{ /if }}"
+                                    {{ if url == '/now/' }}aria-current="page"{{ /if }}
                                 >Now</a>
                             </li>
                         </ul>
@@ -190,10 +190,10 @@
             >
                 <div class="flex-1 flex flex-col justify-center pl-7 pr-4">
                     <ul class="flex flex-col gap-0.5 list-none m-0 p-0" role="list">
-                        <li><a class="sidebar-nav-item {{ if url == '/' }}sidebar-nav-item-active{{ /if }}" href="/">Home</a></li>
-                        <li><a class="sidebar-nav-item {{ if url |> startsWith('/projects') }}sidebar-nav-item-active{{ /if }}" href="/projects/">Projects</a></li>
-                        <li><a class="sidebar-nav-item {{ if url |> startsWith('/blog') }}sidebar-nav-item-active{{ /if }}" href="/blog/">Blog</a></li>
-                        <li><a class="sidebar-nav-item {{ if url == '/now/' }}sidebar-nav-item-active{{ /if }}" href="/now/">Now</a></li>
+                        <li><a class="sidebar-nav-item {{ if url == '/' }}sidebar-nav-item-active{{ /if }}" href="/" {{ if url == '/' }}aria-current="page"{{ /if }}>Home</a></li>
+                        <li><a class="sidebar-nav-item {{ if url |> startsWith('/projects') }}sidebar-nav-item-active{{ /if }}" href="/projects/" {{ if url |> startsWith('/projects') }}aria-current="page"{{ /if }}>Projects</a></li>
+                        <li><a class="sidebar-nav-item {{ if url |> startsWith('/blog') }}sidebar-nav-item-active{{ /if }}" href="/blog/" {{ if url |> startsWith('/blog') }}aria-current="page"{{ /if }}>Blog</a></li>
+                        <li><a class="sidebar-nav-item {{ if url == '/now/' }}sidebar-nav-item-active{{ /if }}" href="/now/" {{ if url == '/now/' }}aria-current="page"{{ /if }}>Now</a></li>
                     </ul>
                     <div class="mt-6">
                         <button

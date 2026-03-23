@@ -9,6 +9,7 @@
 	--accent: #7c7981;
 	--surface: #0f1419;
 	--border: #262930;
+	--banner-mountain: color-mix(in oklab, var(--surface) 88%, var(--background));
 	--radius: 0;
 	--shadow:
 		0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
@@ -60,6 +61,7 @@
 	--accent: #4a5568;
 	--surface: #ffffff;
 	--border: #e2e8f0;
+	--banner-mountain: color-mix(in oklab, var(--secondary) 22%, var(--background));
 	--shadow:
 		0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
 
@@ -126,13 +128,13 @@ samp {
 	right: -20px;
 	bottom: -20px;
 	background-image:
-		radial-gradient(2px 2px at 20px 30px, var(--primary), transparent),
-		radial-gradient(2px 2px at 40px 70px, rgba(164, 175, 203, 0.6), transparent),
-		radial-gradient(1px 1px at 90px 40px, rgba(164, 175, 203, 0.4), transparent),
-		radial-gradient(1px 1px at 130px 80px, var(--primary), transparent),
+		radial-gradient(2px 2px at 20px 30px, color-mix(in oklab, var(--primary) 88%, transparent), transparent),
+		radial-gradient(2px 2px at 40px 70px, color-mix(in oklab, var(--primary) 60%, transparent), transparent),
+		radial-gradient(1px 1px at 90px 40px, color-mix(in oklab, var(--primary) 42%, transparent), transparent),
+		radial-gradient(1px 1px at 130px 80px, color-mix(in oklab, var(--primary) 78%, transparent), transparent),
 		radial-gradient(
 			2px 2px at 160px 30px,
-			rgba(164, 175, 203, 0.3),
+			color-mix(in oklab, var(--primary) 30%, transparent),
 			transparent
 		);
 	background-repeat: repeat;
@@ -151,6 +153,10 @@ samp {
 	height: 4px;
 }
 
+.page__header--plain::before {
+	display: none;
+}
+
 @keyframes snowfall {
 	0% {
 		transform: translateY(-100px) translateX(0);
@@ -161,74 +167,95 @@ samp {
 	}
 }
 
-/* Now Page Banner */
+/* Now / Home Atmosphere Banner */
 .now__banner {
 	width: 100%;
-	height: 200px;
-	background: linear-gradient(180deg, #0a0f1c 0%, #1a1f2e 50%, #2d3748 100%);
-	border-radius: var(--radius);
-	margin-bottom: 3rem;
+	height: clamp(5.75rem, 10vw, 8rem);
+	margin-bottom: 2rem;
 	position: relative;
 	overflow: hidden;
-	box-shadow: var(--shadow);
+	border: 1px solid var(--border);
+	border-radius: var(--radius);
+	background:
+		radial-gradient(
+			circle at 76% 28%,
+			color-mix(in oklab, var(--primary) 18%, transparent) 0,
+			transparent 34%
+		),
+		linear-gradient(
+			180deg,
+			color-mix(in oklab, var(--surface) 72%, var(--background)) 0%,
+			color-mix(in oklab, var(--background) 92%, var(--surface)) 100%
+		);
 }
 
 .now__banner::before {
 	content: "";
 	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
+	inset: 0;
 	background-image:
-		radial-gradient(1px 1px at 30px 20px, rgba(255, 255, 255, 0.8), transparent),
-		radial-gradient(
-			0.5px 0.5px at 80px 35px,
-			rgba(255, 255, 255, 0.6),
-			transparent
-		),
-		radial-gradient(
-			1px 1px at 150px 15px,
-			rgba(255, 255, 255, 0.9),
-			transparent
-		),
-		radial-gradient(
-			0.5px 0.5px at 220px 40px,
-			rgba(255, 255, 255, 0.5),
-			transparent
-		),
-		radial-gradient(
-			1px 1px at 290px 25px,
-			rgba(255, 255, 255, 0.7),
-			transparent
-		),
-		radial-gradient(
-			0.5px 0.5px at 360px 30px,
-			rgba(255, 255, 255, 0.4),
-			transparent
-		),
-		radial-gradient(
-			1px 1px at 420px 18px,
-			rgba(255, 255, 255, 0.8),
-			transparent
+		radial-gradient(circle at 10% 28%, color-mix(in oklab, var(--text) 72%, transparent) 0 1px, transparent 1.8px),
+		radial-gradient(circle at 18% 48%, color-mix(in oklab, var(--primary) 42%, transparent) 0 1px, transparent 1.8px),
+		radial-gradient(circle at 32% 22%, color-mix(in oklab, var(--text) 58%, transparent) 0 1px, transparent 1.8px),
+		radial-gradient(circle at 46% 38%, color-mix(in oklab, var(--primary) 35%, transparent) 0 1px, transparent 1.8px),
+		radial-gradient(circle at 60% 18%, color-mix(in oklab, var(--text) 52%, transparent) 0 1px, transparent 1.8px),
+		radial-gradient(circle at 72% 44%, color-mix(in oklab, var(--primary) 30%, transparent) 0 1px, transparent 1.8px),
+		radial-gradient(circle at 84% 20%, color-mix(in oklab, var(--text) 62%, transparent) 0 1px, transparent 1.8px),
+		radial-gradient(circle at 94% 42%, color-mix(in oklab, var(--primary) 30%, transparent) 0 1px, transparent 1.8px);
+	opacity: 0.7;
+	animation: starTwinkle 9s ease-in-out infinite alternate;
+}
+
+.now__banner::after {
+	content: "";
+	position: absolute;
+	left: -4%;
+	right: -4%;
+	bottom: -1px;
+	height: 48%;
+	background:
+		linear-gradient(
+			180deg,
+			transparent 0%,
+			var(--banner-mountain) 100%
 		);
-	background-repeat: repeat-x;
-	background-size: 450px 60px;
-	animation: starTwinkle 8s ease-in-out infinite alternate;
-	z-index: 1;
+	clip-path: polygon(
+		0% 100%,
+		7% 62%,
+		14% 82%,
+		22% 44%,
+		31% 70%,
+		41% 28%,
+		52% 66%,
+		63% 36%,
+		74% 76%,
+		84% 48%,
+		92% 66%,
+		100% 40%,
+		100% 100%
+	);
+	opacity: 0.9;
 }
 
 @keyframes starTwinkle {
 	0% {
-		opacity: 0.4;
+		opacity: 0.38;
 	}
 
 	50% {
-		opacity: 0.8;
+		opacity: 0.68;
 	}
 
 	100% {
-		opacity: 0.5;
+		opacity: 0.46;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.page__header::before,
+	.now__banner::before,
+	.animate-float {
+		animation: none;
 	}
 }
 
