@@ -1,0 +1,69 @@
+---
+import { getGitHubActivity } from "../lib/github";
+import { formatDate } from "../lib/content";
+
+const activity = await getGitHubActivity();
+const weekCount = activity.weeks.length;
+---
+
+<section class="activity-section" aria-labelledby="activity-title">
+	<div class="section-heading">
+		<h2 id="activity-title">GitHub activity</h2>
+		<a class="text-link" href="https://github.com/Veirt" rel="me">See GitHub <span aria-hidden="true">↗</span></a>
+	</div>
+
+	<div class="contribution-panel">
+		<div class="contribution-summary">
+			<div>
+				<strong>{activity.total?.toLocaleString("en") ?? "—"}</strong>
+				<span>contributions in the past year</span>
+			</div>
+			{activity.longestStreak !== null && (
+				<p>longest streak <b>{activity.longestStreak} days</b></p>
+			)}
+		</div>
+
+		{weekCount > 0 ? (
+			<div class="heatmap-scroll">
+				<p class="heatmap-hint">Swipe to see the full year <span aria-hidden="true">→</span></p>
+				<div class="heatmap-months" style={`--week-count: ${weekCount}`} aria-hidden="true">
+					{activity.months.map((month) => (
+						<span style={`grid-column: ${month.week + 1} / span 3`}>{month.name}</span>
+					))}
+				</div>
+				<div
+					class="contribution-grid"
+					role="img"
+					aria-label={`${activity.total?.toLocaleString("en") ?? "GitHub"} contributions over the past year`}
+				>
+					{activity.weeks.map((week) => (
+						<div class="contribution-week">
+							{week.days.map((day) => day ? (
+								<span
+									class="contribution-day"
+									data-level={day.level}
+									title={`${day.count} contribution${day.count === 1 ? "" : "s"} on ${formatDate(new Date(`${day.date}T00:00:00Z`))}`}
+								></span>
+							) : <span class="contribution-day contribution-day--empty"></span>)}
+						</div>
+					))}
+				</div>
+			</div>
+		) : (
+			<p class="activity-unavailable">
+				Contribution calendar is taking a little break. <a href="https://github.com/Veirt">See my GitHub profile</a> instead.
+			</p>
+		)}
+
+		{weekCount > 0 && <div class="heatmap-legend" aria-hidden="true">
+			<span>less</span>
+			{[0, 1, 2, 3, 4].map((level) => <i data-level={level}></i>)}
+			<span>more</span>
+			<span class="activity-source">
+				<a href="https://github-contributions-api.jogruber.de/" rel="noreferrer">contribution data</a>
+				· refreshed at build time
+			</span>
+		</div>
+		}
+	</div>
+</section>

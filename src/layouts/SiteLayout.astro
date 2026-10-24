@@ -1,0 +1,100 @@
+---
+import "../styles/global.css";
+
+interface Props {
+	title: string;
+	description: string;
+	active?: "home" | "projects" | "blog" | "now";
+	type?: "website" | "article";
+	noIndex?: boolean;
+}
+
+const {
+	title,
+	description,
+	active,
+	type = "website",
+	noIndex = false,
+} = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const links = [
+	{ href: "/", label: "Home", index: "01", key: "home" },
+	{ href: "/projects/", label: "Projects", index: "02", key: "projects" },
+	{ href: "/blog/", label: "Blog", index: "03", key: "blog" },
+	{ href: "/now/", label: "Now", index: "04", key: "now" },
+] as const;
+---
+
+<!doctype html>
+<html lang="en" data-theme="dark">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="theme-color" content="#161616" />
+		<meta name="robots" content={noIndex ? "noindex, nofollow" : "index, follow"} />
+		<meta name="description" content={description} />
+		<meta name="author" content="Veirt" />
+		{!noIndex && <link rel="canonical" href={canonical} />}
+		<link rel="icon" href="/favicon.png" type="image/png" />
+		<link rel="manifest" href="/site.webmanifest" />
+		<link rel="alternate" type="application/rss+xml" title="veirt's blog" href="/feed.xml" />
+		<link rel="preconnect" href="https://github.com" />
+		<title>{title} · veirt</title>
+		<meta property="og:type" content={type} />
+		<meta property="og:title" content={`${title} · veirt`} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonical} />
+		<meta property="og:site_name" content="veirt" />
+		<meta name="twitter:card" content="summary" />
+		<script is:inline>
+			try {
+				const theme = localStorage.getItem("theme");
+				if (theme === "dark" || theme === "light") document.documentElement.dataset.theme = theme;
+			} catch {}
+		</script>
+		<script src="/site.js" defer></script>
+	</head>
+	<body>
+		<a class="skip-link" href="#main">Skip to content</a>
+		<header class="mobile-header">
+			<a class="brand" href="/" aria-label="veirt home">veirt<span>.</span></a>
+			<nav class="mobile-nav" aria-label="Main navigation">
+				{links.map(({ href, label, key }) => (
+					<a href={href} aria-current={active === key ? "page" : undefined}>
+						{label === "Projects" ? "Work" : label === "Blog" ? "Notes" : label}
+					</a>
+				))}
+				<button class="theme-toggle" data-theme-toggle aria-label="Switch to dark mode">
+					<span aria-hidden="true">◐</span>
+				</button>
+			</nav>
+		</header>
+
+		<aside class="side-nav" aria-label="Site navigation">
+			<a class="brand side-brand" href="/" aria-label="veirt home">veirt<span>.</span></a>
+			<p class="side-note">A small corner<br />of the internet</p>
+			<nav aria-label="Main navigation">
+				<ul>
+					{links.map(({ href, label, index, key }) => (
+						<li>
+							<a class="side-link" href={href} aria-current={active === key ? "page" : undefined}>
+								<span class="side-link__index">{index}</span>
+								<span>{label}</span>
+							</a>
+						</li>
+					))}
+				</ul>
+			</nav>
+			<div class="side-bottom">
+				<button class="theme-toggle" data-theme-toggle aria-label="Switch to dark mode">
+					<span aria-hidden="true">◐</span>
+				</button>
+				<span>change the light</span>
+			</div>
+		</aside>
+
+		<main id="main" class="site-main">
+			<slot />
+		</main>
+	</body>
+</html>

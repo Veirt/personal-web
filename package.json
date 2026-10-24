@@ -1,15 +1,13 @@
 {
-    "dependencies": {
-        "@iconify-json/solar": "^1.2.5",
-        "@unocss/preset-icons": "^66.5.10",
-        "date-fns": "^4.1.0",
-        "highlight.js": "11.11.1",
-        "ico-endec": "0.1.6",
-        "markdown-it-deflist": "^3.0.0",
-        "purgecss": "npm:purgecss",
-        "purgecss-from-html": "npm:purgecss-from-html",
-        "sharp": "0.34.3",
-        "svgo": "^4.0.0",
-        "terser": "npm:terser"
-    }
+	"name": "veirt-personal-site",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"dev": "astro dev --host 0.0.0.0",
+		"build": "astro build",
+		"preview": "astro preview --host 0.0.0.0"
+	},
+	"dependencies": {
+		"astro": "^7.4.2"
+	}
 }

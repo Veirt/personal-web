@@ -1,0 +1,33 @@
+---
+import { getCollection, render } from "astro:content";
+import { formatDate } from "../../lib/content";
+import SiteLayout from "../../layouts/SiteLayout.astro";
+
+export async function getStaticPaths() {
+	const posts = await getCollection("blog");
+	return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const wordCount = post.body?.trim().split(/\s+/).length ?? 0;
+const readingMinutes = Math.max(1, Math.ceil(wordCount / 220));
+---
+
+<SiteLayout title={post.data.title} description={post.data.description} active="blog" type="article">
+	<article class="detail-page journal-page">
+		<a class="back-link" href="/blog/">← <span>all notes</span></a>
+		<header class="detail-header">
+			<h1>{post.data.title}</h1>
+			<div class="detail-meta">
+				<div class="journal-meta">
+					<time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
+					<span>{readingMinutes} min read</span>
+				</div>
+				<div class="tag-list">{post.data.tags.map((tag) => <span>{tag}</span>)}</div>
+			</div>
+		</header>
+		<div class="markdown-content"><Content /></div>
+		<a class="next-page-link" href="/blog/">Back to the notebook <span aria-hidden="true">↗</span></a>
+	</article>
+</SiteLayout>

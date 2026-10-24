@@ -6,10 +6,10 @@ description: A terminal weather app with ASCII animations
 technologies: ["Rust"]
 github_url: https://github.com/veirt/weathr
 date: 2026-02-01
-screenshot: /projects/weathr/demo.gif
+screenshot: /assets/weathr-demo.webp
 ---
 
-<img src="/projects/weathr/demo.gif" alt="Weathr preview" />
+<img src="/assets/weathr-demo.webp" alt="Weathr preview" />
 
 weathr started from a simple place: I really like asciiquarium. When my nephew
 comes over, I usually leave it running on my second monitor, and she seems to

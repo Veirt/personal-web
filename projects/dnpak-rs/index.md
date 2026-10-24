@@ -6,7 +6,7 @@ description: A Rust implementation of Dragon Nest PAK structure file
 github_url: https://crates.io/crates/dnpak
 technologies: ["Rust"]
 date: 2022-04-11
-screenshot: /projects/dnpak-rs/screenshot.png
+screenshot: /assets/dnpak-rs-screenshot.webp
 ---
 
 **dnpak-rs** is a Rust library for reading and writing Dragon Nest `.pak` files.
@@ -14,7 +14,7 @@ I first made a [Python version](https://github.com/Veirt/dnpak.py) just to
 figure out how the format worked, but later rewrote it in Rust because I wanted
 something faster (and honestly, I just wanted to build something cool in Rust).
 
-This is what [dnutils](/projects/dnutils) use and is way quicker and more
+This is what [dnutils](/projects/dnutils/) use and is way quicker and more
 stable than my old Python one.
 
 ## Usage

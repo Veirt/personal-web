@@ -1,3 +1,21 @@
-_site
-_cache
-node_modules
+# Dependencies
+/node_modules/
+
+# Generated builds and local caches
+/_site/
+/_cache/
+/dist/
+/.astro/
+
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+
+# Local research notes
+/.repos/
+
+# OS/editor and test artifacts
+.DS_Store
+*.log
+/coverage/

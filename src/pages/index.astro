@@ -1,0 +1,27 @@
+---
+import { getCollection } from "astro:content";
+import GitHubActivity from "../components/GitHubActivity.astro";
+import SiteLayout from "../layouts/SiteLayout.astro";
+
+---
+
+<SiteLayout
+	title="Home"
+	description="Veirt's personal corner of the web: small tools, odd ideas, software and side quests."
+	active="home"
+>
+	<script
+		type="application/ld+json"
+		set:html={JSON.stringify({
+			"@context": "https://schema.org",
+			"@type": "Person",
+			name: "Veirt",
+			url: "https://veirt.is-a.dev",
+			sameAs: ["https://github.com/Veirt"],
+			knowsAbout: ["Rust", "TypeScript", "DevOps", "Self-hosting", "Web development"],
+		})}
+	/>
+	<div class="home-page">
+		<GitHubActivity />
+	</div>
+</SiteLayout>

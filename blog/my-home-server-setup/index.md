@@ -13,7 +13,7 @@ rabbit hole for 2 years now. I started this hobby in July 2022, with
 [Orange Pi Zero 2](http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/details/Orange-Pi-Zero-2.html)
 as my first server.
 
-<img width="700" src="/blog/my-home-server-setup/orangepi.jpg" alt="Orange Pi Zero 2" transform-images="avif" />
+<img width="700" src="/assets/my-home-server-setup-orangepi.webp" alt="Orange Pi Zero 2" />
 
 I bought Zero 2 as the alternative for Raspberry Pi 4, because it was too
 overpriced back then. Long story short, in October 2022, I decided to buy a new
@@ -31,7 +31,7 @@ worth it for me.
 This is what my home server looks like now. I've been using the EliteDesk unit
 for almost 2 years, I also reuse my old gaming laptop as a server.
 
-<img src="/blog/my-home-server-setup/server-now.jpg" alt="My Server (Now)" transform-images="avif" />
+<img src="/assets/my-home-server-setup-server-now.webp" alt="My Server (Now)" />
 
 These are the specification of the machines I'm running:
 
@@ -66,7 +66,7 @@ machines.
 Here is what my
 [self-made home server dashboard](https://github.com/veirt/vesta) looks like:
 
-<img src="/blog/my-home-server-setup/dashboard.png" alt="Home Server Dashboard" transform-images="avif" />
+<img src="/assets/my-home-server-setup-dashboard.webp" alt="Home Server Dashboard" />
 
 There are quite a few services, aren't there? I will explain what all of those
 services/applications do, starting from the top-left.

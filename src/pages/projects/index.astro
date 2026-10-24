@@ -1,0 +1,46 @@
+---
+import { getCollection } from "astro:content";
+import SiteLayout from "../../layouts/SiteLayout.astro";
+
+const projects = (await getCollection("projects"))
+	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<SiteLayout
+	title="Projects"
+	description="A shelf of useful tools, small experiments, and other software side quests by Veirt."
+	active="projects"
+>
+	<header class="page-intro">
+		<h1>Things I've <em>made.</em></h1>
+		<p>{projects.length} side quests: little tools for problems I had, experiments I wanted to try, and a few that got out of hand.</p>
+	</header>
+
+	{projects.length ? (
+		<section class="project-gallery" aria-label="Projects">
+			{projects.map((project, index) => (
+				<article class={`gallery-card gallery-card--${(index % 4) + 1}`}>
+					<a class="gallery-card__image" href={`/projects/${project.id}/`} aria-label={`Read about ${project.data.title}`}>
+						{project.data.screenshot ? (
+							<img src={project.data.screenshot} alt={`${project.data.title} preview`} loading="lazy" />
+						) : (
+							<span class="gallery-card__placeholder" aria-hidden="true">{project.data.title.slice(0, 2).toUpperCase()}</span>
+						)}
+						<span class="gallery-card__number">{String(index + 1).padStart(2, "0")}</span>
+						<span class="gallery-card__arrow" aria-hidden="true">↗</span>
+					</a>
+					<div class="gallery-card__body">
+						<div class="gallery-card__heading">
+							<h2><a href={`/projects/${project.id}/`}>{project.data.title}</a></h2>
+							<time datetime={project.data.date.toISOString()}>{project.data.date.getFullYear()}</time>
+						</div>
+						<p>{project.data.description}</p>
+						<div class="tag-list" aria-label="Technologies">
+							{project.data.technologies.slice(0, 4).map((technology) => <span>{technology}</span>)}
+						</div>
+					</div>
+				</article>
+			))}
+		</section>
+	) : <p class="empty-state">Nothing on the shelf just yet.</p>}
+</SiteLayout>

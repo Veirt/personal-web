@@ -1,0 +1,37 @@
+---
+import { getCollection } from "astro:content";
+import { formatDate } from "../../lib/content";
+import SiteLayout from "../../layouts/SiteLayout.astro";
+
+const posts = (await getCollection("blog"))
+	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<SiteLayout
+	title="Notes"
+	description="Notes from building things, learning new tools, and maintaining a tiny homelab."
+	active="blog"
+>
+	<header class="page-intro page-intro--compact">
+		<h1>Things I've <em>learned.</em></h1>
+		<p>Build notes, small discoveries, and the occasional tale from the homelab.</p>
+	</header>
+
+	{posts.length ? (
+		<section class="journal-list" aria-label="Blog posts">
+			{posts.map((post, index) => (
+				<article class="journal-entry">
+					<span class="journal-entry__number">{String(index + 1).padStart(2, "0")}</span>
+					<div class="journal-entry__main">
+						<h2><a href={`/blog/${post.id}/`}>{post.data.title}<span aria-hidden="true">↗</span></a></h2>
+						<p>{post.data.description}</p>
+						{post.data.tags.length > 0 && (
+							<div class="tag-list">{post.data.tags.map((tag) => <span>{tag}</span>)}</div>
+						)}
+					</div>
+					<time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
+				</article>
+			))}
+		</section>
+	) : <p class="empty-state">The notebook is empty for now.</p>}
+</SiteLayout>

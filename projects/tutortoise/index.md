@@ -6,10 +6,10 @@ description: Personalized tutoring platform connecting learners with skilled tut
 github_url: https://github.com/Tutortoise
 technologies: ["TypeScript", "Express.js", "PostgreSQL"]
 date: 2024-12-12
-screenshot: /projects/tutortoise/pitchdeck.png
+screenshot: /assets/tutortoise-pitchdeck.webp
 ---
 
-<img alt="Pitch Deck" src="/projects/tutortoise/pitchdeck.png" transform-images="avif" />
+<img alt="Pitch Deck" src="/assets/tutortoise-pitchdeck.webp" />
 
 Tutortoise is a platform designed to connect learners with the right tutors —
 based on subject, budget, availability, and preferred learning style (online or
@@ -25,4 +25,4 @@ Mobile Development, and Cloud Computing learning paths. It was one of the most
 cross-functional teams I’ve worked with, and I learned a lot from building
 something meaningful together from scratch.
 
-<img alt="Infrastructure" src="/projects/tutortoise/infrastructure.png" transform-images="avif" />
+<img alt="Infrastructure" src="/assets/tutortoise-infrastructure.webp" />

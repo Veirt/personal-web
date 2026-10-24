@@ -6,10 +6,10 @@ description: A Web UI for realesrgan-ncnn-vulkan and waifu2x-ncnn-vulkan
 github_url: https://github.com/Veirt/miyo
 technologies: ["Svelte", "TypeScript", "Go", "Fiber"]
 date: 2024-07-16
-screenshot: /projects/miyo/screenshot.png
+screenshot: /assets/miyo-screenshot.webp
 ---
 
-<img src="/projects/miyo/screenshot.png" alt="Screenshot" transform-images="avif" />
+<img src="/assets/miyo-screenshot.webp" alt="Screenshot" />
 
 Miyo is a simple web interface I built for two popular image upscalers:
 [Real-ESRGAN-ncnn-vulkan](https://github.com/xinntao/Real-ESRGAN-ncnn-vulkan)

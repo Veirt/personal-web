@@ -6,10 +6,10 @@ description: Website for managing my college schedule with automated reminders v
 github_url: https://github.com/Veirt/schedula
 technologies: ["Svelte", "TypeScript", "SQLite", "Hono"]
 date: 2024-04-13
-screenshot: /projects/schedula/screenshot.png
+screenshot: /assets/schedula-screenshot.webp
 ---
 
-<img src="/projects/schedula/screenshot.png" alt="Schedula Screenshot" transform-images="avif">
+<img src="/assets/schedula-screenshot.webp" alt="Schedula Screenshot">
 
 I built Schedula to manage my class schedule and avoid the usual last-minute
 confusion—like already being on campus and forgetting where the next class is.

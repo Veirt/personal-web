@@ -1,0 +1,32 @@
+---
+import { getCollection, render } from "astro:content";
+import SiteLayout from "../../layouts/SiteLayout.astro";
+
+export async function getStaticPaths() {
+	const projects = await getCollection("projects");
+	return projects.map((project) => ({ params: { slug: project.id }, props: { project } }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+---
+
+<SiteLayout title={project.data.title} description={project.data.description} active="projects" type="article">
+	<article class="detail-page">
+		<a class="back-link" href="/projects/">← <span>all projects</span></a>
+		<header class="detail-header">
+			<h1>{project.data.title}</h1>
+			<p class="detail-header__description">{project.data.description}</p>
+			<div class="detail-meta">
+				<div class="tag-list">
+					{project.data.technologies.map((technology) => <span>{technology}</span>)}
+				</div>
+				{project.data.github_url && (
+					<a class="text-link" href={project.data.github_url} target="_blank" rel="noreferrer">Source / project <span aria-hidden="true">↗</span></a>
+				)}
+			</div>
+		</header>
+		<div class="markdown-content"><Content /></div>
+		<a class="next-page-link" href="/projects/">Back to the project shelf <span aria-hidden="true">↗</span></a>
+	</article>
+</SiteLayout>

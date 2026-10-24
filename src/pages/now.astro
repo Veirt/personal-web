@@ -1,0 +1,32 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+
+const interests = [
+	{ title: "Building", detail: "Small software that solves an actual annoyance." },
+	{ title: "Homelab", detail: "Self-hosting, containers, and making the little servers behave." },
+	{ title: "Learning", detail: "Working through my CS thesis and picking up useful things along the way." },
+	{ title: "Unwinding", detail: "Anime, typing sites, and the odd game." },
+];
+---
+
+<SiteLayout title="Now" description="A small snapshot of what Veirt is building, learning, and enjoying lately." active="now">
+	<header class="page-intro page-intro--compact now-intro">
+		<h1>What I'm up to <em>now.</em></h1>
+		<p>A snapshot of the things currently occupying my brain (and a few browser tabs).</p>
+	</header>
+
+	<section class="now-list" aria-label="Current interests">
+		{interests.map((interest, index) => (
+			<article class="now-item">
+				<span class="now-item__number">0{index + 1}</span>
+				<div>
+					<h2>{interest.title}</h2>
+					<p>{interest.detail}</p>
+				</div>
+				<span class="now-item__spark" aria-hidden="true">✳</span>
+			</article>
+		))}
+	</section>
+
+	<p class="now-footnote">This is a loose snapshot, not a productivity dashboard. <span aria-hidden="true">☺</span></p>
+</SiteLayout>
