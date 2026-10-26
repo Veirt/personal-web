@@ -14,20 +14,48 @@ const wordCount = post.body?.trim().split(/\s+/).length ?? 0;
 const readingMinutes = Math.max(1, Math.ceil(wordCount / 220));
 ---
 
-<SiteLayout title={post.data.title} description={post.data.description} active="blog" type="article">
-	<article class="detail-page journal-page">
-		<a class="back-link" href="/blog/">← <span>all notes</span></a>
-		<header class="detail-header">
-			<h1>{post.data.title}</h1>
-			<div class="detail-meta">
-				<div class="journal-meta">
+<SiteLayout
+	title={post.data.title}
+	description={post.data.description}
+	active="blog"
+	type="article"
+>
+	<article>
+		<a
+			class="mb-7 inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-accent-strong"
+			href="/blog/"
+		>
+			← <span>all notes</span>
+		</a>
+		<header class="mb-8 border-b border-line pb-6">
+			<h1 class="mt-3 mb-2 text-5xl leading-none font-extrabold tracking-tighter md:text-6xl">
+				{post.data.title}
+			</h1>
+			<div class="mt-4 flex flex-wrap items-center justify-between gap-4">
+				<div class="flex gap-4 font-mono text-xs text-muted">
 					<time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
 					<span>{readingMinutes} min read</span>
 				</div>
-				<div class="tag-list">{post.data.tags.map((tag) => <span>{tag}</span>)}</div>
+				<div class="flex flex-wrap gap-2">
+					{post.data.tags.map((tag) => (
+						<span class="rounded-full bg-paper-deep px-2 py-1 font-mono text-xs text-muted">
+							{tag}
+						</span>
+					))}
+				</div>
 			</div>
 		</header>
-		<div class="markdown-content"><Content /></div>
-		<a class="next-page-link" href="/blog/">Back to the notebook <span aria-hidden="true">↗</span></a>
+		<div class="markdown-content">
+			<Content />
+		</div>
+		<a
+			class="mt-10 flex justify-between border-t border-line py-4 text-sm text-muted transition-colors hover:text-accent-strong"
+			href="/blog/"
+		>
+			Back to the notebook{" "}
+			<span class="text-accent" aria-hidden="true">
+				↗
+			</span>
+		</a>
 	</article>
 </SiteLayout>

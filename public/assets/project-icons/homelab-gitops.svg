@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none">
+  <style>
+    .stack { transform-box: fill-box; transform-origin: center bottom; animation: stack 2.6s cubic-bezier(.7,0,.3,1) infinite; }
+    .light { transform-box: fill-box; transform-origin: center; animation: blink 1.7s ease-in-out infinite; }
+    .light:nth-child(2) { animation-delay: .4s; }
+    .light:nth-child(3) { animation-delay: .8s; }
+    @keyframes stack { 0%,100% { transform: translateY(0) rotate(0); } 44% { transform: translateY(-4px) rotate(2deg) scale(1.03,.96); } 59% { transform: translateY(1px) rotate(-1deg) scale(.98,1.03); } }
+    @keyframes blink { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: .45; transform: scale(.7); } }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+  </style>
+  <g class="stack">
+    <rect x="31" y="18" width="66" height="29" rx="13" fill="#A0A0A0"/>
+    <rect x="24" y="43" width="80" height="30" rx="13" fill="#888"/>
+    <rect x="31" y="69" width="66" height="29" rx="13" fill="#A0A0A0"/>
+    <ellipse cx="48" cy="32" rx="3" ry="4" fill="#F2F2F2"/><ellipse cx="63" cy="32" rx="3" ry="4" fill="#F2F2F2"/>
+    <circle class="light" cx="87" cy="32" r="4" fill="#F2F2F2"/>
+    <ellipse cx="47" cy="56" rx="3" ry="4" fill="#F2F2F2"/><ellipse cx="61" cy="56" rx="3" ry="4" fill="#F2F2F2"/>
+    <circle class="light" cx="87" cy="56" r="4" fill="#F2F2F2"/>
+    <ellipse cx="48" cy="83" rx="3" ry="4" fill="#F2F2F2"/><ellipse cx="63" cy="83" rx="3" ry="4" fill="#F2F2F2"/>
+    <circle class="light" cx="87" cy="83" r="4" fill="#F2F2F2"/>
+  </g>
+</svg>

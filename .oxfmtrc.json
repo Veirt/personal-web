@@ -1,0 +1,8 @@
+{
+	"useTabs": true,
+	"astro": true,
+	"sortTailwindcss": {
+		"attributes": ["class:list"],
+		"stylesheet": "src/styles/global.css"
+	}
+}

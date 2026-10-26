@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none">
+  <style>
+    .bell { transform-box: fill-box; transform-origin: 50% 12%; animation: ring 2.6s ease-in-out infinite; }
+    .ping { transform-box: fill-box; transform-origin: center; animation: ping 1.8s ease-out infinite; }
+    @keyframes ring { 0%,75%,100% { transform: rotate(0); } 80% { transform: rotate(-8deg); } 86% { transform: rotate(7deg); } 92% { transform: rotate(-3deg); } }
+    @keyframes ping { 0%,100% { transform: scale(.7); opacity: .35; } 55% { transform: scale(1.08); opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+  </style>
+  <path class="ping" d="M31 48c-8 7-12 16-12 27m78-27c8 7 12 16 12 27" fill="none" stroke="#B7B7B7" stroke-width="5" stroke-linecap="round"/>
+  <g class="bell">
+    <path d="M35 78c7-8 6-15 7-27 1-17 9-27 23-27s22 10 23 27c1 12 0 19 7 27l8 8H27l8-8Z" fill="#999"/>
+    <ellipse cx="56" cy="57" rx="3" ry="5" fill="#F2F2F2"/><ellipse cx="72" cy="57" rx="3" ry="5" fill="#F2F2F2"/>
+    <path d="M57 69c4 4 9 4 13 0" stroke="#F2F2F2" stroke-width="3" stroke-linecap="round"/>
+    <path d="M58 87c0 7 14 7 14 0" fill="#777"/>
+  </g>
+</svg>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none">
+  <style>
+    .lid { transform-box: fill-box; transform-origin: 0% 100%; animation: open 2.7s ease-in-out infinite; }
+    @keyframes open { 0%,100% { transform: translateY(0); } 48%,62% { transform: translateY(-3px); } }
+    @media (prefers-reduced-motion: reduce) { .lid { animation: none; } }
+  </style>
+  <path d="m64 18 42 24v49l-42 23-42-23V42l42-24Z" fill="#969696"/>
+  <path d="m22 42 42 25 42-25M64 67v47" stroke="#727272" stroke-width="4" stroke-linejoin="round"/>
+  <path class="lid" d="m44 31 40 23v18L44 49V31Z" fill="#C8C8C8"/>
+  <path d="m51 84 8 5-8 5m26-10-8 5 8 5" stroke="#E5E5E5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

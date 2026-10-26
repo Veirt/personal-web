@@ -1,10 +1,10 @@
 ---
 import { getCollection } from "astro:content";
-import { formatDate } from "../../lib/content";
 import SiteLayout from "../../layouts/SiteLayout.astro";
 
-const posts = (await getCollection("blog"))
-	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const posts = (await getCollection("blog")).sort(
+	(a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
 ---
 
 <SiteLayout
@@ -12,26 +12,108 @@ const posts = (await getCollection("blog"))
 	description="Notes from building things, learning new tools, and maintaining a tiny homelab."
 	active="blog"
 >
-	<header class="page-intro page-intro--compact">
-		<h1>Things I've <em>learned.</em></h1>
-		<p>Build notes, small discoveries, and the occasional tale from the homelab.</p>
+	<header class="mt-5 mb-7 max-w-3xl max-sm:mt-2">
+		<h1 class="m-0 text-5xl leading-none font-extrabold tracking-tighter md:text-6xl">
+			Things I've{" "}
+			<em class="text-accent not-italic underline decoration-faint decoration-wavy decoration-2 underline-offset-2">
+				learned.
+			</em>
+		</h1>
+		<p class="mt-4 max-w-2xl text-base text-muted max-sm:text-sm">
+			Build notes, small discoveries, and the occasional tale from the homelab.
+		</p>
 	</header>
 
+	<div class="mb-4 flex items-center justify-between gap-4 border-b border-line px-1 pb-3 font-mono text-xs text-muted">
+		<span>
+			{posts.length} {posts.length === 1 ? "note" : "notes"}
+			<span class="text-faint"> · newest first</span>
+		</span>
+		<a
+			class="inline-flex items-center gap-2 text-muted transition hover:-translate-y-px hover:text-ink"
+			href="/feed.xml"
+			aria-label="Subscribe to the notes RSS feed"
+		>
+			<svg
+				class="archive-rss-icon size-4 fill-none stroke-current stroke-2"
+				viewBox="0 0 20 20"
+				aria-hidden="true"
+			>
+				<circle cx="4" cy="16" r="1.5" fill="currentColor" />
+				<path d="M3 9a8 8 0 0 1 8 8M3 4a13 13 0 0 1 13 13" />
+			</svg>
+			<span>RSS feed</span>
+		</a>
+	</div>
+
 	{posts.length ? (
-		<section class="journal-list" aria-label="Blog posts">
-			{posts.map((post, index) => (
-				<article class="journal-entry">
-					<span class="journal-entry__number">{String(index + 1).padStart(2, "0")}</span>
-					<div class="journal-entry__main">
-						<h2><a href={`/blog/${post.id}/`}>{post.data.title}<span aria-hidden="true">↗</span></a></h2>
-						<p>{post.data.description}</p>
-						{post.data.tags.length > 0 && (
-							<div class="tag-list">{post.data.tags.map((tag) => <span>{tag}</span>)}</div>
+		<section class="grid gap-4" aria-label="Blog posts">
+			{posts.map((post) => {
+				const wordCount = post.body?.trim().split(/\s+/).length ?? 0;
+				const readingMinutes = Math.max(1, Math.ceil(wordCount / 220));
+				return (
+					<article
+						class:list={[
+							"group relative grid min-w-0 grid-cols-1 items-center gap-4 rounded-2xl border border-line bg-surface p-4 transition hover:-translate-y-0.5 hover:border-faint max-sm:gap-3",
+							post.data.cover_image && "lg:grid-cols-[minmax(0,1fr)_14rem]",
+						]}
+					>
+						<div class="min-w-0">
+							<div class="mb-2 flex items-center gap-2 font-mono text-xs text-faint">
+								<time datetime={post.data.date.toISOString()}>
+									{post.data.date.toLocaleDateString("en", {
+										month: "short",
+										day: "numeric",
+										year: "numeric",
+										timeZone: "UTC",
+									})}
+								</time>
+								<span aria-hidden="true">·</span>
+								<span>{readingMinutes} min read</span>
+							</div>
+							<h2 class="m-0 text-2xl leading-tight font-bold tracking-tight lg:text-3xl">
+								<a
+									class="inline-flex items-baseline gap-2 hover:text-accent-strong"
+									href={`/blog/${post.id}/`}
+								>
+									{post.data.title}
+									<span
+										class="text-sm text-faint transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-ink"
+										aria-hidden="true"
+									>
+										↗
+									</span>
+								</a>
+							</h2>
+							<p class="mt-2 mb-3 max-w-2xl text-sm leading-relaxed text-muted">
+								{post.data.description}
+							</p>
+							{post.data.tags.length > 0 && (
+								<div class="flex flex-wrap gap-2 font-mono text-xs text-faint" aria-label="Topics">
+									{post.data.tags.map((tag) => (
+										<span>#{tag}</span>
+									))}
+								</div>
+							)}
+						</div>
+						{post.data.cover_image && (
+							<div
+								class="col-start-2 row-start-1 h-36 w-full rotate-1 overflow-hidden rounded-xl border border-line bg-paper-deep shadow-sm transition-transform duration-200 group-hover:rotate-0 max-lg:col-start-1 max-lg:row-start-2 max-lg:h-40 max-sm:h-32"
+								aria-hidden="true"
+							>
+								<img
+									class="size-full object-cover grayscale transition-transform duration-300 group-hover:scale-105"
+									src={post.data.cover_image}
+									alt=""
+									loading="lazy"
+								/>
+							</div>
 						)}
-					</div>
-					<time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
-				</article>
-			))}
+					</article>
+				);
+			})}
 		</section>
-	) : <p class="empty-state">The notebook is empty for now.</p>}
+	) : (
+		<p class="py-8 text-muted">The notebook is empty for now.</p>
+	)}
 </SiteLayout>

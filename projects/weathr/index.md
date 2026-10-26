@@ -3,13 +3,12 @@ layout: project-page.vto
 type: project
 title: weathr
 description: A terminal weather app with ASCII animations
+icon: /assets/project-icons/weathr.svg
 technologies: ["Rust"]
 github_url: https://github.com/veirt/weathr
 date: 2026-02-01
 screenshot: /assets/weathr-demo.webp
 ---
-
-<img src="/assets/weathr-demo.webp" alt="Weathr preview" />
 
 weathr started from a simple place: I really like asciiquarium. When my nephew
 comes over, I usually leave it running on my second monitor, and she seems to

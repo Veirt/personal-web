@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none">
+  <style>
+    .folder { transform-box: fill-box; transform-origin: center bottom; animation: peek 2.8s cubic-bezier(.7,0,.3,1) infinite; }
+    .page { transform-box: fill-box; transform-origin: 50% 100%; animation: page 2.8s ease-in-out infinite; }
+    @keyframes peek { 0%,100% { transform: translateY(0) scale(1); } 43% { transform: translateY(-4px) scale(1.03,.96); } 58% { transform: translateY(1px) scale(.98,1.03); } }
+    @keyframes page { 0%,100% { transform: translateY(0) rotate(0); } 48% { transform: translateY(-4px) rotate(4deg); } }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+  </style>
+  <g class="folder">
+    <path d="M20 42c0-7 5-12 12-12h23l10 10h31c7 0 12 5 12 12v37c0 8-5 13-13 13H33c-8 0-13-5-13-13V42Z" fill="#777"/>
+    <path class="page" d="M36 22c0-5 4-9 9-9h37l17 18v54H36V22Z" fill="#BDBDBD"/>
+    <path d="M82 13v18h17" stroke="#888" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M49 49h29m-29 11h29m-29 11h19" stroke="#777" stroke-width="4" stroke-linecap="round"/>
+    <path d="m53 89 5 5 9-11" stroke="#E5E5E5" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

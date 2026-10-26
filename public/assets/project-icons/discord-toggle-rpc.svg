@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none">
+  <style>
+    .pad { transform-box: fill-box; transform-origin: center bottom; animation: pad 2.5s cubic-bezier(.7,0,.3,1) infinite; }
+    .button { transform-box: fill-box; transform-origin: center; animation: button 2.5s ease-in-out infinite; }
+    .switch { transform-box: fill-box; transform-origin: center; animation: toggle 2.5s cubic-bezier(.7,0,.3,1) infinite alternate; }
+    @keyframes pad { 0%,100% { transform: translateY(0) rotate(0); } 44% { transform: translateY(-5px) rotate(-3deg) scale(1.04,.95); } 60% { transform: translateY(1px) rotate(2deg) scale(.98,1.04); } }
+    @keyframes button { 0%,35%,100% { transform: scale(1); } 45%,55% { transform: scale(.78); } }
+    @keyframes toggle { from { transform: translateX(-6px); } to { transform: translateX(6px); } }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+  </style>
+  <g transform="translate(0 12)">
+    <g class="pad">
+      <path d="M24 69c4-24 16-37 31-34l9 4 9-4c15-3 27 10 31 34 3 17-5 24-15 17l-14-10H53L39 86c-10 7-18 0-15-17Z" fill="#929292"/>
+      <path d="M40 61h18M49 52v18" stroke="#F1F1F1" stroke-width="6" stroke-linecap="round"/>
+      <circle class="button" cx="82" cy="57" r="5" fill="#F1F1F1"/><circle cx="92" cy="67" r="4" fill="#D0D0D0"/>
+    </g>
+    <rect x="48" y="14" width="32" height="14" rx="7" fill="#BDBDBD"/>
+    <circle class="switch" cx="57" cy="21" r="5" fill="#777"/>
+  </g>
+</svg>

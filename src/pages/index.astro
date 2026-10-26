@@ -1,13 +1,18 @@
 ---
-import { getCollection } from "astro:content";
 import GitHubActivity from "../components/GitHubActivity.astro";
+import ElsewhereTile from "../components/ElsewhereTile.astro";
+import HomeIdentity from "../components/HomeIdentity.astro";
+import LatelyTile from "../components/LatelyTile.astro";
+import NowListening from "../components/NowListening.astro";
 import SiteLayout from "../layouts/SiteLayout.astro";
 
+const topTileSize = "min-h-68 max-sm:min-h-56";
+const bottomTileSize = "min-h-46 max-sm:min-h-56";
 ---
 
 <SiteLayout
 	title="Home"
-	description="Veirt's personal corner of the web: small tools, odd ideas, software and side quests."
+	description="I make small tools, explore odd ideas, and share software side quests from my corner of the web."
 	active="home"
 >
 	<script
@@ -22,6 +27,16 @@ import SiteLayout from "../layouts/SiteLayout.astro";
 		})}
 	/>
 	<div class="home-page">
+		<section class="mb-12 grid gap-4" aria-label="A few things about me">
+			<div class="grid grid-cols-2 gap-4 max-sm:grid-cols-1">
+				<HomeIdentity className={topTileSize} />
+				<NowListening className={topTileSize} />
+			</div>
+			<div class="grid grid-cols-[1fr_1.75fr] gap-4 max-lg:grid-cols-2 max-sm:grid-cols-1">
+				<LatelyTile className={bottomTileSize} />
+				<ElsewhereTile className={bottomTileSize} />
+			</div>
+		</section>
 		<GitHubActivity />
 	</div>
 </SiteLayout>

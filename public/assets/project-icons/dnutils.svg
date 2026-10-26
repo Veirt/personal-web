@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none">
+  <style>
+    .wrench { transform-box: fill-box; transform-origin: center bottom; animation: work 2.5s cubic-bezier(.7,0,.3,1) infinite; }
+    @keyframes work { 0%,100% { transform: rotate(0) translateY(0); } 42% { transform: rotate(-7deg) translateY(-4px); } 58% { transform: rotate(5deg) translateY(1px); } }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+  </style>
+  <g class="wrench">
+    <path d="M71 19c-13-5-28 3-32 16-2 7 0 14 4 19L21 76c-7 7-7 17 0 23s17 7 24 0l22-22c6 4 13 5 20 2 13-5 20-19 15-32L83 67 64 48l16-16-9-13Z" fill="#969696"/>
+    <path d="m62 49 17 17" stroke="#D5D5D5" stroke-width="7" stroke-linecap="round"/>
+  </g>
+</svg>

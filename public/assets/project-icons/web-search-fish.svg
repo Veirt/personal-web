@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none">
+  <style>
+    .lens { transform-box: fill-box; transform-origin: center; animation: sweep 2.8s cubic-bezier(.7,0,.3,1) infinite; }
+    .cursor { animation: blink 1s steps(2, start) infinite; }
+    @keyframes sweep { 0%,100% { transform: translate(0,0) rotate(0); } 48% { transform: translate(3px,-3px) rotate(7deg); } }
+    @keyframes blink { 50% { opacity: 0; } }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+  </style>
+  <path d="M24 29c0-8 6-14 14-14h52c8 0 14 6 14 14v59c0 8-6 14-14 14H38c-8 0-14-6-14-14V29Z" fill="#999"/>
+  <circle cx="40" cy="30" r="3" fill="#D8D8D8"/>
+  <circle cx="51" cy="30" r="3" fill="#D8D8D8"/>
+  <path d="m43 51 13 10-13 10" stroke="#F2F2F2" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M63 72h15" stroke="#F2F2F2" stroke-width="6" stroke-linecap="round"/>
+  <path class="cursor" d="M82 72h7" stroke="#F2F2F2" stroke-width="6" stroke-linecap="round"/>
+  <g class="lens">
+    <circle cx="89" cy="83" r="18" fill="#BDBDBD" stroke="#777" stroke-width="5"/>
+    <path d="m102 96 13 13" stroke="#777" stroke-width="7" stroke-linecap="round"/>
+    <circle cx="89" cy="83" r="3" fill="#F2F2F2"/>
+  </g>
+</svg>

@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+	<rect width="1200" height="630" fill="#161616" />
+
+	<rect x="28" y="28" width="563" height="338" rx="28" fill="#202020" stroke="#3d3d3d" />
+	<rect x="609" y="28" width="563" height="338" rx="28" fill="#f2f2f2" stroke="#3d3d3d" />
+	<rect x="28" y="384" width="409" height="218" rx="28" fill="#f2f2f2" stroke="#3d3d3d" />
+	<rect x="455" y="384" width="717" height="218" rx="28" fill="#252525" stroke="#3d3d3d" />
+
+	<g font-family="Inter, Arial, sans-serif">
+		<text x="61" y="224" fill="none" stroke="#888888" stroke-width="2" font-size="154" font-weight="900" letter-spacing="-10">veirt.</text>
+		<text x="53" y="216" fill="#f2f2f2" font-size="154" font-weight="900" letter-spacing="-10">veirt.</text>
+		<text x="58" y="271" fill="#bbbbbb" font-size="19">A small corner of the internet.</text>
+
+		<g fill="#171717">
+			<rect x="641" y="100" width="7" height="25" rx="3.5" />
+			<rect x="656" y="91" width="7" height="43" rx="3.5" />
+			<rect x="671" y="107" width="7" height="31" rx="3.5" />
+			<rect x="686" y="80" width="7" height="55" rx="3.5" />
+			<rect x="701" y="95" width="7" height="37" rx="3.5" />
+			<rect x="716" y="88" width="7" height="48" rx="3.5" />
+			<rect x="731" y="105" width="7" height="29" rx="3.5" />
+			<rect x="746" y="76" width="7" height="60" rx="3.5" />
+			<rect x="761" y="93" width="7" height="41" rx="3.5" />
+			<rect x="776" y="84" width="7" height="50" rx="3.5" />
+			<rect x="791" y="101" width="7" height="33" rx="3.5" />
+			<rect x="806" y="89" width="7" height="46" rx="3.5" />
+			<rect x="821" y="105" width="7" height="29" rx="3.5" />
+			<rect x="836" y="96" width="7" height="38" rx="3.5" />
+		</g>
+		<text x="641" y="176" fill="#666666" font-size="15" font-weight="600" letter-spacing="1.5">CURRENTLY LISTENING</text>
+		<text x="637" y="310" fill="#171717" font-size="104" font-weight="900" letter-spacing="-7">NOW</text>
+		<text x="1035" y="333" fill="#666666" font-family="monospace" font-size="10">veirt.is-a.dev</text>
+
+		<g fill="#555555" opacity="0.9">
+			<rect x="244" y="407" width="151" height="4" rx="2" />
+			<rect x="244" y="419" width="124" height="4" rx="2" />
+			<rect x="244" y="431" width="139" height="4" rx="2" />
+			<rect x="244" y="443" width="102" height="4" rx="2" />
+		</g>
+		<text x="53" y="477" fill="#171717" font-size="17" font-weight="600">Tinkering with this little corner of the internet.</text>
+		<text x="53" y="560" fill="#171717" font-size="52" font-weight="900" letter-spacing="-3">WRITINGS</text>
+		<text x="381" y="575" fill="#171717" font-size="24">↗</text>
+
+		<text x="483" y="432" fill="#f2f2f2" font-size="21" font-weight="800" letter-spacing="-0.5">Elsewhere</text>
+		<g font-size="16" font-weight="700" fill="#f2f2f2">
+			<rect x="483" y="456" width="155" height="48" rx="13" fill="#202020" stroke="#3d3d3d" stroke-width="2" />
+			<text x="504" y="486">◉  GitHub</text>
+			<rect x="650" y="456" width="160" height="48" rx="13" fill="#202020" stroke="#3d3d3d" stroke-width="2" />
+			<text x="671" y="486">⌁  Last.fm</text>
+			<rect x="822" y="456" width="131" height="48" rx="13" fill="#202020" stroke="#3d3d3d" stroke-width="2" />
+			<text x="843" y="486">✉  Email</text>
+		</g>
+		<text x="483" y="538" fill="#bbbbbb" font-size="16">Code, experiments &amp; other bits</text>
+		<text x="1090" y="581" fill="#666666" font-size="78" font-style="italic">~</text>
+	</g>
+
+	<g fill="none" stroke="#888888" stroke-width="1.5">
+		<circle cx="523" cy="324" r="4" />
+		<circle cx="541" cy="324" r="6" fill="#f2f2f2" />
+		<circle cx="561" cy="324" r="4" />
+		<circle cx="543" cy="89" r="11" fill="#f2f2f2" stroke="#f2f2f2" />
+		<circle cx="557" cy="98" r="11" />
+	</g>
+</svg>

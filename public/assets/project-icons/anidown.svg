@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none">
+  <style>
+    .download { transform-box: fill-box; transform-origin: center; animation: download 1.7s cubic-bezier(.7,0,.3,1) infinite; }
+    .progress { transform-box: fill-box; transform-origin: left center; animation: load 2.4s ease-in-out infinite; }
+    @keyframes download { 0%,100% { transform: translateY(-2px); } 55% { transform: translateY(3px); } }
+    @keyframes load { 0%,100% { transform: scaleX(.72); } 50% { transform: scaleX(1); } }
+    @media (prefers-reduced-motion: reduce) { .download, .progress { animation: none; } }
+  </style>
+  <rect x="15" y="22" width="84" height="73" rx="10" fill="#888"/>
+  <rect x="24" y="31" width="66" height="48" rx="5" fill="#D0D0D0"/>
+  <path d="M32 39v5m0 6v5m0 6v5m0 6v3m50-30v5m0 6v5m0 6v5m0 6v3" stroke="#888" stroke-width="3" stroke-linecap="round"/>
+  <path d="m49 42 18 13-18 13V42Z" fill="#777"/>
+  <rect x="25" y="85" width="51" height="4" rx="2" fill="#BDBDBD"/>
+  <rect class="progress" x="25" y="85" width="32" height="4" rx="2" fill="#F2F2F2"/>
+  <circle cx="91" cy="91" r="25" fill="#BDBDBD"/>
+  <path class="download" d="M91 75v24m-9-9 9 9 9-9m-18 17h18" stroke="#666" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

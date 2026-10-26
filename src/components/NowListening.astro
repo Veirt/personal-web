@@ -1,0 +1,156 @@
+---
+const username = import.meta.env.PUBLIC_LASTFM_USERNAME ?? "veirt";
+const apiKey = import.meta.env.PUBLIC_LASTFM_API_KEY ?? "";
+const waveformBars = [35, 70, 49, 92, 58, 27, 78, 43, 100, 55, 33, 82, 46, 68, 29, 88, 51];
+interface Props {
+	className?: string;
+}
+
+const { className } = Astro.props;
+---
+
+<article
+	class={`home-tile--listening relative flex min-w-0 flex-col justify-between overflow-hidden rounded-3xl border border-line bg-ink p-5 text-paper shadow-md max-sm:p-4 ${className ?? ""}`}
+	data-lastfm-widget
+	data-username={username}
+	data-api-key={apiKey}
+	aria-live="polite"
+	aria-atomic="true"
+>
+	<div class="relative z-10 mb-1 grid min-h-32 grid-cols-3 items-center gap-4">
+		<div
+			class="listening-waveform col-span-1 flex h-14 w-full -rotate-3 items-center justify-between gap-1"
+			aria-hidden="true"
+		>
+			{waveformBars.map((height, index) => (
+				<i style={`--bar-height: ${height}%; --bar-index: ${index};`} />
+			))}
+		</div>
+		<div class="relative z-10 col-span-2 min-w-0 text-paper">
+			<p
+				class="m-0 max-w-60 text-sm leading-snug font-semibold text-paper/80 max-sm:text-xs"
+				data-lastfm-empty
+			></p>
+			<h3
+				class="m-0 text-lg leading-tight font-bold tracking-tight max-lg:text-base max-sm:text-lg"
+				data-lastfm-track
+				hidden
+			></h3>
+			<p class="mt-1 text-sm text-paper/80" data-lastfm-artist hidden></p>
+			<p class="mt-1 block text-xs text-paper/70" data-lastfm-time hidden></p>
+		</div>
+	</div>
+	<div class="relative z-10 flex items-end justify-between gap-3">
+		<h2 class="m-0 -rotate-2 text-6xl leading-none font-extrabold tracking-tighter">NOW</h2>
+		<div class="text-right">
+			<p class="mt-1 font-mono text-xs text-paper/70">
+				Powered by{" "}
+				<a
+					class="underline underline-offset-2 hover:text-paper"
+					href="https://www.last.fm/"
+					target="_blank"
+					rel="noreferrer"
+				>
+					AudioScrobbler
+				</a>
+			</p>
+		</div>
+	</div>
+</article>
+
+<script>
+	type ApiTrack = {
+		name?: string;
+		artist?: string | { "#text"?: string };
+		date?: { uts?: string };
+		"@attr"?: { nowplaying?: string };
+	};
+
+	const widget = document.querySelector<HTMLElement>("[data-lastfm-widget]");
+
+	if (widget) {
+		const empty = widget.querySelector<HTMLElement>("[data-lastfm-empty]");
+		const title = widget.querySelector<HTMLElement>("[data-lastfm-track]");
+		const artist = widget.querySelector<HTMLElement>("[data-lastfm-artist]");
+		const time = widget.querySelector<HTMLElement>("[data-lastfm-time]");
+		const username = widget.dataset.username;
+		const apiKey = widget.dataset.apiKey;
+
+		const unavailable = (message: string) => {
+			if (empty) {
+				empty.textContent = message;
+				empty.hidden = false;
+			}
+			if (title) title.hidden = true;
+			if (artist) artist.hidden = true;
+			if (time) time.hidden = true;
+		};
+
+		const displayValue = (value?: string | { "#text"?: string }) =>
+			typeof value === "string" ? value : (value?.["#text"] ?? "");
+
+		if (!username || !apiKey) {
+			unavailable("The listening feed is taking a little break.");
+		} else {
+			const endpoint = new URL("https://ws.audioscrobbler.com/2.0/");
+			endpoint.search = new URLSearchParams({
+				method: "user.getRecentTracks",
+				user: username,
+				api_key: apiKey,
+				format: "json",
+				limit: "1",
+			}).toString();
+
+			const controller = new AbortController();
+			const timeout = window.setTimeout(() => controller.abort(), 8000);
+
+			fetch(endpoint, { signal: controller.signal, headers: { Accept: "application/json" } })
+				.then(async (response) => {
+					if (!response.ok) throw new Error("Last.fm request failed");
+					return response.json();
+				})
+				.then(
+					(payload: {
+						error?: number;
+						message?: string;
+						recenttracks?: { track?: ApiTrack | ApiTrack[] };
+					}) => {
+						if (payload.error) throw new Error(payload.message || "Last.fm request failed");
+						const tracks = payload.recenttracks?.track;
+						const track = Array.isArray(tracks) ? tracks[0] : tracks;
+						if (!track?.name) {
+							unavailable("Nothing to show just yet.");
+							return;
+						}
+
+						const isPlaying = track["@attr"]?.nowplaying === "true";
+						const artistName = displayValue(track.artist);
+						widget.classList.toggle("is-playing", isPlaying);
+						if (empty) empty.hidden = true;
+						if (title) {
+							title.textContent = track.name ?? "";
+							title.hidden = false;
+						}
+						if (artist) {
+							artist.textContent = artistName;
+							artist.hidden = !artistName;
+						}
+						if (time) {
+							const playedAt = track.date?.uts ? new Date(Number(track.date.uts) * 1000) : null;
+							time.textContent = isPlaying
+								? "playing right now"
+								: playedAt && !Number.isNaN(playedAt.valueOf())
+									? new Intl.DateTimeFormat(undefined, {
+											dateStyle: "medium",
+											timeStyle: "short",
+										}).format(playedAt)
+									: "";
+							time.hidden = !time.textContent;
+						}
+					},
+				)
+				.catch(() => unavailable("Last.fm didn’t answer. Try again in a little while."))
+				.finally(() => window.clearTimeout(timeout));
+		}
+	}
+</script>

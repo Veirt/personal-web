@@ -2,45 +2,82 @@
 import { getCollection } from "astro:content";
 import SiteLayout from "../../layouts/SiteLayout.astro";
 
-const projects = (await getCollection("projects"))
-	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const projects = (await getCollection("projects")).sort(
+	(a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
 ---
 
 <SiteLayout
 	title="Projects"
-	description="A shelf of useful tools, small experiments, and other software side quests by Veirt."
+	description="Tools and small experiments I've built, plus a few software side quests that got out of hand."
 	active="projects"
 >
-	<header class="page-intro">
-		<h1>Things I've <em>made.</em></h1>
-		<p>{projects.length} side quests: little tools for problems I had, experiments I wanted to try, and a few that got out of hand.</p>
+	<header class="mt-5 mb-10 max-w-3xl max-sm:mt-2">
+		<h1 class="m-0 text-5xl leading-none font-extrabold tracking-tighter md:text-6xl">
+			Things I've <em class="text-accent not-italic">made.</em>
+		</h1>
+		<p class="mt-4 max-w-2xl text-base text-muted max-sm:text-sm">
+			{projects.length} side quests: little tools for problems I had, experiments I wanted to try,
+			and a few that got out of hand.
+		</p>
 	</header>
 
 	{projects.length ? (
-		<section class="project-gallery" aria-label="Projects">
+		<section class="grid grid-cols-2 gap-4 max-sm:grid-cols-1" aria-label="Projects">
 			{projects.map((project, index) => (
-				<article class={`gallery-card gallery-card--${(index % 4) + 1}`}>
-					<a class="gallery-card__image" href={`/projects/${project.id}/`} aria-label={`Read about ${project.data.title}`}>
-						{project.data.screenshot ? (
-							<img src={project.data.screenshot} alt={`${project.data.title} preview`} loading="lazy" />
-						) : (
-							<span class="gallery-card__placeholder" aria-hidden="true">{project.data.title.slice(0, 2).toUpperCase()}</span>
+				<a
+					class={`project-card project-card--${(index % 4) + 1} group grid min-h-32 min-w-0 grid-cols-[4rem_minmax(0,1fr)_1rem] items-center gap-3 rounded-2xl border border-line bg-surface p-4 transition hover:-translate-y-0.5 hover:border-faint max-sm:min-h-28 max-sm:p-3`}
+					href={`/projects/${project.id}/`}
+				>
+					<span
+						class="project-card__icon-wrap grid size-16 place-items-center overflow-hidden rounded-xl bg-surface-muted"
+						aria-hidden="true"
+					>
+						<img
+							class:list={[
+								"project-card__icon size-full object-contain p-1 grayscale transition-transform duration-300 group-hover:scale-105 group-hover:-rotate-6",
+								!project.data.icon && "project-card__icon--placeholder p-2",
+							]}
+							src={project.data.icon ?? "/assets/project-icon-placeholder.svg"}
+							alt=""
+							loading="lazy"
+						/>
+					</span>
+					<span class="flex min-w-0 flex-col items-start justify-center gap-2">
+						<span class="flex w-full items-center justify-between gap-2">
+							<span class="min-w-0 overflow-hidden font-bold tracking-tight text-ellipsis whitespace-nowrap transition-colors group-hover:text-accent-strong">
+								{project.data.title}
+							</span>
+							<time
+								class="shrink-0 font-mono text-xs text-faint"
+								datetime={project.data.date.toISOString()}
+							>
+								{project.data.date.getFullYear()}
+							</time>
+						</span>
+						<span class="line-clamp-2 max-w-full text-xs leading-snug text-muted">
+							{project.data.description}
+						</span>
+						{project.data.technologies.length > 0 && (
+							<span class="flex flex-wrap gap-1" aria-label="Technologies">
+								{project.data.technologies.slice(0, 3).map((technology) => (
+									<span class="rounded-full bg-paper-deep px-2 py-0.5 font-mono text-xs text-muted">
+										{technology}
+									</span>
+								))}
+							</span>
 						)}
-						<span class="gallery-card__number">{String(index + 1).padStart(2, "0")}</span>
-						<span class="gallery-card__arrow" aria-hidden="true">↗</span>
-					</a>
-					<div class="gallery-card__body">
-						<div class="gallery-card__heading">
-							<h2><a href={`/projects/${project.id}/`}>{project.data.title}</a></h2>
-							<time datetime={project.data.date.toISOString()}>{project.data.date.getFullYear()}</time>
-						</div>
-						<p>{project.data.description}</p>
-						<div class="tag-list" aria-label="Technologies">
-							{project.data.technologies.slice(0, 4).map((technology) => <span>{technology}</span>)}
-						</div>
-					</div>
-				</article>
+					</span>
+					<span
+						class="self-start justify-self-end text-lg text-faint transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-ink"
+						aria-hidden="true"
+					>
+						↗
+					</span>
+				</a>
 			))}
 		</section>
-	) : <p class="empty-state">Nothing on the shelf just yet.</p>}
+	) : (
+		<p class="py-8 text-muted">Nothing on the shelf just yet.</p>
+	)}
 </SiteLayout>

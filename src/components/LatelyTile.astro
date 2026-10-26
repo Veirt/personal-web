@@ -1,0 +1,31 @@
+---
+interface Props {
+	className?: string;
+}
+
+const { className } = Astro.props;
+---
+
+<a
+	class={`group relative flex min-w-0 flex-col items-start overflow-hidden rounded-3xl border border-line bg-ink p-5 pt-14 text-paper shadow-md transition-transform hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink max-sm:rounded-3xl max-sm:p-4 max-sm:pt-16 ${className ?? ""}`}
+	href="/blog/"
+>
+	<span class="absolute top-5 right-6 flex w-1/2 rotate-2 flex-col gap-1" aria-hidden="true">
+		<i class="h-1 w-full rounded-full bg-paper opacity-75"></i>
+		<i class="h-1 w-3/4 rounded-full bg-paper opacity-75"></i>
+		<i class="h-1 w-11/12 rounded-full bg-paper opacity-75"></i>
+		<i class="h-1 w-2/3 rounded-full bg-paper opacity-75"></i>
+	</span>
+	<span class="relative z-10 mt-auto mb-3 max-w-72 text-sm leading-snug font-semibold">
+		Tinkering with this little corner of the internet.
+	</span>
+	<span class="relative z-10 text-5xl leading-none font-extrabold tracking-tighter max-sm:text-4xl">
+		WRITINGS
+	</span>
+	<span
+		class="absolute right-5 bottom-5 text-lg transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
+		aria-hidden="true"
+	>
+		↗
+	</span>
+</a>

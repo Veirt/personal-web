@@ -3,6 +3,7 @@ layout: project-page.vto
 type: project
 title: dnwebhook
 description: A simple Discord webhook notifier for DragonNest server status.
+icon: /assets/project-icons/dnwebhook.svg
 github_url: https://github.com/Veirt/DNWebhook
 technologies: ["Python", "SQLite"]
 date: 2021-02-08

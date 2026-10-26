@@ -3,13 +3,12 @@ layout: project-page.vto
 type: project
 title: tutortoise
 description: Personalized tutoring platform connecting learners with skilled tutors
+icon: /assets/project-icons/tutortoise.svg
 github_url: https://github.com/Tutortoise
 technologies: ["TypeScript", "Express.js", "PostgreSQL"]
 date: 2024-12-12
 screenshot: /assets/tutortoise-pitchdeck.webp
 ---
-
-<img alt="Pitch Deck" src="/assets/tutortoise-pitchdeck.webp" />
 
 Tutortoise is a platform designed to connect learners with the right tutors —
 based on subject, budget, availability, and preferred learning style (online or

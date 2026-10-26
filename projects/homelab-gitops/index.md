@@ -3,6 +3,7 @@ layout: project-page.vto
 type: project
 title: homelab-gitops
 description: GitOps configuration of my Kubernetes homelab
+icon: /assets/project-icons/homelab-gitops.svg
 github_url: https://github.com/Veirt/homelab-gitops
 technologies: ["Docker", "Kubernetes"]
 date: 2025-02-25

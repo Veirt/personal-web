@@ -6,6 +6,7 @@ description: A look at my home server setup. I share what hardware I use and the
 date: 2024-06-29
 tags: ["homelab", "server", "docker", "monitoring"]
 og_image: /blog/my-home-server-setup/orangepi.jpg
+cover_image: /assets/my-home-server-setup-orangepi.webp
 ---
 
 Hey! This is my first blog post. I've been down the home server and self-hosted

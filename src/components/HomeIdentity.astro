@@ -1,0 +1,36 @@
+---
+interface Props {
+	className?: string;
+}
+
+const { className } = Astro.props;
+---
+
+<article
+	class={`relative flex min-w-0 flex-col justify-center overflow-hidden rounded-3xl border border-line bg-paper-deep p-5 shadow-md ${className ?? ""}`}
+	aria-label="About Veirt"
+>
+	<div class="identity-mark relative mb-1 w-fit">
+		<span
+			class="identity-outline absolute top-0 left-0 translate-x-2 translate-y-1 text-8xl leading-none font-extrabold tracking-tighter text-transparent transition-transform duration-300 max-sm:text-7xl"
+			aria-hidden="true"
+		>
+			veirt<span class="identity-dot">.</span>
+		</span>
+		<h1
+			class="relative z-10 m-0 text-8xl leading-none font-extrabold tracking-tighter transition-transform duration-200 max-sm:text-7xl"
+			aria-label="Veirt"
+		>
+			veirt
+			<span class="identity-dot" aria-hidden="true">
+				.
+			</span>
+		</h1>
+	</div>
+	<p class="mt-2 ml-1 text-sm text-muted">A few things I've been working on.</p>
+	<div class="absolute right-5 bottom-4 flex -rotate-12 items-center gap-1" aria-hidden="true">
+		<i class="size-2 rounded-full border border-faint"></i>
+		<i class="size-3 rounded-full border border-faint bg-ink"></i>
+		<i class="size-2 rounded-full border border-faint"></i>
+	</div>
+</article>

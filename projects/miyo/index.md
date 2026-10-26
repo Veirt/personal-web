@@ -3,13 +3,12 @@ layout: project-page.vto
 type: project
 title: miyo
 description: A Web UI for realesrgan-ncnn-vulkan and waifu2x-ncnn-vulkan
+icon: /assets/project-icons/miyo.svg
 github_url: https://github.com/Veirt/miyo
 technologies: ["Svelte", "TypeScript", "Go", "Fiber"]
 date: 2024-07-16
 screenshot: /assets/miyo-screenshot.webp
 ---
-
-<img src="/assets/miyo-screenshot.webp" alt="Screenshot" />
 
 Miyo is a simple web interface I built for two popular image upscalers:
 [Real-ESRGAN-ncnn-vulkan](https://github.com/xinntao/Real-ESRGAN-ncnn-vulkan)

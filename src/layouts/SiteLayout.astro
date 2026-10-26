@@ -9,24 +9,20 @@ interface Props {
 	noIndex?: boolean;
 }
 
-const {
-	title,
-	description,
-	active,
-	type = "website",
-	noIndex = false,
-} = Astro.props;
+const { title, description, active, type = "website", noIndex = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const socialImage = new URL("/assets/og-image.png", Astro.site).href;
+const socialImageAlt = "A playful monochrome collage of the veirt homepage.";
 const links = [
 	{ href: "/", label: "Home", index: "01", key: "home" },
 	{ href: "/projects/", label: "Projects", index: "02", key: "projects" },
-	{ href: "/blog/", label: "Blog", index: "03", key: "blog" },
+	{ href: "/blog/", label: "Notes", index: "03", key: "blog" },
 	{ href: "/now/", label: "Now", index: "04", key: "now" },
 ] as const;
 ---
 
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="dark" class="min-w-80 scroll-smooth bg-paper font-sans antialiased">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -37,7 +33,7 @@ const links = [
 		{!noIndex && <link rel="canonical" href={canonical} />}
 		<link rel="icon" href="/favicon.png" type="image/png" />
 		<link rel="manifest" href="/site.webmanifest" />
-		<link rel="alternate" type="application/rss+xml" title="veirt's blog" href="/feed.xml" />
+		<link rel="alternate" type="application/rss+xml" title="My blog" href="/feed.xml" />
 		<link rel="preconnect" href="https://github.com" />
 		<title>{title} · veirt</title>
 		<meta property="og:type" content={type} />
@@ -45,7 +41,13 @@ const links = [
 		<meta property="og:description" content={description} />
 		<meta property="og:url" content={canonical} />
 		<meta property="og:site_name" content="veirt" />
-		<meta name="twitter:card" content="summary" />
+		<meta property="og:image" content={socialImage} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:image:alt" content={socialImageAlt} />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:image" content={socialImage} />
+		<meta name="twitter:image:alt" content={socialImageAlt} />
 		<script is:inline>
 			try {
 				const theme = localStorage.getItem("theme");
@@ -54,46 +56,89 @@ const links = [
 		</script>
 		<script src="/site.js" defer></script>
 	</head>
-	<body>
-		<a class="skip-link" href="#main">Skip to content</a>
-		<header class="mobile-header">
-			<a class="brand" href="/" aria-label="veirt home">veirt<span>.</span></a>
-			<nav class="mobile-nav" aria-label="Main navigation">
+	<body class="min-h-screen bg-paper text-base leading-relaxed text-ink">
+		<a
+			class="fixed top-3 left-3 z-50 -translate-y-full rounded-full bg-ink px-4 py-2 text-paper focus:translate-y-0"
+			href="#main"
+		>
+			Skip to content
+		</a>
+		<header class="sticky top-0 z-30 hidden min-h-16 items-center justify-between gap-4 bg-paper/90 px-4 py-2 backdrop-blur-md max-md:flex max-sm:min-h-14 max-sm:gap-2 max-sm:px-3">
+			<a
+				class="font-brand text-5xl leading-none font-bold tracking-tighter max-md:text-4xl max-sm:text-3xl"
+				href="/"
+				aria-label="veirt home"
+			>
+				veirt<span class="text-accent">.</span>
+			</a>
+			<nav class="flex items-center gap-4 max-sm:gap-2" aria-label="Main navigation">
 				{links.map(({ href, label, key }) => (
-					<a href={href} aria-current={active === key ? "page" : undefined}>
-						{label === "Projects" ? "Work" : label === "Blog" ? "Notes" : label}
+					<a
+						class="text-xs text-muted aria-[current=page]:font-bold aria-[current=page]:text-accent-strong"
+						href={href}
+						aria-current={active === key ? "page" : undefined}
+					>
+						{label}
 					</a>
 				))}
-				<button class="theme-toggle" data-theme-toggle aria-label="Switch to dark mode">
+				<button
+					class="grid size-8 place-items-center rounded-full bg-surface-muted text-base text-accent-strong transition-transform duration-200 hover:-rotate-12"
+					data-theme-toggle
+					aria-label="Switch to dark mode"
+				>
 					<span aria-hidden="true">◐</span>
 				</button>
 			</nav>
 		</header>
 
-		<aside class="side-nav" aria-label="Site navigation">
-			<a class="brand side-brand" href="/" aria-label="veirt home">veirt<span>.</span></a>
-			<p class="side-note">A small corner<br />of the internet</p>
+		<aside
+			class="fixed top-1/2 left-10 z-20 w-44 -translate-y-1/2 max-md:hidden"
+			aria-label="Site navigation"
+		>
+			<a
+				class="inline-block font-brand text-5xl leading-none font-bold tracking-tighter transition-transform duration-300 hover:scale-105 hover:-rotate-3"
+				href="/"
+				aria-label="veirt home"
+			>
+				veirt<span class="text-accent">.</span>
+			</a>
+			<p class="mt-3 mb-10 text-xs leading-normal text-muted">
+				A small corner
+				<br />
+				of the internet
+			</p>
 			<nav aria-label="Main navigation">
 				<ul>
 					{links.map(({ href, label, index, key }) => (
 						<li>
-							<a class="side-link" href={href} aria-current={active === key ? "page" : undefined}>
-								<span class="side-link__index">{index}</span>
+							<a
+								class="relative flex items-baseline gap-3 px-1 py-2 text-sm text-muted transition-transform before:absolute before:-left-3.5 before:size-1.5 before:scale-0 before:rounded-full before:bg-accent before:transition-transform before:content-[''] hover:translate-x-1 hover:text-ink aria-[current=page]:translate-x-1 aria-[current=page]:text-ink aria-[current=page]:before:scale-100"
+								href={href}
+								aria-current={active === key ? "page" : undefined}
+							>
+								<span class="font-mono text-xs text-faint">{index}</span>
 								<span>{label}</span>
 							</a>
 						</li>
 					))}
 				</ul>
 			</nav>
-			<div class="side-bottom">
-				<button class="theme-toggle" data-theme-toggle aria-label="Switch to dark mode">
+			<div class="mt-8 flex items-center gap-3 text-xs text-muted">
+				<button
+					class="grid size-10 place-items-center rounded-full bg-surface-muted text-xl text-accent-strong transition-transform duration-200 hover:-rotate-12 hover:bg-accent hover:text-white"
+					data-theme-toggle
+					aria-label="Switch to dark mode"
+				>
 					<span aria-hidden="true">◐</span>
 				</button>
 				<span>change the light</span>
 			</div>
 		</aside>
 
-		<main id="main" class="site-main">
+		<main
+			id="main"
+			class="ml-[var(--main-offset)] min-h-screen w-[min(var(--main-width),calc(100vw-var(--main-offset)-2.5rem))] pt-9 pb-4 max-md:mx-auto max-md:w-full max-md:max-w-2xl max-md:px-0 max-md:pt-10 max-md:pb-2 max-sm:px-3 max-sm:pt-8"
+		>
 			<slot />
 		</main>
 	</body>

@@ -3,13 +3,12 @@ layout: project-page.vto
 type: project
 title: web-search.fish
 description: Fish shell plugin to do a web search
+icon: /assets/project-icons/web-search-fish.svg
 github_url: https://github.com/Veirt/web-search.fish
 technologies: ["Fish", "Shell Scripting"]
 date: 2024-10-14
 screenshot: /assets/web-search-demo.webp
 ---
-
-<img src="/assets/web-search-demo.webp" alt="Preview" />
 
 web-search.fish is a simple plugin I made for the Fish shell to open web
 searches directly from the terminal. Mostly just to make terminal life a bit

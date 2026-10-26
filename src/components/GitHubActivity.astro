@@ -6,64 +6,104 @@ const activity = await getGitHubActivity();
 const weekCount = activity.weeks.length;
 ---
 
-<section class="activity-section" aria-labelledby="activity-title">
-	<div class="section-heading">
-		<h2 id="activity-title">GitHub activity</h2>
-		<a class="text-link" href="https://github.com/Veirt" rel="me">See GitHub <span aria-hidden="true">↗</span></a>
+<section class="mb-12 max-sm:mb-10" aria-labelledby="activity-title">
+	<div class="mb-4 flex items-end justify-between gap-5 max-sm:items-start">
+		<h2
+			class="m-0 text-3xl leading-tight font-extrabold tracking-tight max-sm:text-2xl"
+			id="activity-title"
+		>
+			GitHub activity
+		</h2>
+		<a
+			class="text-sm font-semibold text-muted transition-colors hover:text-accent-strong max-sm:mt-1 max-sm:whitespace-nowrap"
+			href="https://github.com/Veirt"
+			rel="me"
+		>
+			See GitHub{" "}
+			<span class="text-base text-accent" aria-hidden="true">
+				↗
+			</span>
+		</a>
 	</div>
 
-	<div class="contribution-panel">
-		<div class="contribution-summary">
-			<div>
-				<strong>{activity.total?.toLocaleString("en") ?? "—"}</strong>
-				<span>contributions in the past year</span>
+	<div class="min-w-0">
+		<div class="mb-4 flex items-end justify-between gap-4 max-sm:mb-3 max-sm:flex-col max-sm:items-start max-sm:gap-1">
+			<div class="flex flex-wrap items-baseline gap-x-3 gap-y-2">
+				<strong class="font-mono text-4xl leading-none font-medium tracking-tight text-accent sm:text-5xl">
+					{activity.total?.toLocaleString("en") ?? "—"}
+				</strong>
+				<span class="font-mono text-xs text-muted">contributions in the past year</span>
 			</div>
 			{activity.longestStreak !== null && (
-				<p>longest streak <b>{activity.longestStreak} days</b></p>
+				<p class="font-mono text-xs whitespace-nowrap text-muted">
+					longest streak <b class="font-semibold text-ink">{activity.longestStreak} days</b>
+				</p>
 			)}
 		</div>
 
 		{weekCount > 0 ? (
-			<div class="heatmap-scroll">
-				<p class="heatmap-hint">Swipe to see the full year <span aria-hidden="true">→</span></p>
-				<div class="heatmap-months" style={`--week-count: ${weekCount}`} aria-hidden="true">
+			<div class="w-full overflow-x-auto">
+				<p class="mb-2 hidden font-mono text-xs text-faint max-sm:block">
+					Swipe to see the full year <span aria-hidden="true">→</span>
+				</p>
+				<div
+					class="mb-1 grid min-w-max grid-cols-[repeat(var(--week-count),0.75rem)] gap-1 font-mono text-xs leading-none whitespace-nowrap text-faint uppercase"
+					style={`--week-count: ${weekCount}`}
+					aria-hidden="true"
+				>
 					{activity.months.map((month) => (
 						<span style={`grid-column: ${month.week + 1} / span 3`}>{month.name}</span>
 					))}
 				</div>
 				<div
-					class="contribution-grid"
+					class="flex min-w-max gap-1"
 					role="img"
 					aria-label={`${activity.total?.toLocaleString("en") ?? "GitHub"} contributions over the past year`}
 				>
 					{activity.weeks.map((week) => (
-						<div class="contribution-week">
-							{week.days.map((day) => day ? (
-								<span
-									class="contribution-day"
-									data-level={day.level}
-									title={`${day.count} contribution${day.count === 1 ? "" : "s"} on ${formatDate(new Date(`${day.date}T00:00:00Z`))}`}
-								></span>
-							) : <span class="contribution-day contribution-day--empty"></span>)}
+						<div class="grid grid-rows-7 gap-1">
+							{week.days.map((day) =>
+								day ? (
+									<span
+										class="contribution-day size-3 rounded-sm bg-heat-0"
+										data-level={day.level}
+										title={`${day.count} contribution${day.count === 1 ? "" : "s"} on ${formatDate(new Date(`${day.date}T00:00:00Z`))}`}
+									></span>
+								) : (
+									<span class="size-3 rounded-sm bg-transparent"></span>
+								),
+							)}
 						</div>
 					))}
 				</div>
 			</div>
 		) : (
-			<p class="activity-unavailable">
-				Contribution calendar is taking a little break. <a href="https://github.com/Veirt">See my GitHub profile</a> instead.
+			<p class="my-3 text-sm text-muted">
+				Contribution calendar is taking a little break.{" "}
+				<a class="text-accent-strong underline decoration-line" href="https://github.com/Veirt">
+					See my GitHub profile
+				</a>{" "}
+				instead.
 			</p>
 		)}
 
-		{weekCount > 0 && <div class="heatmap-legend" aria-hidden="true">
-			<span>less</span>
-			{[0, 1, 2, 3, 4].map((level) => <i data-level={level}></i>)}
-			<span>more</span>
-			<span class="activity-source">
-				<a href="https://github-contributions-api.jogruber.de/" rel="noreferrer">contribution data</a>
-				· refreshed at build time
-			</span>
-		</div>
-		}
+		{weekCount > 0 && (
+			<div
+				class="heatmap-legend mt-3 flex items-center gap-1 font-mono text-xs text-faint"
+				aria-hidden="true"
+			>
+				<span>less</span>
+				{[0, 1, 2, 3, 4].map((level) => (
+					<i class="inline-block size-2.5 rounded-sm bg-heat-0" data-level={level}></i>
+				))}
+				<span>more</span>
+				<span class="ml-auto whitespace-nowrap max-sm:hidden">
+					<a href="https://github-contributions-api.jogruber.de/" rel="noreferrer">
+						contribution data
+					</a>
+					· refreshed at build time
+				</span>
+			</div>
+		)}
 	</div>
 </section>

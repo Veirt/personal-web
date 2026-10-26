@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none">
+  <style>
+    .photo { transform-box: fill-box; transform-origin: center bottom; animation: tilt 2.8s cubic-bezier(.7,0,.3,1) infinite; }
+    .sun { transform-box: fill-box; transform-origin: center; animation: sun 2s ease-in-out infinite; }
+    @keyframes tilt { 0%,100% { transform: rotate(0) translateY(0); } 42% { transform: rotate(-5deg) translateY(-4px); } 58% { transform: rotate(2deg) translateY(1px); } }
+    @keyframes sun { 0%,100% { transform: scale(1); } 50% { transform: scale(.8); } }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+  </style>
+  <path d="M29 41c-7 4-9 10-7 17l10 34c2 8 8 12 16 9l49-15c8-2 11-8 9-16l-9-33c-2-8-9-11-16-9L29 41Z" fill="#BFBFBF"/>
+  <g class="photo">
+    <path d="M30 27c0-7 5-12 12-12h48c7 0 12 5 12 12v67c0 7-5 12-12 12H42c-7 0-12-5-12-12V27Z" fill="#E3E3E3"/>
+    <path d="m41 83 17-22 12 14 10-17 17 25v7H41v-7Z" fill="#999"/>
+    <circle class="sun" cx="82" cy="45" r="8" fill="#777"/>
+    <ellipse cx="53" cy="82" rx="3" ry="5" fill="#F2F2F2"/><ellipse cx="67" cy="82" rx="3" ry="5" fill="#F2F2F2"/>
+  </g>
+</svg>

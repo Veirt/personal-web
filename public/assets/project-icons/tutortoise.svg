@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none">
+  <style>
+    .book { transform-box: fill-box; transform-origin: center bottom; animation: open 2.8s cubic-bezier(.7,0,.3,1) infinite; }
+    .page { transform-box: fill-box; transform-origin: 100% 100%; animation: turn 2.8s ease-in-out infinite; }
+    @keyframes open { 0%,100% { transform: translateY(0) scale(1); } 42% { transform: translateY(-4px) scale(1.03,.96); } 58% { transform: translateY(1px) scale(.98,1.03); } }
+    @keyframes turn { 0%,100% { transform: rotate(0); } 45%,62% { transform: rotate(-5deg); } }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+  </style>
+  <g class="book">
+    <path d="M64 43c-15-12-31-14-46-7v59c17-7 32-4 46 8 14-12 29-15 46-8V36c-15-7-31-5-46 7Z" fill="#999"/>
+    <path d="M64 44v59" stroke="#777" stroke-width="4" stroke-linecap="round"/>
+    <path d="M27 51c10-4 20-3 29 2m-29 11c9-3 17-2 24 1m-24 9c7-2 14-1 19 1" stroke="#D4D4D4" stroke-width="3" stroke-linecap="round"/>
+    <path class="page" d="M69 47c11-7 21-8 32-4v39c-11-4-21-3-32 4V47Z" fill="#BDBDBD"/>
+    <path d="M75 55c8-4 15-5 21-3m-21 11c7-3 14-4 21-3m-21 11c7-2 14-2 21 0" stroke="#E3E3E3" stroke-width="3" stroke-linecap="round"/>
+  </g>
+</svg>

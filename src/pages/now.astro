@@ -1,32 +1,48 @@
 ---
 import SiteLayout from "../layouts/SiteLayout.astro";
 
-const interests = [
-	{ title: "Building", detail: "Small software that solves an actual annoyance." },
-	{ title: "Homelab", detail: "Self-hosting, containers, and making the little servers behave." },
-	{ title: "Learning", detail: "Working through my CS thesis and picking up useful things along the way." },
-	{ title: "Unwinding", detail: "Anime, typing sites, and the odd game." },
+const updates = [
+	"Yeah, still working on my undergrad thesis.",
+	"Playing piano again. Mostly songs for fun and a little note reading.",
+	"Trying to work out again.",
+	"Making coffee with a moka pot and playing a game now and then.",
 ];
+const lastUpdated = new Date("2026-10-26T00:00:00Z");
 ---
 
-<SiteLayout title="Now" description="A small snapshot of what Veirt is building, learning, and enjoying lately." active="now">
-	<header class="page-intro page-intro--compact now-intro">
-		<h1>What I'm up to <em>now.</em></h1>
-		<p>A snapshot of the things currently occupying my brain (and a few browser tabs).</p>
+<SiteLayout
+	title="Now"
+	description="I'm working on my undergrad thesis, playing piano again, and getting back into workouts."
+	active="now"
+>
+	<header class="mt-5 mb-8 max-w-3xl max-sm:mt-2">
+		<h1 class="m-0 text-5xl leading-none font-extrabold tracking-tighter md:text-6xl">
+			What I'm up to <em class="text-muted not-italic">now.</em>
+		</h1>
 	</header>
 
-	<section class="now-list" aria-label="Current interests">
-		{interests.map((interest, index) => (
-			<article class="now-item">
-				<span class="now-item__number">0{index + 1}</span>
-				<div>
-					<h2>{interest.title}</h2>
-					<p>{interest.detail}</p>
-				</div>
-				<span class="now-item__spark" aria-hidden="true">✳</span>
+	<section class="grid gap-5" aria-label="What I'm up to">
+		{updates.map((update) => (
+			<article class="group flex items-center gap-4">
+				<p class="m-0 min-w-0 flex-1 text-sm text-muted">{update}</p>
+				<span
+					class="ml-auto text-xl text-accent transition-transform duration-300 group-hover:scale-110 group-hover:rotate-90"
+					aria-hidden="true"
+				>
+					✳
+				</span>
 			</article>
 		))}
 	</section>
-
-	<p class="now-footnote">This is a loose snapshot, not a productivity dashboard. <span aria-hidden="true">☺</span></p>
+	<p class="mt-8 font-mono text-xs text-faint">
+		Last updated{" "}
+		<time datetime={lastUpdated.toISOString()}>
+			{lastUpdated.toLocaleDateString("en", {
+				month: "short",
+				day: "numeric",
+				year: "numeric",
+				timeZone: "UTC",
+			})}
+		</time>
+	</p>
 </SiteLayout>
