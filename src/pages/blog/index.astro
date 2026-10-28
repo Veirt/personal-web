@@ -12,25 +12,46 @@ const posts = (await getCollection("blog")).sort(
 	description="Notes from building things, learning new tools, and maintaining a tiny homelab."
 	active="blog"
 >
-	<header class="mt-5 mb-7 max-w-3xl max-sm:mt-2">
-		<h1 class="m-0 text-5xl leading-none font-extrabold tracking-tighter md:text-6xl">
-			Things I've{" "}
-			<em class="text-accent not-italic underline decoration-faint decoration-wavy decoration-2 underline-offset-2">
-				learned.
-			</em>
-		</h1>
-		<p class="mt-4 max-w-2xl text-base text-muted max-sm:text-sm">
-			Build notes, small discoveries, and the occasional tale from the homelab.
-		</p>
+	<header class="mt-5 mb-7 flex max-w-5xl items-center justify-between gap-8 max-sm:mt-2 max-sm:gap-4">
+		<div class="max-w-3xl">
+			<h1 class="m-0 text-5xl leading-none font-extrabold tracking-tighter md:text-6xl">
+				Things I've{" "}
+				<em class="text-accent not-italic underline decoration-faint decoration-wavy decoration-2 underline-offset-2">
+					learned.
+				</em>
+			</h1>
+			<p class="mt-4 max-w-2xl text-base text-muted max-sm:text-sm">
+				Notes from projects, the homelab, and things I had to look up twice.
+			</p>
+		</div>
+		<svg
+			class="mr-4 hidden h-24 w-40 shrink-0 text-muted opacity-70 md:block"
+			viewBox="0 0 160 96"
+			fill="none"
+			aria-hidden="true"
+		>
+			<g stroke="currentColor" stroke-linecap="round" stroke-width="2">
+				<path d="m5 24 117 3" />
+				<path d="m15 39 98 3" />
+				<path d="m1 54 119 2" />
+				<path d="m13 69 84 2" />
+			</g>
+			<g stroke="var(--accent)" stroke-linecap="round" stroke-width="1.8">
+				<path d="M137 13v18m-9-9h18m-15.4-6.4 12.8 12.8m0-12.8-12.8 12.8" />
+			</g>
+		</svg>
 	</header>
 
-	<div class="mb-4 flex items-center justify-between gap-4 border-b border-line px-1 pb-3 font-mono text-xs text-muted">
-		<span>
-			{posts.length} {posts.length === 1 ? "note" : "notes"}
-			<span class="text-faint"> · newest first</span>
-		</span>
+	<div class="mb-5 flex items-center justify-between gap-4">
+		<p class="m-0 flex items-center gap-2 font-mono text-xs text-muted">
+			<i class="size-1.5 rounded-full bg-accent" aria-hidden="true"></i>
+			<span>
+				{posts.length} {posts.length === 1 ? "note" : "notes"}
+			</span>
+			<span class="text-faint">· newest first</span>
+		</p>
 		<a
-			class="inline-flex items-center gap-2 text-muted transition hover:-translate-y-px hover:text-ink"
+			class="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-2 text-xs text-muted transition-colors hover:border-accent/50 hover:text-ink"
 			href="/feed.xml"
 			aria-label="Subscribe to the notes RSS feed"
 		>
@@ -52,14 +73,15 @@ const posts = (await getCollection("blog")).sort(
 				const wordCount = post.body?.trim().split(/\s+/).length ?? 0;
 				const readingMinutes = Math.max(1, Math.ceil(wordCount / 220));
 				return (
-					<article
+					<a
 						class:list={[
-							"group relative grid min-w-0 grid-cols-1 items-center gap-4 rounded-2xl border border-line bg-surface p-4 transition hover:-translate-y-0.5 hover:border-faint max-sm:gap-3",
-							post.data.cover_image && "lg:grid-cols-[minmax(0,1fr)_14rem]",
+							"group grid min-w-0 grid-cols-1 items-center gap-6 rounded-3xl border border-line bg-surface p-6 transition-colors hover:border-accent/50 focus-visible:outline-2 focus-visible:outline-offset-4 max-sm:gap-4 max-sm:p-4",
+							post.data.cover_image && "lg:grid-cols-[minmax(0,1fr)_18rem]",
 						]}
+						href={`/blog/${post.id}/`}
 					>
 						<div class="min-w-0">
-							<div class="mb-2 flex items-center gap-2 font-mono text-xs text-faint">
+							<div class="mb-3 flex items-center gap-2 font-mono text-xs text-faint">
 								<time datetime={post.data.date.toISOString()}>
 									{post.data.date.toLocaleDateString("en", {
 										month: "short",
@@ -68,37 +90,44 @@ const posts = (await getCollection("blog")).sort(
 										timeZone: "UTC",
 									})}
 								</time>
-								<span aria-hidden="true">·</span>
+								<span class="size-1 rounded-full bg-accent" aria-hidden="true"></span>
 								<span>{readingMinutes} min read</span>
 							</div>
-							<h2 class="m-0 text-2xl leading-tight font-bold tracking-tight lg:text-3xl">
-								<a
-									class="inline-flex items-baseline gap-2 hover:text-accent-strong"
-									href={`/blog/${post.id}/`}
-								>
+							<div class="flex items-start justify-between gap-4">
+								<h2 class="m-0 text-4xl leading-tight font-extrabold tracking-tight max-sm:text-3xl">
 									{post.data.title}
-									<span
-										class="text-sm text-faint transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-ink"
-										aria-hidden="true"
-									>
-										↗
-									</span>
-								</a>
-							</h2>
-							<p class="mt-2 mb-3 max-w-2xl text-sm leading-relaxed text-muted">
+								</h2>
+								<span
+									class="grid size-9 shrink-0 place-items-center rounded-full border border-line text-accent transition-colors group-hover:border-accent group-hover:bg-accent group-hover:text-paper"
+									aria-hidden="true"
+								>
+									<svg class="size-4" viewBox="0 0 16 16" fill="none">
+										<path
+											d="M3 13 13 3M5 3h8v8"
+											stroke="currentColor"
+											stroke-width="1.5"
+											stroke-linecap="round"
+											stroke-linejoin="round"
+										/>
+									</svg>
+								</span>
+							</div>
+							<p class="mt-3 mb-4 max-w-2xl text-base leading-relaxed text-muted max-sm:text-sm">
 								{post.data.description}
 							</p>
 							{post.data.tags.length > 0 && (
-								<div class="flex flex-wrap gap-2 font-mono text-xs text-faint" aria-label="Topics">
+								<div class="flex flex-wrap gap-2 font-mono text-xs" aria-label="Topics">
 									{post.data.tags.map((tag) => (
-										<span>#{tag}</span>
+										<span class="rounded-full border border-line bg-paper-deep px-2.5 py-1 text-faint">
+											#{tag}
+										</span>
 									))}
 								</div>
 							)}
 						</div>
 						{post.data.cover_image && (
 							<div
-								class="col-start-2 row-start-1 h-36 w-full rotate-1 overflow-hidden rounded-xl border border-line bg-paper-deep shadow-sm transition-transform duration-200 group-hover:rotate-0 max-lg:col-start-1 max-lg:row-start-2 max-lg:h-40 max-sm:h-32"
+								class="col-start-2 row-start-1 h-44 w-full rotate-1 overflow-hidden rounded-xl border border-line bg-paper-deep shadow-sm transition-transform duration-200 group-hover:rotate-0 max-lg:col-start-1 max-lg:row-start-2 max-lg:h-40 max-sm:h-36"
 								aria-hidden="true"
 							>
 								<img
@@ -109,7 +138,7 @@ const posts = (await getCollection("blog")).sort(
 								/>
 							</div>
 						)}
-					</article>
+					</a>
 				);
 			})}
 		</section>

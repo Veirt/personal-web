@@ -19,6 +19,6 @@
     <path transform="translate(-11 0)" d="M22 75c0-12 10-22 22-22 5-16 17-24 32-24 14 0 25 8 30 21 12 0 21 9 21 21 0 13-10 23-23 23H44c-13 0-22-7-22-19Z" fill="#858585"/>
   </g>
   <path class="rain" d="m43 104-3 7" stroke="#858585" stroke-width="5" stroke-linecap="round"/>
-  <path class="rain rain--two" d="m66 104-3 7" stroke="#858585" stroke-width="5" stroke-linecap="round"/>
+  <path class="rain rain--two" d="m66 104-3 7" stroke="#72A5ED" stroke-width="5" stroke-linecap="round"/>
   <path class="rain rain--three" d="m89 104-3 7" stroke="#858585" stroke-width="5" stroke-linecap="round"/>
 </svg>

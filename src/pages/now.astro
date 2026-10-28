@@ -21,18 +21,30 @@ const lastUpdated = new Date("2026-10-26T00:00:00Z");
 		</h1>
 	</header>
 
-	<section class="grid gap-5" aria-label="What I'm up to">
-		{updates.map((update) => (
-			<article class="group flex items-center gap-4">
-				<p class="m-0 min-w-0 flex-1 text-sm text-muted">{update}</p>
-				<span
-					class="ml-auto text-xl text-accent transition-transform duration-300 group-hover:scale-110 group-hover:rotate-90"
-					aria-hidden="true"
-				>
-					✳
-				</span>
-			</article>
-		))}
+	<section
+		class="relative isolate grid min-h-72 grid-cols-2 items-center gap-6 overflow-hidden max-sm:min-h-96 max-sm:grid-cols-1"
+		aria-label="What I'm up to"
+	>
+		<img
+			class="now-orbit-background pointer-events-none absolute inset-0 -z-10 size-full object-cover opacity-70"
+			src="/assets/orbit-bg.svg"
+			alt=""
+			aria-hidden="true"
+			decoding="async"
+		/>
+		<div class="relative z-10 grid gap-5">
+			{updates.map((update) => (
+				<article class="group flex items-center gap-4">
+					<p class="m-0 min-w-0 flex-1 text-sm text-muted">{update}</p>
+					<span
+						class="ml-auto text-xl text-accent transition-transform duration-300 group-hover:scale-110 group-hover:rotate-90"
+						aria-hidden="true"
+					>
+						✳
+					</span>
+				</article>
+			))}
+		</div>
 	</section>
 	<p class="mt-8 font-mono text-xs text-faint">
 		Last updated{" "}

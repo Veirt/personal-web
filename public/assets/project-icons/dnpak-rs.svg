@@ -8,4 +8,6 @@
   <path d="m22 42 42 25 42-25M64 67v47" stroke="#727272" stroke-width="4" stroke-linejoin="round"/>
   <path class="lid" d="m44 31 40 23v18L44 49V31Z" fill="#C8C8C8"/>
   <path d="m51 84 8 5-8 5m26-10-8 5 8 5" stroke="#E5E5E5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="m82 75 11-6.5v13L82 88V75Z" fill="#72A5ED"/>
+  <path d="m85 77 5.5-3.2" stroke="#F2F2F2" stroke-width="1.5" stroke-linecap="round"/>
 </svg>

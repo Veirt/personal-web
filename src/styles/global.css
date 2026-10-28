@@ -26,23 +26,23 @@
 
 :root {
 	color-scheme: dark;
-	--paper: #161616;
-	--paper-deep: #202020;
-	--surface: #252525;
-	--surface-muted: #292929;
-	--surface-subtle: #252525;
-	--surface-raised: #303030;
-	--ink: #f2f2f2;
-	--muted: #bbbbbb;
-	--faint: #888888;
-	--accent: #f2f2f2;
-	--accent-strong: #dddddd;
-	--line: #3d3d3d;
-	--heat-0: #2a2a2a;
-	--heat-1: #414141;
-	--heat-2: #646464;
-	--heat-3: #aaaaaa;
-	--heat-4: #f2f2f2;
+	--paper: #111213;
+	--paper-deep: #191a1b;
+	--surface: #171819;
+	--surface-muted: #1c1d1f;
+	--surface-subtle: #191a1c;
+	--surface-raised: #222426;
+	--ink: #f4f3f1;
+	--muted: #b8b8b7;
+	--faint: #83878b;
+	--accent: #72a5ed;
+	--accent-strong: #72a5ed;
+	--line: #34373a;
+	--heat-0: #202224;
+	--heat-1: color-mix(in srgb, var(--accent) 22%, var(--paper-deep));
+	--heat-2: color-mix(in srgb, var(--accent) 44%, var(--paper-deep));
+	--heat-3: color-mix(in srgb, var(--accent) 70%, var(--paper-deep));
+	--heat-4: var(--accent);
 	--main-width: 1010px;
 	--main-offset: max(275px, calc((100vw - 1050px) / 2 + 205px));
 	--round: 1.5rem;
@@ -59,13 +59,18 @@ html {
 }
 
 body {
-	background:
-		radial-gradient(
-			ellipse at 88% 5%,
-			color-mix(in srgb, var(--surface-muted) 58%, transparent),
-			transparent 26rem
-		),
-		var(--paper);
+	background-color: var(--paper);
+	background-image: radial-gradient(
+		ellipse at 88% 5%,
+		color-mix(in srgb, var(--surface-muted) 58%, transparent),
+		transparent 26rem
+	);
+	background-position: 88% 5%;
+	background-repeat: no-repeat;
+}
+
+html[data-theme="light"] .now-orbit-background {
+	filter: brightness(0.72) contrast(1.15);
 }
 
 [data-theme="light"] {
@@ -79,14 +84,14 @@ body {
 	--ink: #171717;
 	--muted: #666666;
 	--faint: #929292;
-	--accent: #252525;
-	--accent-strong: #111111;
+	--accent: #396daf;
+	--accent-strong: #315d95;
 	--line: #dddddd;
-	--heat-0: #f0f0f0;
-	--heat-1: #d8d8d8;
-	--heat-2: #b5b5b5;
-	--heat-3: #777777;
-	--heat-4: #222222;
+	--heat-0: #edf1f6;
+	--heat-1: color-mix(in srgb, var(--accent) 22%, var(--paper));
+	--heat-2: color-mix(in srgb, var(--accent) 44%, var(--paper));
+	--heat-3: color-mix(in srgb, var(--accent) 70%, var(--paper));
+	--heat-4: var(--accent);
 }
 
 a:focus-visible,
@@ -100,39 +105,9 @@ button:focus-visible {
 	color: var(--paper);
 }
 
-.identity-mark:hover h1 {
-	transform: rotate(-2deg) translateY(-2px);
-}
-
-.identity-mark > span .identity-dot,
-.identity-mark h1 .identity-dot {
-	display: inline-block;
-	transform-origin: 50% 85%;
-}
-
-.identity-mark:hover > span {
-	transform: translate(0.14em, 0.09em) rotate(1deg);
-}
-
-.identity-mark:hover h1 .identity-dot {
-	animation: identity-dot-hop 460ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
-}
-
-.identity-mark:hover > span .identity-dot {
-	animation: identity-dot-hop 520ms cubic-bezier(0.2, 0.8, 0.2, 1) 35ms both;
-}
-
-@keyframes identity-dot-hop {
-	0%,
-	100% {
-		transform: translate(0, 0) rotate(0);
-	}
-	42% {
-		transform: translate(0.12em, -0.28em) rotate(22deg);
-	}
-	72% {
-		transform: translate(0.16em, 0.02em) rotate(-7deg);
-	}
+[data-theme="dark"] .theme-toggle__moon,
+[data-theme="light"] .theme-toggle__sun {
+	display: none;
 }
 
 .listening-waveform i {
@@ -144,20 +119,6 @@ button:focus-visible {
 	border-radius: 99px;
 	background: var(--paper);
 	opacity: 0.9;
-}
-
-.home-tile--listening.is-playing .listening-waveform i {
-	animation: listening-wave 780ms ease-in-out infinite alternate;
-	animation-delay: calc(var(--bar-index) * -65ms);
-}
-
-@keyframes listening-wave {
-	from {
-		transform: scaleY(0.42);
-	}
-	to {
-		transform: scaleY(1);
-	}
 }
 
 .home-tile--listening [hidden] {
@@ -217,34 +178,17 @@ button:focus-visible {
 }
 
 html[data-theme="light"] .project-card__icon--placeholder {
-	filter: invert(1);
+	filter: invert(1) hue-rotate(180deg);
+}
+
+html[data-theme="light"] .orbit-art {
+	filter: brightness(0.72) contrast(1.15);
 }
 
 .markdown-content {
 	color: var(--ink);
 	font-size: 1rem;
 	line-height: 1.82;
-}
-
-.project-hero__visual {
-	background-image: radial-gradient(
-		circle at 1px 1px,
-		color-mix(in srgb, var(--faint) 30%, transparent) 1px,
-		transparent 0
-	);
-	background-size: 17px 17px;
-}
-
-.project-hero__copy::after {
-	position: absolute;
-	right: -2rem;
-	bottom: -5rem;
-	width: 11rem;
-	height: 11rem;
-	transform: rotate(28deg);
-	border: 1px solid color-mix(in srgb, var(--faint) 40%, transparent);
-	border-radius: 42% 58% 62% 38%;
-	content: "";
 }
 
 .identity-outline {
@@ -323,7 +267,6 @@ html[data-theme="light"] .project-card__icon--placeholder {
 	width: auto;
 	max-width: 100%;
 	height: auto;
-	filter: grayscale(1);
 	margin: 1.5rem auto;
 	border-radius: 1rem;
 }

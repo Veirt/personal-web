@@ -1,5 +1,6 @@
 ---
 import { getCollection, render } from "astro:content";
+import Breadcrumb from "../../components/Breadcrumb.astro";
 import SiteLayout from "../../layouts/SiteLayout.astro";
 
 export async function getStaticPaths() {
@@ -25,78 +26,80 @@ const hasBody = Boolean(project.body?.trim());
 	type="article"
 >
 	<article class="mx-auto max-w-5xl">
-		<div class="mb-5 flex items-center justify-between gap-4">
-			<a
-				class="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-accent-strong"
-				href="/projects/"
-			>
-				← <span>project shelf</span>
-			</a>
-		</div>
-
-		<header class="grid min-h-112 grid-cols-5 items-stretch gap-5 max-lg:min-h-0 max-lg:grid-cols-1 max-lg:gap-0">
-			<div class="project-hero__copy relative col-span-2 flex min-w-0 -rotate-1 flex-col items-start justify-center overflow-hidden rounded-3xl border border-line/75 bg-surface-raised p-8 shadow-md max-lg:col-span-1 max-lg:mr-auto max-lg:min-h-68 max-lg:w-11/12 max-lg:p-7 max-sm:w-full max-sm:p-5">
-				<h1 class="relative z-10 m-0 max-w-full text-5xl leading-none font-extrabold tracking-tighter break-words md:text-6xl">
-					{project.data.title}
-				</h1>
-				<p class="relative z-10 mt-4 mb-5 max-w-md text-base leading-relaxed text-muted max-sm:my-4 max-sm:text-sm">
-					{project.data.description}
-				</p>
-				<div
-					class="project-hero__tags relative z-10 flex flex-wrap gap-2"
-					aria-label="Technologies"
-				>
-					{project.data.technologies.map((technology) => (
-						<span class="rounded-full border border-line/75 bg-paper-deep px-3 py-1 font-mono text-xs text-muted">
-							{technology}
-						</span>
-					))}
+		<Breadcrumb href="/projects/" label="all projects" />
+		<header class="project-detail-header relative isolate mb-6 overflow-hidden">
+			<img
+				class="project-topo-map pointer-events-none absolute top-0 right-0 -z-10 w-3/5 opacity-30 max-md:w-4/5"
+				src="/assets/topo-map.svg"
+				alt=""
+				aria-hidden="true"
+				decoding="async"
+			/>
+			<div class="relative mt-3 flex items-end justify-between gap-6 max-sm:mt-3 max-sm:flex-col max-sm:items-start">
+				<div class="min-w-0">
+					<h1 class="m-0 flex items-center gap-3 text-6xl leading-none font-extrabold tracking-tighter break-words max-sm:text-5xl">
+						{project.data.title}
+						<span class="size-3 shrink-0 rounded-sm bg-accent" aria-hidden="true"></span>
+					</h1>
+					<p class="mt-4 mb-0 text-sm leading-relaxed text-muted sm:text-base">
+						{project.data.description}
+					</p>
 				</div>
-				{project.data.github_url && (
-					<a
-						class="relative z-10 mt-6 inline-flex items-center gap-4 rounded-xl border border-line/75 bg-ink px-4 py-3 text-sm font-bold text-paper transition hover:-translate-y-0.5"
-						href={project.data.github_url}
-						target="_blank"
-						rel="noreferrer"
-					>
-						<span>Take a closer look</span>
-						<span aria-hidden="true">↗</span>
-					</a>
-				)}
+				<div class="flex shrink-0 items-center gap-3 font-mono text-xs text-muted">
+					<span>{project.data.date.getFullYear()}</span>
+					{project.data.github_url && (
+						<a
+							class="inline-flex items-center gap-1.5 transition-colors hover:text-accent-strong"
+							href={project.data.github_url}
+							target="_blank"
+							rel="noreferrer"
+						>
+							source <span aria-hidden="true">↗</span>
+						</a>
+					)}
+				</div>
 			</div>
-
-			<figure
-				class:list={[
-					"project-hero__visual relative z-0 col-span-3 mt-3 ml-auto grid min-h-96 w-11/12 min-w-0 rotate-1 place-items-center overflow-hidden rounded-3xl border border-line/75 bg-paper-deep p-5 pb-10 shadow-md max-lg:z-10 max-lg:col-span-1 max-lg:-mt-2 max-lg:min-h-80 max-sm:mt-3 max-sm:min-h-64 max-sm:w-full max-sm:p-3",
-					!project.data.screenshot && "project-hero__visual--icon bg-surface-raised",
-				]}
-			>
-				{project.data.screenshot ? (
-					<img
-						class="relative z-10 size-full max-h-88 rounded-xl object-contain shadow-lg grayscale max-md:max-h-72 max-sm:max-h-56"
-						src={project.data.screenshot}
-						alt={`${project.data.title} in use`}
-						fetchpriority="high"
-					/>
-				) : (
-					<img
-						class="relative z-10 h-auto w-52 rounded-3xl shadow-xl grayscale"
-						src={project.data.icon ?? "/assets/project-icon-placeholder.svg"}
-						alt=""
-						fetchpriority="high"
-					/>
-				)}
-			</figure>
 		</header>
 
+		<figure
+			class:list={[
+				"w-full min-w-0 overflow-hidden rounded-2xl border border-line bg-paper-deep p-4 max-sm:p-3",
+				!project.data.screenshot && "grid min-h-72 place-items-center",
+			]}
+		>
+			{project.data.screenshot ? (
+				<img
+					class="relative z-10 block h-auto w-full rounded-lg object-contain"
+					src={project.data.screenshot}
+					alt={`${project.data.title} in use`}
+					fetchpriority="high"
+				/>
+			) : (
+				<img
+					class="relative z-10 h-auto w-52"
+					src={project.data.icon ?? "/assets/project-icon-placeholder.svg"}
+					alt=""
+					fetchpriority="high"
+				/>
+			)}
+		</figure>
+
+		<div class="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2">
+			<h2 class="m-0 font-mono text-xs font-medium tracking-wider text-muted uppercase">
+				Built with
+			</h2>
+			<div class="flex flex-wrap gap-2" aria-label="Technologies">
+				{project.data.technologies.map((technology) => (
+					<span class="rounded-full border border-line px-3 py-1 font-mono text-xs text-muted">
+						{technology}
+					</span>
+				))}
+			</div>
+		</div>
+
 		{hasBody && (
-			<section
-				class="mx-auto mt-12 max-w-3xl border-t border-line/75 px-4 pt-6 max-sm:mt-8 max-sm:px-2 max-sm:pt-4"
-				aria-label={`About ${project.data.title}`}
-			>
-				<div class="markdown-content">
-					<Content />
-				</div>
+			<section class="markdown-content mt-10 w-full" aria-label={`About ${project.data.title}`}>
+				<Content />
 			</section>
 		)}
 

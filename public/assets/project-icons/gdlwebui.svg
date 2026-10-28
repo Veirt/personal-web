@@ -10,7 +10,7 @@
   <g class="photo">
     <path d="M30 27c0-7 5-12 12-12h48c7 0 12 5 12 12v67c0 7-5 12-12 12H42c-7 0-12-5-12-12V27Z" fill="#E3E3E3"/>
     <path d="m41 83 17-22 12 14 10-17 17 25v7H41v-7Z" fill="#999"/>
-    <circle class="sun" cx="82" cy="45" r="8" fill="#777"/>
+    <circle class="sun" cx="82" cy="45" r="8" fill="#72A5ED"/>
     <ellipse cx="53" cy="82" rx="3" ry="5" fill="#F2F2F2"/><ellipse cx="67" cy="82" rx="3" ry="5" fill="#F2F2F2"/>
   </g>
 </svg>

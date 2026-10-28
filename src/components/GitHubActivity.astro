@@ -1,109 +1,163 @@
 ---
-import { getGitHubActivity } from "../lib/github";
-import { formatDate } from "../lib/content";
-
-const activity = await getGitHubActivity();
-const weekCount = activity.weeks.length;
 ---
 
-<section class="mb-12 max-sm:mb-10" aria-labelledby="activity-title">
-	<div class="mb-4 flex items-end justify-between gap-5 max-sm:items-start">
+<section class="mb-12 max-sm:mb-10" aria-labelledby="activity-title" data-github-activity>
+	<div class="mb-4">
 		<h2
 			class="m-0 text-3xl leading-tight font-extrabold tracking-tight max-sm:text-2xl"
 			id="activity-title"
 		>
 			GitHub activity
 		</h2>
-		<a
-			class="text-sm font-semibold text-muted transition-colors hover:text-accent-strong max-sm:mt-1 max-sm:whitespace-nowrap"
-			href="https://github.com/Veirt"
-			rel="me"
-		>
-			See GitHub{" "}
-			<span class="text-base text-accent" aria-hidden="true">
-				↗
-			</span>
-		</a>
 	</div>
 
 	<div class="min-w-0">
 		<div class="mb-4 flex items-end justify-between gap-4 max-sm:mb-3 max-sm:flex-col max-sm:items-start max-sm:gap-1">
 			<div class="flex flex-wrap items-baseline gap-x-3 gap-y-2">
-				<strong class="font-mono text-4xl leading-none font-medium tracking-tight text-accent sm:text-5xl">
-					{activity.total?.toLocaleString("en") ?? "—"}
+				<strong
+					class="font-mono text-4xl leading-none font-medium tracking-tight text-accent sm:text-5xl"
+					data-contribution-total
+				>
+					—
 				</strong>
 				<span class="font-mono text-xs text-muted">contributions in the past year</span>
 			</div>
-			{activity.longestStreak !== null && (
-				<p class="font-mono text-xs whitespace-nowrap text-muted">
-					longest streak <b class="font-semibold text-ink">{activity.longestStreak} days</b>
-				</p>
-			)}
+			<p class="font-mono text-xs whitespace-nowrap text-muted" data-contribution-streak hidden>
+				longest streak <b class="font-semibold text-ink" data-streak-days></b> days
+			</p>
 		</div>
 
-		{weekCount > 0 ? (
-			<div class="w-full overflow-x-auto">
-				<p class="mb-2 hidden font-mono text-xs text-faint max-sm:block">
-					Swipe to see the full year <span aria-hidden="true">→</span>
-				</p>
-				<div
-					class="mb-1 grid min-w-max grid-cols-[repeat(var(--week-count),0.75rem)] gap-1 font-mono text-xs leading-none whitespace-nowrap text-faint uppercase"
-					style={`--week-count: ${weekCount}`}
-					aria-hidden="true"
-				>
-					{activity.months.map((month) => (
-						<span style={`grid-column: ${month.week + 1} / span 3`}>{month.name}</span>
-					))}
-				</div>
-				<div
-					class="flex min-w-max gap-1"
-					role="img"
-					aria-label={`${activity.total?.toLocaleString("en") ?? "GitHub"} contributions over the past year`}
-				>
-					{activity.weeks.map((week) => (
-						<div class="grid grid-rows-7 gap-1">
-							{week.days.map((day) =>
-								day ? (
-									<span
-										class="contribution-day size-3 rounded-sm bg-heat-0"
-										data-level={day.level}
-										title={`${day.count} contribution${day.count === 1 ? "" : "s"} on ${formatDate(new Date(`${day.date}T00:00:00Z`))}`}
-									></span>
-								) : (
-									<span class="size-3 rounded-sm bg-transparent"></span>
-								),
-							)}
-						</div>
-					))}
-				</div>
-			</div>
-		) : (
-			<p class="my-3 text-sm text-muted">
-				Contribution calendar is taking a little break.{" "}
-				<a class="text-accent-strong underline decoration-line" href="https://github.com/Veirt">
-					See my GitHub profile
-				</a>{" "}
-				instead.
+		<p class="my-3 text-sm text-muted" data-contribution-status aria-live="polite">
+			Loading contribution activity…
+		</p>
+		<div class="w-full overflow-x-auto" data-contribution-calendar hidden>
+			<p class="mb-2 hidden font-mono text-xs text-faint max-sm:block">
+				Swipe to see the full year <span aria-hidden="true">→</span>
 			</p>
-		)}
-
-		{weekCount > 0 && (
 			<div
-				class="heatmap-legend mt-3 flex items-center gap-1 font-mono text-xs text-faint"
+				class="mb-1 grid min-w-max grid-cols-[repeat(var(--week-count),0.75rem)] gap-1 font-mono text-xs leading-none whitespace-nowrap text-faint uppercase max-lg:grid-cols-[repeat(var(--week-count),0.625rem)] max-lg:gap-0.5 max-sm:grid-cols-[repeat(var(--week-count),0.5rem)]"
+				data-contribution-months
 				aria-hidden="true"
-			>
-				<span>less</span>
-				{[0, 1, 2, 3, 4].map((level) => (
-					<i class="inline-block size-2.5 rounded-sm bg-heat-0" data-level={level}></i>
-				))}
-				<span>more</span>
-				<span class="ml-auto whitespace-nowrap max-sm:hidden">
-					<a href="https://github-contributions-api.jogruber.de/" rel="noreferrer">
-						contribution data
-					</a>
-					· refreshed at build time
-				</span>
-			</div>
-		)}
+			></div>
+			<div class="flex min-w-max gap-1 max-lg:gap-0.5" data-contribution-weeks role="img"></div>
+		</div>
+
+		<div
+			class="heatmap-legend mt-3 flex items-center gap-1 font-mono text-xs text-faint"
+			data-contribution-legend
+			aria-hidden="true"
+			hidden
+		>
+			<span>less</span>
+			{[0, 1, 2, 3, 4].map((level) => (
+				<i class="inline-block size-2.5 rounded-sm bg-heat-0" data-level={level}></i>
+			))}
+			<span>more</span>
+		</div>
 	</div>
 </section>
+
+<script>
+	import { calendarLayout, type ContributionDay } from "../lib/github";
+
+	type ContributionResponse = {
+		total?: { lastYear?: number };
+		contributions?: { date: string; count: number; level?: number }[];
+	};
+
+	const section = document.querySelector<HTMLElement>("[data-github-activity]");
+
+	if (section) {
+		const total = section.querySelector<HTMLElement>("[data-contribution-total]");
+		const streak = section.querySelector<HTMLElement>("[data-contribution-streak]");
+		const streakDays = section.querySelector<HTMLElement>("[data-streak-days]");
+		const status = section.querySelector<HTMLElement>("[data-contribution-status]");
+		const calendar = section.querySelector<HTMLElement>("[data-contribution-calendar]");
+		const monthLabels = section.querySelector<HTMLElement>("[data-contribution-months]");
+		const weekColumns = section.querySelector<HTMLElement>("[data-contribution-weeks]");
+		const legend = section.querySelector<HTMLElement>("[data-contribution-legend]");
+		const username = "Veirt";
+
+		const showUnavailable = () => {
+			if (status) status.textContent = "Contribution activity is unavailable right now.";
+		};
+
+		const loadActivity = async () => {
+			const endpoint = new URL(`https://github-contributions-api.jogruber.de/v4/${username}`);
+			endpoint.searchParams.set("y", "last");
+			endpoint.searchParams.set("refresh", String(Date.now()));
+			const controller = new AbortController();
+			const timeout = window.setTimeout(() => controller.abort(), 8000);
+
+			try {
+				const response = await fetch(endpoint, {
+					cache: "no-store",
+					headers: { Accept: "application/json" },
+					signal: controller.signal,
+				});
+				if (!response.ok) throw new Error("Contribution request failed");
+
+				const payload = (await response.json()) as ContributionResponse;
+				const days: ContributionDay[] = Array.isArray(payload.contributions)
+					? payload.contributions.map((day) => ({
+							date: day.date,
+							count: day.count,
+							level: day.level ?? 0,
+						}))
+					: [];
+				if (!days.length) throw new Error("No contribution days returned");
+
+				const layout = calendarLayout(days);
+				const count = payload.total?.lastYear ?? days.reduce((sum, day) => sum + day.count, 0);
+				if (total) total.textContent = count.toLocaleString("en");
+				if (streak && streakDays && layout.longestStreak !== null) {
+					streakDays.textContent = String(layout.longestStreak);
+					streak.hidden = false;
+				}
+
+				if (monthLabels && weekColumns && calendar) {
+					monthLabels.replaceChildren();
+					monthLabels.style.setProperty("--week-count", String(layout.weeks.length));
+					for (const month of layout.months) {
+						const label = document.createElement("span");
+						label.textContent = month.name;
+						label.style.gridColumn = `${month.week + 1} / span 3`;
+						monthLabels.append(label);
+					}
+
+					weekColumns.replaceChildren();
+					weekColumns.setAttribute(
+						"aria-label",
+						`${count.toLocaleString("en")} contributions over the past year`,
+					);
+					for (const week of layout.weeks) {
+						const column = document.createElement("div");
+						column.className = "grid grid-rows-7 gap-1 max-lg:gap-0.5";
+						for (const day of week.days) {
+							const cell = document.createElement("span");
+							cell.className = day
+								? "contribution-day size-3 rounded-sm bg-heat-0 max-lg:size-2.5 max-sm:size-2"
+								: "size-3 rounded-sm bg-transparent max-lg:size-2.5 max-sm:size-2";
+							if (day) {
+								cell.dataset.level = String(day.level);
+								cell.title = `${day.count} contribution${day.count === 1 ? "" : "s"} on ${new Intl.DateTimeFormat("en", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" }).format(new Date(`${day.date}T00:00:00Z`))}`;
+							}
+							column.append(cell);
+						}
+						weekColumns.append(column);
+					}
+
+					calendar.hidden = false;
+					if (legend) legend.hidden = false;
+					if (status) status.hidden = true;
+				}
+			} catch {
+				showUnavailable();
+			} finally {
+				window.clearTimeout(timeout);
+			}
+		};
+
+		void loadActivity();
+	}
+</script>

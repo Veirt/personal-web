@@ -7,28 +7,89 @@ const { className } = Astro.props;
 ---
 
 <article
-	class={`relative flex min-w-0 flex-col justify-center overflow-hidden rounded-3xl border border-line bg-paper-deep p-5 shadow-md ${className ?? ""}`}
+	class={`relative flex min-w-0 flex-col justify-center overflow-hidden rounded-3xl border border-line bg-paper-deep p-5 ${className ?? ""}`}
 	aria-label="About Veirt"
 >
-	<div class="identity-mark relative mb-1 w-fit">
-		<span
-			class="identity-outline absolute top-0 left-0 translate-x-2 translate-y-1 text-8xl leading-none font-extrabold tracking-tighter text-transparent transition-transform duration-300 max-sm:text-7xl"
-			aria-hidden="true"
-		>
-			veirt<span class="identity-dot">.</span>
-		</span>
-		<h1
-			class="relative z-10 m-0 text-8xl leading-none font-extrabold tracking-tighter transition-transform duration-200 max-sm:text-7xl"
-			aria-label="Veirt"
-		>
-			veirt
-			<span class="identity-dot" aria-hidden="true">
-				.
+	<svg
+		class="pointer-events-none absolute top-10 -left-7 w-96 text-muted max-sm:top-13 max-sm:-left-3 max-sm:w-72"
+		viewBox="0 0 528 207"
+		fill="none"
+		aria-hidden="true"
+	>
+		<g fill="none" stroke="currentColor">
+			<ellipse
+				cx="226.29"
+				cy="83.51"
+				rx="186.89"
+				ry="62.30"
+				transform="rotate(-12 226.29 83.51)"
+				stroke-opacity="0.55"
+				stroke-width="0.67"
+			/>
+			<ellipse
+				cx="224.94"
+				cy="84.86"
+				rx="176.79"
+				ry="53.88"
+				transform="rotate(-11 224.94 84.86)"
+				stroke-opacity="0.45"
+				stroke-width="0.61"
+			/>
+			<ellipse
+				cx="235.71"
+				cy="80.14"
+				rx="158.27"
+				ry="48.83"
+				transform="rotate(-14 235.71 80.14)"
+				stroke-opacity="0.4"
+				stroke-width="0.54"
+			/>
+			<ellipse
+				cx="232.35"
+				cy="88.22"
+				rx="168.37"
+				ry="57.92"
+				transform="rotate(-9 232.35 88.22)"
+				stroke-opacity="0.35"
+				stroke-width="0.54"
+			/>
+		</g>
+		<g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+			<path stroke-width="1.1" d="M265.01 6.06H283.87M274.44 -3.37V15.49" />
+			<path stroke-width="1.0" d="M10.10 101.69H24.92M17.51 94.28V109.10" />
+			<path stroke-width="0.8" d="M17.51 99L20.2 101.69L17.51 104.38L14.82 101.69Z" />
+			<path stroke-width="0.9" d="M412.16 81.49H422.26M417.21 76.44V86.54" />
+		</g>
+		<circle cx="356.6" cy="31.32" r="3.37" fill="currentColor" />
+		<circle cx="377.48" cy="122.23" r="2.36" fill="currentColor" />
+		<circle cx="81.83" cy="153.21" r="3.37" fill="currentColor" />
+		<circle cx="383.2" cy="60.95" r="3.7" fill="var(--accent)" />
+		<g fill="var(--faint)">
+			<circle cx="29.3" cy="134.02" r="0.84" />
+			<circle cx="11.11" cy="152.54" r="0.84" />
+			<circle cx="47.14" cy="154.9" r="0.84" />
+			<circle cx="381.18" cy="152.2" r="0.84" />
+			<circle cx="399.7" cy="162.98" r="1.01" />
+		</g>
+	</svg>
+	<div class="relative z-10 flex flex-col items-start">
+		<div class="identity-mark relative mb-1 w-fit">
+			<span
+				class="identity-outline absolute top-0 left-0 translate-x-2 translate-y-1 text-8xl leading-none font-extrabold tracking-tighter text-transparent max-sm:text-7xl"
+				aria-hidden="true"
+			>
+				veirt<span class="identity-dot">.</span>
 			</span>
-		</h1>
+			<h1 class="relative m-0 text-8xl leading-none font-extrabold tracking-tighter max-sm:text-7xl">
+				veirt
+				<span class="identity-dot" aria-hidden="true">
+					.
+				</span>
+			</h1>
+		</div>
+		<p class="mt-6 ml-1 text-sm text-muted">A few things I've been working on.</p>
 	</div>
-	<p class="mt-2 ml-1 text-sm text-muted">A few things I've been working on.</p>
-	<div class="absolute right-5 bottom-4 flex -rotate-12 items-center gap-1" aria-hidden="true">
+	<div class="absolute right-5 bottom-4 flex items-center gap-1" aria-hidden="true">
 		<i class="size-2 rounded-full border border-faint"></i>
 		<i class="size-3 rounded-full border border-faint bg-ink"></i>
 		<i class="size-2 rounded-full border border-faint"></i>

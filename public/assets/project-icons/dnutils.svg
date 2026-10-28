@@ -6,6 +6,6 @@
   </style>
   <g class="wrench">
     <path d="M71 19c-13-5-28 3-32 16-2 7 0 14 4 19L21 76c-7 7-7 17 0 23s17 7 24 0l22-22c6 4 13 5 20 2 13-5 20-19 15-32L83 67 64 48l16-16-9-13Z" fill="#969696"/>
-    <path d="m62 49 17 17" stroke="#D5D5D5" stroke-width="7" stroke-linecap="round"/>
+    <path d="m62 49 17 17" stroke="#72A5ED" stroke-width="7" stroke-linecap="round"/>
   </g>
 </svg>

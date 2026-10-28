@@ -10,7 +10,7 @@
     <path d="M64 43c-15-12-31-14-46-7v59c17-7 32-4 46 8 14-12 29-15 46-8V36c-15-7-31-5-46 7Z" fill="#999"/>
     <path d="M64 44v59" stroke="#777" stroke-width="4" stroke-linecap="round"/>
     <path d="M27 51c10-4 20-3 29 2m-29 11c9-3 17-2 24 1m-24 9c7-2 14-1 19 1" stroke="#D4D4D4" stroke-width="3" stroke-linecap="round"/>
-    <path class="page" d="M69 47c11-7 21-8 32-4v39c-11-4-21-3-32 4V47Z" fill="#BDBDBD"/>
-    <path d="M75 55c8-4 15-5 21-3m-21 11c7-3 14-4 21-3m-21 11c7-2 14-2 21 0" stroke="#E3E3E3" stroke-width="3" stroke-linecap="round"/>
+    <path class="page" d="M69 47c11-7 21-8 32-4v39c-11-4-21-3-32 4V47Z" fill="#72A5ED" fill-opacity=".7"/>
+    <path d="M75 55c8-4 15-5 21-3m-21 8c7-3 14-4 21-3m-21 11c7-2 14-2 21 0" stroke="#F2F2F2" stroke-width="3" stroke-linecap="round"/>
   </g>
 </svg>

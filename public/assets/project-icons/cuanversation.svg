@@ -11,7 +11,7 @@
     <path d="M47 68c4 5 12 5 16 0" stroke="#F1F1F1" stroke-width="4" stroke-linecap="round"/>
   </g>
   <g class="bubble-b">
-    <path d="M80 58c0-12 8-20 20-20h9c10 0 17 7 17 17v12c0 10-7 17-18 17h-8l-12 9V80c-5-4-8-11-8-22Z" fill="#C3C3C3"/>
+    <path d="M80 58c0-12 8-20 20-20h9c10 0 17 7 17 17v12c0 10-7 17-18 17h-8l-12 9V80c-5-4-8-11-8-22Z" fill="#72A5ED"/>
     <circle cx="99" cy="57" r="2.5" fill="#777"/><circle cx="110" cy="57" r="2.5" fill="#777"/>
     <path d="M99 67h11" stroke="#777" stroke-width="3" stroke-linecap="round"/>
   </g>

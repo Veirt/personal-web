@@ -8,9 +8,9 @@
   </style>
   <g class="folder">
     <path d="M20 42c0-7 5-12 12-12h23l10 10h31c7 0 12 5 12 12v37c0 8-5 13-13 13H33c-8 0-13-5-13-13V42Z" fill="#777"/>
-    <path class="page" d="M36 22c0-5 4-9 9-9h37l17 18v54H36V22Z" fill="#BDBDBD"/>
-    <path d="M82 13v18h17" stroke="#888" stroke-width="4" stroke-linejoin="round"/>
-    <path d="M49 49h29m-29 11h29m-29 11h19" stroke="#777" stroke-width="4" stroke-linecap="round"/>
+    <path class="page" d="M36 22c0-5 4-9 9-9h37l17 18v54H36V22Z" fill="#72A5ED" fill-opacity=".65"/>
+    <path d="M82 13v18h17" stroke="#F2F2F2" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M49 49h29m-29 11h29m-29 11h19" stroke="#F2F2F2" stroke-width="4" stroke-linecap="round"/>
     <path d="m53 89 5 5 9-11" stroke="#E5E5E5" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
   </g>
 </svg>

@@ -1,19 +1,10 @@
-const username = "Veirt";
-
-interface ContributionDay {
+export interface ContributionDay {
 	date: string;
 	count: number;
 	level: number;
 }
 
-export interface GitHubActivity {
-	total: number | null;
-	longestStreak: number | null;
-	weeks: { days: (ContributionDay | null)[] }[];
-	months: { name: string; week: number }[];
-}
-
-function calendarLayout(days: ContributionDay[]) {
+export function calendarLayout(days: ContributionDay[]) {
 	if (!days.length) return { weeks: [], months: [], longestStreak: null };
 
 	const firstDate = new Date(`${days[0].date}T00:00:00Z`);
@@ -39,7 +30,9 @@ function calendarLayout(days: ContributionDay[]) {
 			const week = Math.floor((index + leading) / 7);
 			if (!months.length || week - months.at(-1)!.week >= 3) {
 				months.push({
-					name: new Intl.DateTimeFormat("en", { month: "short", timeZone: "UTC" }).format(date),
+					name: new Intl.DateTimeFormat("en", { month: "short", timeZone: "UTC" }).format(
+						date,
+					),
 					week,
 				});
 			}
@@ -50,43 +43,4 @@ function calendarLayout(days: ContributionDay[]) {
 	}
 
 	return { weeks, months, longestStreak };
-}
-
-export async function getGitHubActivity(): Promise<GitHubActivity> {
-	const empty: GitHubActivity = {
-		total: null,
-		longestStreak: null,
-		weeks: [],
-		months: [],
-	};
-
-	try {
-		const response = await fetch(`https://github-contributions-api.jogruber.de/v4/${username}?y=last`, {
-			headers: { accept: "application/json" },
-			signal: AbortSignal.timeout(5000),
-		});
-		if (!response.ok) {
-			console.warn(`GitHub contribution calendar returned ${response.status}.`);
-			return empty;
-		}
-
-		const data = await response.json();
-		const days: ContributionDay[] = Array.isArray(data.contributions)
-			? data.contributions.map((day: { date: string; count: number; level?: number }) => ({
-				date: day.date,
-				count: day.count,
-				level: day.level ?? 0,
-			}))
-			: [];
-		const layout = calendarLayout(days);
-		return {
-			total: data.total?.lastYear ?? days.reduce((sum, day) => sum + day.count, 0),
-			longestStreak: layout.longestStreak,
-			weeks: layout.weeks,
-			months: layout.months,
-		};
-	} catch (error) {
-		console.warn("GitHub contribution calendar is unavailable:", error);
-		return empty;
-	}
 }

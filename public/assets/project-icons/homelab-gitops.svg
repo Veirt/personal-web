@@ -10,7 +10,7 @@
   </style>
   <g class="stack">
     <rect x="31" y="18" width="66" height="29" rx="13" fill="#A0A0A0"/>
-    <rect x="24" y="43" width="80" height="30" rx="13" fill="#888"/>
+    <rect x="24" y="43" width="80" height="30" rx="13" fill="#72A5ED"/>
     <rect x="31" y="69" width="66" height="29" rx="13" fill="#A0A0A0"/>
     <ellipse cx="48" cy="32" rx="3" ry="4" fill="#F2F2F2"/><ellipse cx="63" cy="32" rx="3" ry="4" fill="#F2F2F2"/>
     <circle class="light" cx="87" cy="32" r="4" fill="#F2F2F2"/>
