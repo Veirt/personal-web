@@ -1,14 +1,62 @@
 ---
+import { CONTRIBUTION_LEVEL_CLASSES } from "../lib/github";
 ---
 
-<section class="mb-12 max-sm:mb-10" aria-labelledby="activity-title" data-github-activity>
-	<div class="mb-4">
+<github-activity class="mb-12 block max-sm:mb-10" aria-labelledby="activity-title" role="region">
+	<div class="mb-4 flex items-start justify-between gap-4">
 		<h2
 			class="m-0 text-3xl leading-tight font-extrabold tracking-tight max-sm:text-2xl"
 			id="activity-title"
 		>
 			GitHub activity
 		</h2>
+		<svg
+			class="hidden h-20 w-44 shrink-0 text-muted opacity-70 md:block"
+			viewBox="0 0 180 80"
+			fill="none"
+			aria-hidden="true"
+		>
+			<g stroke="currentColor" stroke-linecap="round">
+				<ellipse
+					cx="94"
+					cy="41"
+					rx="74"
+					ry="24"
+					transform="rotate(-10 94 41)"
+					stroke-opacity="0.45"
+					stroke-width="0.8"
+				/>
+				<ellipse
+					cx="94"
+					cy="41"
+					rx="61"
+					ry="18"
+					transform="rotate(-4 94 41)"
+					stroke-opacity="0.3"
+					stroke-width="0.7"
+				/>
+				<ellipse
+					cx="94"
+					cy="41"
+					rx="45"
+					ry="12"
+					transform="rotate(-16 94 41)"
+					stroke-opacity="0.25"
+					stroke-width="0.7"
+				/>
+				<path d="M8 62c24-12 48-14 72-6s48 8 72-4" stroke-opacity="0.2" stroke-width="0.7" />
+				<path d="M18 10v6m-3-3h6" stroke-opacity="0.4" stroke-width="0.8" />
+			</g>
+			<g fill="currentColor">
+				<circle cx="34" cy="24" r="1.2" fill-opacity="0.5" />
+				<circle cx="146" cy="18" r="1" fill-opacity="0.4" />
+				<circle cx="158" cy="58" r="1.4" fill-opacity="0.45" />
+				<circle cx="64" cy="65" r="1" fill-opacity="0.35" />
+				<circle cx="112" cy="13" r="1.1" fill-opacity="0.4" />
+			</g>
+			<circle cx="146" cy="18" r="3.2" fill="var(--accent)" fill-opacity="0.8" />
+			<path d="M34 24l2.2 2.2L34 28.4l-2.2-2.2z" fill="var(--accent)" fill-opacity="0.7" />
+		</svg>
 	</div>
 
 	<div class="min-w-0">
@@ -18,7 +66,7 @@
 					class="font-mono text-4xl leading-none font-medium tracking-tight text-accent sm:text-5xl"
 					data-contribution-total
 				>
-					—
+					-
 				</strong>
 				<span class="font-mono text-xs text-muted">contributions in the past year</span>
 			</div>
@@ -43,121 +91,129 @@
 		</div>
 
 		<div
-			class="heatmap-legend mt-3 flex items-center gap-1 font-mono text-xs text-faint"
+			class="mt-3 flex items-center gap-1 font-mono text-xs text-faint"
 			data-contribution-legend
 			aria-hidden="true"
 			hidden
 		>
 			<span>less</span>
-			{[0, 1, 2, 3, 4].map((level) => (
-				<i class="inline-block size-2.5 rounded-sm bg-heat-0" data-level={level}></i>
+			{CONTRIBUTION_LEVEL_CLASSES.map((level) => (
+				<i class={`inline-block size-2.5 rounded-sm ${level}`}></i>
 			))}
 			<span>more</span>
 		</div>
 	</div>
-</section>
+</github-activity>
 
 <script>
-	import { calendarLayout, type ContributionDay } from "../lib/github";
+	import { calendarLayout, CONTRIBUTION_LEVEL_CLASSES, type ContributionDay } from "../lib/github";
 
 	type ContributionResponse = {
 		total?: { lastYear?: number };
-		contributions?: { date: string; count: number; level?: number }[];
+		contributions: ContributionDay[];
 	};
 
-	const section = document.querySelector<HTMLElement>("[data-github-activity]");
+	const dateFormat = new Intl.DateTimeFormat("en", {
+		month: "short",
+		day: "numeric",
+		year: "numeric",
+		timeZone: "UTC",
+	});
 
-	if (section) {
-		const total = section.querySelector<HTMLElement>("[data-contribution-total]");
-		const streak = section.querySelector<HTMLElement>("[data-contribution-streak]");
-		const streakDays = section.querySelector<HTMLElement>("[data-streak-days]");
-		const status = section.querySelector<HTMLElement>("[data-contribution-status]");
-		const calendar = section.querySelector<HTMLElement>("[data-contribution-calendar]");
-		const monthLabels = section.querySelector<HTMLElement>("[data-contribution-months]");
-		const weekColumns = section.querySelector<HTMLElement>("[data-contribution-weeks]");
-		const legend = section.querySelector<HTMLElement>("[data-contribution-legend]");
-		const username = "Veirt";
+	function createDayCell(day: ContributionDay | null) {
+		const cell = document.createElement("span");
+		if (day) {
+			cell.className = `block size-3 rounded-sm max-lg:size-2.5 max-sm:size-2 ${CONTRIBUTION_LEVEL_CLASSES[day.level] ?? CONTRIBUTION_LEVEL_CLASSES[0]}`;
+			cell.title = `${day.count} contribution${day.count === 1 ? "" : "s"} on ${dateFormat.format(new Date(`${day.date}T00:00:00Z`))}`;
+		} else {
+			cell.className = "block size-3 rounded-sm bg-transparent max-lg:size-2.5 max-sm:size-2";
+		}
+		return cell;
+	}
 
-		const showUnavailable = () => {
-			if (status) status.textContent = "Contribution activity is unavailable right now.";
-		};
+	class GitHubActivity extends HTMLElement {
+		private controller?: AbortController;
 
-		const loadActivity = async () => {
-			const endpoint = new URL(`https://github-contributions-api.jogruber.de/v4/${username}`);
-			endpoint.searchParams.set("y", "last");
-			endpoint.searchParams.set("refresh", String(Date.now()));
+		connectedCallback() {
+			void this.load();
+		}
+
+		disconnectedCallback() {
+			this.controller?.abort();
+		}
+
+		private async load() {
+			const total = this.querySelector<HTMLElement>("[data-contribution-total]")!;
+			const streak = this.querySelector<HTMLElement>("[data-contribution-streak]")!;
+			const streakDays = this.querySelector<HTMLElement>("[data-streak-days]")!;
+			const status = this.querySelector<HTMLElement>("[data-contribution-status]")!;
+			const calendar = this.querySelector<HTMLElement>("[data-contribution-calendar]")!;
+			const monthLabels = this.querySelector<HTMLElement>("[data-contribution-months]")!;
+			const weekColumns = this.querySelector<HTMLElement>("[data-contribution-weeks]")!;
+			const legend = this.querySelector<HTMLElement>("[data-contribution-legend]")!;
+
 			const controller = new AbortController();
+			this.controller = controller;
 			const timeout = window.setTimeout(() => controller.abort(), 8000);
 
 			try {
+				const endpoint = new URL("https://github-contributions-api.jogruber.de/v4/Veirt");
+				endpoint.searchParams.set("y", "last");
+
 				const response = await fetch(endpoint, {
 					cache: "no-store",
 					headers: { Accept: "application/json" },
 					signal: controller.signal,
 				});
-				if (!response.ok) throw new Error("Contribution request failed");
+				if (!response.ok) throw new Error(`GitHub activity returned ${response.status}`);
 
 				const payload = (await response.json()) as ContributionResponse;
-				const days: ContributionDay[] = Array.isArray(payload.contributions)
-					? payload.contributions.map((day) => ({
-							date: day.date,
-							count: day.count,
-							level: day.level ?? 0,
-						}))
-					: [];
-				if (!days.length) throw new Error("No contribution days returned");
+				if (!payload.contributions.length) throw new Error("No activity days returned");
 
-				const layout = calendarLayout(days);
-				const count = payload.total?.lastYear ?? days.reduce((sum, day) => sum + day.count, 0);
-				if (total) total.textContent = count.toLocaleString("en");
-				if (streak && streakDays && layout.longestStreak !== null) {
+				const layout = calendarLayout(payload.contributions);
+				const count =
+					payload.total?.lastYear ?? payload.contributions.reduce((sum, day) => sum + day.count, 0);
+
+				total.textContent = count.toLocaleString("en");
+				if (layout.longestStreak !== null) {
 					streakDays.textContent = String(layout.longestStreak);
 					streak.hidden = false;
 				}
 
-				if (monthLabels && weekColumns && calendar) {
-					monthLabels.replaceChildren();
-					monthLabels.style.setProperty("--week-count", String(layout.weeks.length));
-					for (const month of layout.months) {
-						const label = document.createElement("span");
-						label.textContent = month.name;
-						label.style.gridColumn = `${month.week + 1} / span 3`;
-						monthLabels.append(label);
-					}
-
-					weekColumns.replaceChildren();
-					weekColumns.setAttribute(
-						"aria-label",
-						`${count.toLocaleString("en")} contributions over the past year`,
-					);
-					for (const week of layout.weeks) {
-						const column = document.createElement("div");
-						column.className = "grid grid-rows-7 gap-1 max-lg:gap-0.5";
-						for (const day of week.days) {
-							const cell = document.createElement("span");
-							cell.className = day
-								? "contribution-day size-3 rounded-sm bg-heat-0 max-lg:size-2.5 max-sm:size-2"
-								: "size-3 rounded-sm bg-transparent max-lg:size-2.5 max-sm:size-2";
-							if (day) {
-								cell.dataset.level = String(day.level);
-								cell.title = `${day.count} contribution${day.count === 1 ? "" : "s"} on ${new Intl.DateTimeFormat("en", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" }).format(new Date(`${day.date}T00:00:00Z`))}`;
-							}
-							column.append(cell);
-						}
-						weekColumns.append(column);
-					}
-
-					calendar.hidden = false;
-					if (legend) legend.hidden = false;
-					if (status) status.hidden = true;
+				monthLabels.replaceChildren();
+				monthLabels.style.setProperty("--week-count", String(layout.weeks.length));
+				for (const month of layout.months) {
+					const label = document.createElement("span");
+					label.textContent = month.name;
+					label.style.gridColumn = `${month.week + 1} / span 3`;
+					monthLabels.append(label);
 				}
+
+				weekColumns.replaceChildren();
+				weekColumns.setAttribute(
+					"aria-label",
+					`${count.toLocaleString("en")} contributions over the past year`,
+				);
+				for (const week of layout.weeks) {
+					const column = document.createElement("div");
+					column.className = "grid grid-rows-7 gap-1 max-lg:gap-0.5";
+					column.append(...week.days.map(createDayCell));
+					weekColumns.append(column);
+				}
+
+				calendar.hidden = false;
+				legend.hidden = false;
+				status.hidden = true;
 			} catch {
-				showUnavailable();
+				if (!this.isConnected) return;
+				status.textContent = "Contribution activity is unavailable right now.";
 			} finally {
 				window.clearTimeout(timeout);
 			}
-		};
+		}
+	}
 
-		void loadActivity();
+	if (!customElements.get("github-activity")) {
+		customElements.define("github-activity", GitHubActivity);
 	}
 </script>

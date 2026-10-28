@@ -4,6 +4,14 @@ export interface ContributionDay {
 	level: number;
 }
 
+export const CONTRIBUTION_LEVEL_CLASSES = [
+	"bg-line/50",
+	"bg-accent/25",
+	"bg-accent/45",
+	"bg-accent/70",
+	"bg-accent",
+];
+
 export function calendarLayout(days: ContributionDay[]) {
 	if (!days.length) return { weeks: [], months: [], longestStreak: null };
 

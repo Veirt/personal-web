@@ -1,6 +1,6 @@
 # veirt's website
 
-A small, static personal portfolio built with Astro. Astro components and Markdown content become plain HTML at build time; there are no client-side UI frameworks or hydrated components. The small `/site.js` file only handles the light/dark toggle.
+A small, static personal portfolio built with Astro. Astro components and Markdown content become plain HTML at build time; there are no client-side UI frameworks or hydrated components. Small browser scripts handle the light/dark toggle and live GitHub and Last.fm data.
 
 ## Development
 
@@ -21,6 +21,6 @@ Open <http://localhost:9000/>. Build the static site with `bun run build`; outpu
 
 ## GitHub activity
 
-The homepage fetches a contribution calendar at **build time**, so no GitHub requests are made from a visitor's browser. If the calendar service is unavailable, the page falls back to a link to the GitHub profile.
+The homepage fetches a contribution calendar in the browser from the public GitHub Contributions API. If the service is unavailable, the page shows a short fallback message.
 
 The calendar shows GitHub contributions, not only commits.

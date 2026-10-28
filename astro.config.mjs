@@ -5,6 +5,9 @@ export default defineConfig({
 	site: "https://veirt.is-a.dev",
 	output: "static",
 	trailingSlash: "always",
+	prefetch: {
+		defaultStrategy: "hover",
+	},
 	vite: {
 		plugins: [tailwindcss()],
 	},
