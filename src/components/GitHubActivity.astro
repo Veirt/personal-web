@@ -113,6 +113,14 @@ import { CONTRIBUTION_LEVEL_CLASSES } from "../lib/github";
 		contributions: ContributionDay[];
 	};
 
+	type CachedActivity = {
+		storedAt: number;
+		payload: ContributionResponse;
+	};
+
+	const CACHE_KEY = "github-activity:v1";
+	const CACHE_TTL = 60 * 60 * 1000;
+
 	const dateFormat = new Intl.DateTimeFormat("en", {
 		month: "short",
 		day: "numeric",
@@ -131,6 +139,32 @@ import { CONTRIBUTION_LEVEL_CLASSES } from "../lib/github";
 		return cell;
 	}
 
+	function readCache(): CachedActivity | null {
+		try {
+			const raw = localStorage.getItem(CACHE_KEY);
+			if (!raw) return null;
+
+			const cached = JSON.parse(raw) as CachedActivity;
+			if (
+				typeof cached?.storedAt !== "number" ||
+				!Array.isArray(cached.payload?.contributions) ||
+				cached.payload.contributions.length === 0
+			) {
+				return null;
+			}
+
+			return cached;
+		} catch {
+			return null;
+		}
+	}
+
+	function writeCache(payload: ContributionResponse) {
+		try {
+			localStorage.setItem(CACHE_KEY, JSON.stringify({ storedAt: Date.now(), payload }));
+		} catch {}
+	}
+
 	class GitHubActivity extends HTMLElement {
 		private controller?: AbortController;
 
@@ -142,7 +176,7 @@ import { CONTRIBUTION_LEVEL_CLASSES } from "../lib/github";
 			this.controller?.abort();
 		}
 
-		private async load() {
+		private render(payload: ContributionResponse) {
 			const total = this.querySelector<HTMLElement>("[data-contribution-total]")!;
 			const streak = this.querySelector<HTMLElement>("[data-contribution-streak]")!;
 			const streakDays = this.querySelector<HTMLElement>("[data-streak-days]")!;
@@ -151,6 +185,51 @@ import { CONTRIBUTION_LEVEL_CLASSES } from "../lib/github";
 			const monthLabels = this.querySelector<HTMLElement>("[data-contribution-months]")!;
 			const weekColumns = this.querySelector<HTMLElement>("[data-contribution-weeks]")!;
 			const legend = this.querySelector<HTMLElement>("[data-contribution-legend]")!;
+
+			const layout = calendarLayout(payload.contributions);
+			const count =
+				payload.total?.lastYear ?? payload.contributions.reduce((sum, day) => sum + day.count, 0);
+
+			total.textContent = count.toLocaleString("en");
+			if (layout.longestStreak !== null) {
+				streakDays.textContent = String(layout.longestStreak);
+				streak.hidden = false;
+			}
+
+			monthLabels.replaceChildren();
+			monthLabels.style.setProperty("--week-count", String(layout.weeks.length));
+			for (const month of layout.months) {
+				const label = document.createElement("span");
+				label.textContent = month.name;
+				label.style.gridColumn = `${month.week + 1} / span 3`;
+				monthLabels.append(label);
+			}
+
+			weekColumns.replaceChildren();
+			weekColumns.setAttribute(
+				"aria-label",
+				`${count.toLocaleString("en")} contributions over the past year`,
+			);
+			for (const week of layout.weeks) {
+				const column = document.createElement("div");
+				column.className = "grid grid-rows-7 gap-1 max-lg:gap-0.5";
+				column.append(...week.days.map(createDayCell));
+				weekColumns.append(column);
+			}
+
+			calendar.hidden = false;
+			legend.hidden = false;
+			status.hidden = true;
+		}
+
+		private async load() {
+			const status = this.querySelector<HTMLElement>("[data-contribution-status]")!;
+			const cached = readCache();
+
+			if (cached) {
+				this.render(cached.payload);
+				if (Date.now() - cached.storedAt < CACHE_TTL) return;
+			}
 
 			const controller = new AbortController();
 			this.controller = controller;
@@ -161,7 +240,6 @@ import { CONTRIBUTION_LEVEL_CLASSES } from "../lib/github";
 				endpoint.searchParams.set("y", "last");
 
 				const response = await fetch(endpoint, {
-					cache: "no-store",
 					headers: { Accept: "application/json" },
 					signal: controller.signal,
 				});
@@ -170,42 +248,10 @@ import { CONTRIBUTION_LEVEL_CLASSES } from "../lib/github";
 				const payload = (await response.json()) as ContributionResponse;
 				if (!payload.contributions.length) throw new Error("No activity days returned");
 
-				const layout = calendarLayout(payload.contributions);
-				const count =
-					payload.total?.lastYear ?? payload.contributions.reduce((sum, day) => sum + day.count, 0);
-
-				total.textContent = count.toLocaleString("en");
-				if (layout.longestStreak !== null) {
-					streakDays.textContent = String(layout.longestStreak);
-					streak.hidden = false;
-				}
-
-				monthLabels.replaceChildren();
-				monthLabels.style.setProperty("--week-count", String(layout.weeks.length));
-				for (const month of layout.months) {
-					const label = document.createElement("span");
-					label.textContent = month.name;
-					label.style.gridColumn = `${month.week + 1} / span 3`;
-					monthLabels.append(label);
-				}
-
-				weekColumns.replaceChildren();
-				weekColumns.setAttribute(
-					"aria-label",
-					`${count.toLocaleString("en")} contributions over the past year`,
-				);
-				for (const week of layout.weeks) {
-					const column = document.createElement("div");
-					column.className = "grid grid-rows-7 gap-1 max-lg:gap-0.5";
-					column.append(...week.days.map(createDayCell));
-					weekColumns.append(column);
-				}
-
-				calendar.hidden = false;
-				legend.hidden = false;
-				status.hidden = true;
+				writeCache(payload);
+				this.render(payload);
 			} catch {
-				if (!this.isConnected) return;
+				if (!this.isConnected || cached) return;
 				status.textContent = "Contribution activity is unavailable right now.";
 			} finally {
 				window.clearTimeout(timeout);
