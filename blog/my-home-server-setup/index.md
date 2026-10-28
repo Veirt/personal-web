@@ -5,8 +5,8 @@ title: My Home Server Setup
 description: A look at my home server setup. I share what hardware I use and the different services I run for media, backups, and other tasks.
 date: 2024-06-29
 tags: ["homelab", "server", "docker", "monitoring"]
-og_image: /blog/my-home-server-setup/orangepi.jpg
-cover_image: /assets/my-home-server-setup-orangepi.webp
+og_image: ./orangepi.jpg
+cover_image: ./orangepi.jpg
 ---
 
 Hey! This is my first blog post. I've been down the home server and self-hosted
@@ -14,7 +14,7 @@ rabbit hole for 2 years now. I started this hobby in July 2022, with
 [Orange Pi Zero 2](http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/details/Orange-Pi-Zero-2.html)
 as my first server.
 
-<img width="700" src="/assets/my-home-server-setup-orangepi.webp" alt="Orange Pi Zero 2" />
+![Orange Pi Zero 2](./orangepi.jpg)
 
 I bought Zero 2 as the alternative for Raspberry Pi 4, because it was too
 overpriced back then. Long story short, in October 2022, I decided to buy a new
@@ -32,7 +32,7 @@ worth it for me.
 This is what my home server looks like now. I've been using the EliteDesk unit
 for almost 2 years, I also reuse my old gaming laptop as a server.
 
-<img src="/assets/my-home-server-setup-server-now.webp" alt="My Server (Now)" />
+![My Server (Now)](./server-now.jpg)
 
 These are the specification of the machines I'm running:
 
@@ -67,7 +67,7 @@ machines.
 Here is what my
 [self-made home server dashboard](https://github.com/veirt/vesta) looks like:
 
-<img src="/assets/my-home-server-setup-dashboard.webp" alt="Home Server Dashboard" />
+![Home Server Dashboard](./dashboard.png)
 
 There are quite a few services, aren't there? I will explain what all of those
 services/applications do, starting from the top-left.

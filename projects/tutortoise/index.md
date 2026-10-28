@@ -7,7 +7,7 @@ icon: /assets/project-icons/tutortoise.svg
 github_url: https://github.com/Tutortoise
 technologies: ["TypeScript", "Express.js", "PostgreSQL"]
 date: 2024-12-12
-screenshot: /assets/tutortoise-pitchdeck.webp
+screenshot_image: ./pitchdeck.png
 ---
 
 Tutortoise is a platform designed to connect learners with the right tutors —
@@ -24,4 +24,4 @@ Mobile Development, and Cloud Computing learning paths. It was one of the most
 cross-functional teams I’ve worked with, and I learned a lot from building
 something meaningful together from scratch.
 
-<img alt="Infrastructure" src="/assets/tutortoise-infrastructure.webp" />
+![Tutortoise backend infrastructure diagram](./infrastructure.png)

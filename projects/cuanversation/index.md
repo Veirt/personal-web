@@ -7,5 +7,5 @@ icon: /assets/project-icons/cuanversation.svg
 technologies: ["Go", "PostgreSQL", "Redis", "RabbitMQ", "Azure", "Prometheus", "Grafana"]
 github_url: https://github.com/cuanversation
 date: 2025-11-01
-screenshot: /assets/cuanversation-screenshot.webp
+screenshot_image: ./screenshot.png
 ---

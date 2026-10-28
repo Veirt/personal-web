@@ -7,7 +7,7 @@ icon: /assets/project-icons/dnutils.svg
 github_url: https://github.com/Veirt/dnutils
 technologies: ["Rust"]
 date: 2022-04-11
-screenshot: /assets/dnutils-screenshot.webp
+screenshot_image: ./screenshot.png
 ---
 
 **dnutils** is a bunch of command-line tools I made for modding and poking

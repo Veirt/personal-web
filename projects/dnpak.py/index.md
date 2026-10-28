@@ -7,7 +7,7 @@ icon: /assets/project-icons/dnpak-py.svg
 github_url: https://pypi.org/project/dnpak.py
 technologies: ["Python"]
 date: 2021-09-30
-screenshot: /assets/dnpak-py-screenshot.webp
+screenshot_image: ./screenshot.png
 ---
 
 > My first reverse engineering library. Originally written in Python and now

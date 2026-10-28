@@ -7,7 +7,7 @@ icon: /assets/project-icons/vesta.svg
 github_url: https://github.com/Veirt/Vesta
 technologies: ["Rust", "Axum", "TailwindCSS"]
 date: 2024-08-16
-screenshot: /assets/vesta-screenshot.webp
+screenshot_image: ./screenshot.png
 ---
 
 Vesta is a minimal server dashboard I made to monitor my home server.

@@ -1,6 +1,8 @@
 ---
 import { getCollection, render } from "astro:content";
+import { Image } from "astro:assets";
 import { formatDate } from "../../lib/content";
+import { absoluteUrl, SITE_URL } from "../../lib/seo";
 import Breadcrumb from "../../components/Breadcrumb.astro";
 import SiteLayout from "../../layouts/SiteLayout.astro";
 
@@ -13,6 +15,33 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 const wordCount = post.body?.trim().split(/\s+/).length ?? 0;
 const readingMinutes = Math.max(1, Math.ceil(wordCount / 220));
+const site = Astro.site ?? new URL(SITE_URL);
+const canonical = absoluteUrl(Astro.url.pathname, site);
+const coverImage = post.data.cover_image ? absoluteUrl(post.data.cover_image.src, site) : undefined;
+const articleSchema = {
+	"@type": "BlogPosting",
+	"@id": `${canonical}#article`,
+	url: canonical,
+	headline: post.data.title,
+	description: post.data.description,
+	inLanguage: "en",
+	datePublished: post.data.date.toISOString(),
+	author: { "@id": `${site.href}#person` },
+	publisher: { "@id": `${site.href}#person` },
+	mainEntityOfPage: { "@id": `${canonical}#webpage` },
+	articleSection: "Notes",
+	keywords: post.data.tags,
+	...(coverImage ? { image: coverImage } : {}),
+};
+const breadcrumbSchema = {
+	"@type": "BreadcrumbList",
+	"@id": `${canonical}#breadcrumb`,
+	itemListElement: [
+		{ "@type": "ListItem", position: 1, name: "Home", item: site.href },
+		{ "@type": "ListItem", position: 2, name: "Notes", item: absoluteUrl("/blog/", site) },
+		{ "@type": "ListItem", position: 3, name: post.data.title, item: canonical },
+	],
+};
 ---
 
 <SiteLayout
@@ -20,6 +49,11 @@ const readingMinutes = Math.max(1, Math.ceil(wordCount / 220));
 	description={post.data.description}
 	active="blog"
 	type="article"
+	socialImage={post.data.cover_image?.src}
+	socialImageAlt={`${post.data.title} cover`}
+	publishedTime={post.data.date}
+	tags={post.data.tags}
+	structuredData={[articleSchema, breadcrumbSchema]}
 >
 	<article>
 		<Breadcrumb href="/blog/" label="all notes" />
@@ -41,6 +75,18 @@ const readingMinutes = Math.max(1, Math.ceil(wordCount / 220));
 				</div>
 			</div>
 		</header>
+		{post.data.cover_image && (
+			<figure class="mb-8 overflow-hidden rounded-2xl border border-line bg-paper-deep">
+				<Image
+					class="block h-auto w-full"
+					src={post.data.cover_image}
+					alt={`${post.data.title} cover`}
+					fetchpriority="high"
+					loading="eager"
+					decoding="async"
+				/>
+			</figure>
+		)}
 		<div class="markdown-content">
 			<Content />
 		</div>

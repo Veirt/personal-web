@@ -1,5 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
+import { Image } from "astro:assets";
+import { absoluteUrl, SITE_URL } from "../../lib/seo";
 import Breadcrumb from "../../components/Breadcrumb.astro";
 import SiteLayout from "../../layouts/SiteLayout.astro";
 
@@ -17,6 +19,46 @@ const currentIndex = projects.findIndex((item) => item.id === project.id);
 const previousProject = projects[currentIndex - 1];
 const nextProject = projects[currentIndex + 1];
 const hasBody = Boolean(project.body?.trim());
+const site = Astro.site ?? new URL(SITE_URL);
+const canonical = absoluteUrl(Astro.url.pathname, site);
+const screenshot = project.data.screenshot_image ?? project.data.screenshot;
+const projectImage = screenshot ?? project.data.icon;
+const projectImageUrl = projectImage
+	? absoluteUrl(typeof projectImage === "string" ? projectImage : projectImage.src, site)
+	: undefined;
+const socialImagePath = project.data.icon
+	? `/assets/social-cards/${project.data.icon.split("/").at(-1)?.replace(/\.svg$/, ".png")}`
+	: undefined;
+const projectSchema = {
+	"@type": "SoftwareSourceCode",
+	"@id": `${canonical}#software`,
+	name: project.data.title,
+	description: project.data.description,
+	url: canonical,
+	inLanguage: "en",
+	dateCreated: project.data.date.toISOString(),
+	author: { "@id": `${site.href}#person` },
+	keywords: project.data.technologies,
+	...(projectImageUrl ? { image: projectImageUrl } : {}),
+	...(project.data.github_url?.includes("github.com")
+		? { codeRepository: project.data.github_url }
+		: {}),
+	...(project.data.github_url ? { sameAs: [project.data.github_url] } : {}),
+};
+const breadcrumbSchema = {
+	"@type": "BreadcrumbList",
+	"@id": `${canonical}#breadcrumb`,
+	itemListElement: [
+		{ "@type": "ListItem", position: 1, name: "Home", item: site.href },
+		{
+			"@type": "ListItem",
+			position: 2,
+			name: "Projects",
+			item: absoluteUrl("/projects/", site),
+		},
+		{ "@type": "ListItem", position: 3, name: project.data.title, item: canonical },
+	],
+};
 ---
 
 <SiteLayout
@@ -24,6 +66,9 @@ const hasBody = Boolean(project.body?.trim());
 	description={project.data.description}
 	active="projects"
 	type="article"
+	socialImage={socialImagePath}
+	socialImageAlt={socialImagePath ? `${project.data.title} icon` : undefined}
+	structuredData={[projectSchema, breadcrumbSchema]}
 >
 	<article class="mx-auto max-w-5xl">
 		<Breadcrumb href="/projects/" label="all projects" />
@@ -64,10 +109,20 @@ const hasBody = Boolean(project.body?.trim());
 		<figure
 			class:list={[
 				"w-full min-w-0 overflow-hidden rounded-2xl border border-line bg-paper-deep p-4 max-sm:p-3",
-				!project.data.screenshot && "grid min-h-72 place-items-center",
+				!screenshot && "grid min-h-72 place-items-center",
 			]}
 		>
-			{project.data.screenshot ? (
+			{project.data.screenshot_image ? (
+				<Image
+					class="relative z-10 block h-auto w-full rounded-lg object-contain"
+					src={project.data.screenshot_image}
+					alt={`${project.data.title} in use`}
+					width={project.data.screenshot_width}
+					quality={project.data.screenshot_quality}
+					fetchpriority="high"
+					loading="eager"
+				/>
+			) : project.data.screenshot ? (
 				<img
 					class="relative z-10 block h-auto w-full rounded-lg object-contain"
 					src={project.data.screenshot}
@@ -78,7 +133,7 @@ const hasBody = Boolean(project.body?.trim());
 				<img
 					class="relative z-10 h-auto w-52"
 					src={project.data.icon ?? "/assets/project-icon-placeholder.svg"}
-					alt=""
+					alt={`${project.data.title} icon`}
 					fetchpriority="high"
 				/>
 			)}

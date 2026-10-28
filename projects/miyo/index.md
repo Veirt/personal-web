@@ -7,7 +7,7 @@ icon: /assets/project-icons/miyo.svg
 github_url: https://github.com/Veirt/miyo
 technologies: ["Svelte", "TypeScript", "Go", "Fiber"]
 date: 2024-07-16
-screenshot: /assets/miyo-screenshot.webp
+screenshot_image: ./screenshot.png
 ---
 
 Miyo is a simple web interface I built for two popular image upscalers:

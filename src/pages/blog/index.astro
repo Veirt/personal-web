@@ -1,5 +1,6 @@
 ---
 import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
 import SiteLayout from "../../layouts/SiteLayout.astro";
 
 const posts = (await getCollection("blog")).sort(
@@ -130,11 +131,12 @@ const posts = (await getCollection("blog")).sort(
 								class="col-start-2 row-start-1 h-44 w-full rotate-1 overflow-hidden rounded-xl border border-line bg-paper-deep shadow-sm transition-transform duration-200 group-hover:rotate-0 max-lg:col-start-1 max-lg:row-start-2 max-lg:h-40 max-sm:h-36"
 								aria-hidden="true"
 							>
-								<img
+								<Image
 									class="size-full object-cover grayscale transition-transform duration-300 group-hover:scale-105"
 									src={post.data.cover_image}
-									alt=""
+									alt={`${post.data.title} cover`}
 									loading="lazy"
+									decoding="async"
 								/>
 							</div>
 						)}

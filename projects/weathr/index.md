@@ -7,7 +7,9 @@ icon: /assets/project-icons/weathr.svg
 technologies: ["Rust"]
 github_url: https://github.com/veirt/weathr
 date: 2026-02-01
-screenshot: /assets/weathr-demo.webp
+screenshot_image: ./demo.gif
+screenshot_width: 800
+screenshot_quality: 55
 ---
 
 weathr started from a simple place: I really like asciiquarium. When my nephew

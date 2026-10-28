@@ -6,6 +6,7 @@
 /_cache/
 /dist/
 /.astro/
+/public/assets/social-cards/
 
 # Local configuration and credentials
 .env

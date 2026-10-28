@@ -1,5 +1,7 @@
 ---
 import { ClientRouter } from "astro:transitions";
+import { SEO } from "astro-seo";
+import { absoluteUrl, SITE_URL, stringifyJsonLd, type JsonLd } from "../lib/seo";
 import "../styles/global.css";
 
 interface Props {
@@ -8,12 +10,75 @@ interface Props {
 	active?: "home" | "projects" | "blog" | "now";
 	type?: "website" | "article";
 	noIndex?: boolean;
+	socialImage?: string;
+	socialImageAlt?: string;
+	publishedTime?: Date;
+	modifiedTime?: Date;
+	tags?: string[];
+	structuredData?: JsonLd | JsonLd[];
 }
 
-const { title, description, active, type = "website", noIndex = false } = Astro.props;
-const canonical = new URL(Astro.url.pathname, Astro.site).href;
-const socialImage = new URL("/assets/og-image.png", Astro.site).href;
-const socialImageAlt = "A playful monochrome collage of the veirt homepage.";
+const {
+	title,
+	description,
+	active,
+	type = "website",
+	noIndex = false,
+	socialImage: socialImagePath,
+	socialImageAlt: socialImageAltProp,
+	publishedTime,
+	modifiedTime,
+	tags = [],
+	structuredData,
+} = Astro.props;
+const site = Astro.site ?? new URL(SITE_URL);
+const canonical = absoluteUrl(Astro.url.pathname, site);
+const fullTitle = `${title} · veirt`;
+const socialImage = absoluteUrl(socialImagePath ?? "/assets/og-image.png", site);
+const socialImageAlt = socialImageAltProp ?? "A playful monochrome collage of the veirt homepage.";
+const personId = `${site.href}#person`;
+const websiteId = `${site.href}#website`;
+const pageId = `${canonical}#webpage`;
+const pageSchema: JsonLd = {
+	"@type": "WebPage",
+	"@id": pageId,
+	url: canonical,
+	name: fullTitle,
+	description,
+	inLanguage: "en",
+	isPartOf: { "@id": websiteId },
+};
+const extraSchemas = structuredData
+	? Array.isArray(structuredData)
+		? structuredData
+		: [structuredData]
+	: [];
+const jsonLd = noIndex
+	? undefined
+	: {
+		"@context": "https://schema.org",
+		"@graph": [
+			{
+				"@type": "WebSite",
+				"@id": websiteId,
+				url: site.href,
+				name: "veirt",
+				description: "A small corner of the internet for software, experiments, and notes.",
+				inLanguage: "en",
+				publisher: { "@id": personId },
+			},
+			{
+				"@type": "Person",
+				"@id": personId,
+				name: "Veirt",
+				url: site.href,
+				sameAs: ["https://github.com/Veirt", "https://x.com/_veirt"],
+				knowsAbout: ["Rust", "TypeScript", "DevOps", "Self-hosting", "Web development"],
+			},
+			pageSchema,
+			...extraSchemas,
+		],
+		};
 const links = [
 	{ href: "/", label: "Home", index: "01", key: "home" },
 	{ href: "/projects/", label: "Projects", index: "02", key: "projects" },
@@ -25,30 +90,61 @@ const links = [
 <!doctype html>
 <html lang="en" data-theme="dark" class="min-w-80 scroll-smooth bg-paper font-sans antialiased">
 	<head>
-		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta name="theme-color" content="#111213" />
-		<meta name="robots" content={noIndex ? "noindex, nofollow" : "index, follow"} />
-		<meta name="description" content={description} />
-		<meta name="author" content="Veirt" />
-		{!noIndex && <link rel="canonical" href={canonical} />}
-		<link rel="icon" href="/favicon.png" type="image/png" />
-		<link rel="manifest" href="/site.webmanifest" />
-		<link rel="alternate" type="application/rss+xml" title="My blog" href="/feed.xml" />
-		<link rel="preconnect" href="https://github.com" />
-		<title>{title} · veirt</title>
-		<meta property="og:type" content={type} />
-		<meta property="og:title" content={`${title} · veirt`} />
-		<meta property="og:description" content={description} />
-		<meta property="og:url" content={canonical} />
-		<meta property="og:site_name" content="veirt" />
-		<meta property="og:image" content={socialImage} />
-		<meta property="og:image:width" content="1200" />
-		<meta property="og:image:height" content="630" />
-		<meta property="og:image:alt" content={socialImageAlt} />
-		<meta name="twitter:card" content="summary_large_image" />
-		<meta name="twitter:image" content={socialImage} />
-		<meta name="twitter:image:alt" content={socialImageAlt} />
+		<SEO
+			title={fullTitle}
+			charset="UTF-8"
+			description={description}
+			canonical={noIndex ? null : canonical}
+			noindex={noIndex}
+			nofollow={noIndex}
+			robotsExtras={noIndex ? undefined : "max-image-preview:large, max-snippet:-1, max-video-preview:-1"}
+			openGraph={{
+				basic: { title: fullTitle, type, image: socialImage, url: canonical },
+				optional: { description, locale: "en_US", siteName: "veirt" },
+				image: { alt: socialImageAlt, width: 1200, height: 630, type: "image/png" },
+				...(type === "article"
+					? {
+							article: {
+								publishedTime: publishedTime?.toISOString(),
+								modifiedTime: modifiedTime?.toISOString(),
+								authors: [personId],
+								section: "Software and notes",
+								tags,
+							},
+						}
+					: {}),
+			}}
+			twitter={{
+				card: "summary_large_image",
+				site: "@_veirt",
+				creator: "@_veirt",
+				title: fullTitle,
+				description,
+				image: socialImage,
+				imageAlt: socialImageAlt,
+			}}
+			extend={{
+				link: [
+					{ rel: "icon", href: "/favicon.png", type: "image/png" },
+					{ rel: "manifest", href: "/site.webmanifest" },
+					{ rel: "alternate", type: "application/rss+xml", title: "veirt notes", href: "/feed.xml" },
+					{ rel: "sitemap", href: "/sitemap-index.xml" },
+					{ rel: "preconnect", href: "https://github.com" },
+				],
+				meta: [
+					{ name: "author", content: "Veirt" },
+					{
+						name: "googlebot",
+						content: noIndex
+							? "noindex, nofollow"
+							: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+					},
+					{ name: "theme-color", content: "#111213" },
+				],
+			}}
+		/>
+		{jsonLd && <script type="application/ld+json" set:html={stringifyJsonLd(jsonLd)} />}
 		<script is:inline>
 			try {
 				const theme = localStorage.getItem("theme");

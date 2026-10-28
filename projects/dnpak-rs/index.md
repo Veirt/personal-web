@@ -7,7 +7,7 @@ icon: /assets/project-icons/dnpak-rs.svg
 github_url: https://crates.io/crates/dnpak
 technologies: ["Rust"]
 date: 2022-04-11
-screenshot: /assets/dnpak-rs-screenshot.webp
+screenshot_image: ./screenshot.png
 ---
 
 **dnpak-rs** is a Rust library for reading and writing Dragon Nest `.pak` files.

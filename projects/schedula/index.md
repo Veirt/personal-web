@@ -7,7 +7,7 @@ icon: /assets/project-icons/schedula.svg
 github_url: https://github.com/Veirt/schedula
 technologies: ["Svelte", "TypeScript", "SQLite", "Hono"]
 date: 2024-04-13
-screenshot: /assets/schedula-screenshot.webp
+screenshot_image: ./screenshot.png
 ---
 
 I built Schedula to manage my class schedule and avoid the usual last-minute
