@@ -1,6 +1,7 @@
 ---
 import GitHubActivity from "../components/GitHubActivity.astro";
 import ElsewhereTile from "../components/ElsewhereTile.astro";
+import ConstellationGame from "../components/ConstellationGame.astro";
 import HomeIdentity from "../components/HomeIdentity.astro";
 import LatelyTile from "../components/LatelyTile.astro";
 import NowListening from "../components/NowListening.astro";
@@ -15,8 +16,9 @@ const bottomTileSize = "min-h-48 max-sm:min-h-52";
 	description="I make small tools, explore odd ideas, and share software side quests from my corner of the web."
 	active="home"
 >
-	<div class="home-page">
-		<section class="mb-12 grid gap-3" aria-label="A few things about me">
+	<div class="home-page my-auto">
+		<section class="grid gap-3" aria-label="A few things about me">
+			<ConstellationGame />
 			<div class="grid grid-cols-[1.1fr_0.95fr] gap-3 max-sm:grid-cols-1">
 				<HomeIdentity className={topTileSize} />
 				<NowListening className={topTileSize} />
@@ -26,6 +28,5 @@ const bottomTileSize = "min-h-48 max-sm:min-h-52";
 				<ElsewhereTile className={`col-span-3 max-sm:col-span-1 ${bottomTileSize}`} />
 			</div>
 		</section>
-		<GitHubActivity />
 	</div>
 </SiteLayout>

@@ -42,6 +42,12 @@
 	-webkit-font-smoothing: antialiased;
 }
 
+.main--home {
+	display: flex;
+	flex-direction: column;
+	padding-block: 1rem;
+}
+
 html {
 	min-width: 320px;
 	background: var(--paper);

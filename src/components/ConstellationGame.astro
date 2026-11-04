@@ -1,0 +1,310 @@
+---
+// Kept at the original import path; a quiet sky with an optional make-a-wish interaction.
+---
+
+<constellation-sky
+	class="constellation-sky relative block h-56 min-w-0 overflow-hidden rounded-3xl border border-line bg-paper-deep"
+>
+	<button class="sky-wish absolute inset-0 z-10 size-full cursor-pointer rounded-[inherit]" type="button" aria-label="Make a wish: create a constellation" title="Make a wish"></button>
+	<svg class="size-full" viewBox="0 0 1000 224" focusable="false" aria-hidden="true">
+		<defs>
+			<radialGradient id="constellation-halo">
+				<stop stop-color="currentColor" stop-opacity="0.2" />
+				<stop offset="0.35" stop-color="currentColor" stop-opacity="0.06" />
+				<stop offset="1" stop-color="currentColor" stop-opacity="0" />
+			</radialGradient>
+			<linearGradient id="constellation-trail" x1="0" y1="0" x2="1" y2="0">
+				<stop stop-color="currentColor" stop-opacity="0" />
+				<stop offset="1" stop-color="currentColor" stop-opacity="0.6" />
+			</linearGradient>
+		</defs>
+		<!-- A still fallback also keeps the decoration visible without JavaScript. -->
+		<g data-sky>
+			<path d="M110 130 190 65 265 112 350 92 M570 145 650 85 735 120 850 60" fill="none" stroke="currentColor" stroke-opacity="0.16" />
+			{[[110,130],[190,65],[265,112],[350,92],[570,145],[650,85],[735,120],[850,60]].map(([cx,cy]) => <circle cx={cx} cy={cy} r="2" fill="currentColor" />)}
+		</g>
+	</svg>
+</constellation-sky>
+
+<script>
+	const NS = "http://www.w3.org/2000/svg";
+
+	class ConstellationSky extends HTMLElement {
+		private observer?: ResizeObserver;
+		private visibilityObserver?: IntersectionObserver;
+		private inView = false;
+		private wishes = new Map<Animation, SVGGElement>();
+		private lastWishAt = -Infinity;
+		private syncMotion = () => {
+			const visible = this.inView && !document.hidden;
+			this.classList.toggle("is-visible", visible);
+			for (const animation of this.wishes.keys()) {
+				if (visible) animation.play();
+				else animation.pause();
+			}
+		};
+		private seed = Math.random() * 0xffffffff >>> 0;
+		private lastWidth = 0;
+
+		connectedCallback() {
+			this.querySelector("button")?.addEventListener("click", this.makeWish);
+			this.observer = new ResizeObserver(([entry]) => {
+				const width = Math.round(entry.contentRect.width);
+				if (width > 0 && width !== this.lastWidth) {
+					this.lastWidth = width;
+					this.draw(width, entry.contentRect.height);
+				}
+			});
+			this.observer.observe(this);
+			this.visibilityObserver = new IntersectionObserver(([entry]) => {
+				this.inView = entry.isIntersecting;
+				this.syncMotion();
+			});
+			this.visibilityObserver.observe(this);
+			document.addEventListener("visibilitychange", this.syncMotion);
+		}
+
+		disconnectedCallback() {
+			this.querySelector("button")?.removeEventListener("click", this.makeWish);
+			this.finishWish();
+			this.observer?.disconnect();
+			this.visibilityObserver?.disconnect();
+			document.removeEventListener("visibilitychange", this.syncMotion);
+		}
+
+		private finishWish = () => {
+			for (const [animation, group] of this.wishes) {
+				animation.onfinish = null;
+				animation.cancel();
+				group.remove();
+			}
+			this.wishes.clear();
+		};
+
+		private makeWish = (event: MouseEvent) => {
+			const now = performance.now();
+			// Ignore excess input instead of queuing it or replacing a constellation mid-fade.
+			if (this.wishes.size >= 2 || now - this.lastWishAt < 900) return;
+			const svg = this.querySelector("svg")!;
+			const rect = svg.getBoundingClientRect();
+			const x = event.detail === 0 ? rect.width / 2 : event.clientX - rect.left;
+			const y = event.detail === 0 ? rect.height / 2 : event.clientY - rect.top;
+			const templates = [...this.querySelectorAll<SVGGElement>(".sky-constellation")];
+			const template = templates[Math.floor(Math.random() * templates.length)];
+			if (!template) return;
+			const box = template.getBBox();
+			const shape = template.cloneNode(true) as SVGGElement;
+			// Reuse a small chain, without copying its repeating animations.
+			shape.removeAttribute("class");
+			shape.removeAttribute("style");
+			shape.querySelectorAll(".sky-glimmer").forEach(star => {
+				star.removeAttribute("class");
+				star.removeAttribute("style");
+			});
+			const scale = 0.75 + Math.random() * 0.2;
+			const halfWidth = box.width * scale / 2;
+			const halfHeight = box.height * scale / 2;
+			// Keep the whole shape visible for taps near the rounded edges.
+			const cx = Math.max(halfWidth + 10, Math.min(rect.width - halfWidth - 10, x));
+			const cy = Math.max(halfHeight + 10, Math.min(rect.height - halfHeight - 10, y));
+			shape.setAttribute("transform", `scale(${scale}) translate(${-box.x - box.width / 2} ${-box.y - box.height / 2})`);
+			const group = document.createElementNS(NS, "g");
+			group.setAttribute("class", "sky-spawn");
+			group.setAttribute("transform", `translate(${cx} ${cy})`);
+			group.append(shape);
+			svg.append(group);
+			const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+			const animation = group.animate([
+				{ opacity: 0 },
+				{ opacity: 0.9, offset: 0.2 },
+				{ opacity: 0.9, offset: 0.55 },
+				{ opacity: 0 },
+			], { duration: reduced ? 1800 : 4800, easing: "ease-in-out" });
+			this.lastWishAt = now;
+			this.wishes.set(animation, group);
+			animation.onfinish = () => {
+				group.remove();
+				animation.cancel();
+				this.wishes.delete(animation);
+			};
+			this.syncMotion();
+		};
+
+		private draw(width: number, height: number) {
+			this.finishWish();
+			const svg = this.querySelector("svg")!;
+			const sky = this.querySelector("[data-sky]")!;
+			svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
+			// Replay the same seed on resize, so the sky doesn't shuffle as the layout changes.
+			let seed = this.seed;
+			const random = () => {
+				seed = (Math.imul(1664525, seed) + 1013904223) >>> 0;
+				return seed / 0x100000000;
+			};
+			// Pick before the background stars so the count stays stable at a given width.
+			const maxClusters = Math.max(1, Math.min(5, Math.floor(width / 170)));
+			const clusters = 1 + Math.floor(random() * maxClusters);
+			const fragment = document.createDocumentFragment();
+			const add = (tag: "circle" | "path" | "g", attrs: Record<string, string | number>, parent: Node = fragment) => {
+				const element = document.createElementNS(NS, tag);
+				for (const [key, value] of Object.entries(attrs)) element.setAttribute(key, String(value));
+				parent.appendChild(element);
+				return element;
+			};
+			const shimmer = (duration: number, parent: Node = fragment, constellation = false) =>
+				add("g", {
+					class: constellation ? "sky-constellation" : "sky-glimmer",
+					style: `animation-duration:${duration}s;animation-delay:-${random() * duration}s`,
+				}, parent);
+			const dot = (x: number, y: number, radius: number, opacity: number, parent: Node = fragment) =>
+				add("circle", { cx: x, cy: y, r: radius, fill: "currentColor", opacity }, parent);
+
+			// Each distant star fades independently, with a different duration and phase.
+			for (let i = 0; i < Math.floor(width / 16); i++) {
+				const parent = shimmer(6 + random() * 12);
+				const x = 14 + random() * (width - 28);
+				const y = 16 + random() * (height - 32);
+				// Bias toward distant pinpricks, with just a few closer, brighter stars.
+				const brightness = random() ** 3;
+				if (brightness > 0.85) {
+					add("circle", { cx: x, cy: y, r: 8, fill: "url(#constellation-halo)", opacity: 0.6 }, parent);
+				}
+				dot(x, y, 0.35 + brightness * 0.95, 0.14 + brightness * 0.55, parent);
+			}
+
+			const centers: { x: number; y: number }[] = [];
+			for (let c = 0; c < clusters; c++) {
+				// Scatter the centres in two dimensions, with breathing room between them.
+				const radiusX = Math.min(width * 0.21, 55 + random() * 48);
+				const radiusY = 16 + random() * 18;
+				const angle = (random() - 0.5) * 1.3;
+				const cos = Math.cos(angle);
+				const sin = Math.sin(angle);
+				const extentX = Math.abs(cos) * radiusX + Math.abs(sin) * radiusY;
+				const extentY = Math.abs(sin) * radiusX + Math.abs(cos) * radiusY;
+				let center = { x: width / 2, y: height / 2 };
+				let bestClearance = -1;
+				for (let attempt = 0; attempt < 24; attempt++) {
+					const candidate = {
+						x: extentX + 18 + random() * Math.max(0, width - extentX * 2 - 36),
+						y: extentY + 16 + random() * Math.max(0, height - extentY * 2 - 32),
+					};
+					const clearance = Math.min(...centers.map(p => Math.hypot(p.x - candidate.x, p.y - candidate.y)));
+					if (clearance > bestClearance) {
+						center = candidate;
+						bestClearance = clearance;
+					}
+					if (clearance > radiusX * 2 + 24) break;
+				}
+				centers.push(center);
+				const group = shimmer(16 + random() * 16, fragment, true);
+				const count = 4 + Math.floor(random() * 3);
+				// A simple chain, like the original, rotated around its scattered centre.
+				const points = Array.from({ length: count }, (_, i) => {
+					const x = (i / (count - 1) * 2 - 1) * radiusX;
+					const y = (random() * 2 - 1) * radiusY;
+					return {
+						x: center.x + x * cos - y * sin,
+						y: center.y + x * sin + y * cos,
+					};
+				});
+				points.slice(1).forEach((p, i) => {
+					add("path", {
+						d: `M${points[i].x} ${points[i].y}L${p.x} ${p.y}`,
+						fill: "none", stroke: "currentColor",
+						"stroke-width": 0.7, "stroke-opacity": 0.08 + random() * 0.14,
+					}, group);
+				});
+				points.forEach((p, i) => {
+					const bright = i === 0 || random() > 0.65;
+					const star = shimmer(5 + random() * 8, group);
+					if (bright) {
+						add("circle", { cx: p.x, cy: p.y, r: 12 + random() * 6, fill: "url(#constellation-halo)" }, star);
+					}
+					dot(p.x, p.y, bright ? 1.7 : 1 + random() * 0.4, bright ? 0.9 : 0.6, star);
+					if (c === 0 && i === 0) {
+						add("circle", { cx: p.x, cy: p.y, r: 1.8, fill: "var(--accent)", opacity: 0.8 }, star);
+					}
+				});
+			}
+			// One tiny streak, mostly dormant. CSS moves it for about a second per cycle.
+			const origin = `translate(${40 + random() * Math.max(0, width - 220)} ${30 + random() * 65})`;
+			const meteorOrigin = add("g", {
+				transform: origin,
+			});
+			const meteor = add("g", {
+				class: "sky-meteor",
+				style: `animation-duration:${25 + random() * 25}s`,
+			}, meteorOrigin);
+			add("path", {
+				d: "M-38 -13L0 0", fill: "none", stroke: "url(#constellation-trail)",
+				"stroke-width": 1, "stroke-linecap": "round",
+			}, meteor);
+			dot(0, 0, 1, 0.7, meteor);
+			sky.replaceChildren(fragment);
+		}
+	}
+
+	if (!customElements.get("constellation-sky")) {
+		customElements.define("constellation-sky", ConstellationSky);
+	}
+</script>
+
+<style>
+	.constellation-sky {
+		color: var(--ink);
+		user-select: none;
+	}
+	.constellation-sky :global(.sky-glimmer),
+	.constellation-sky :global(.sky-constellation),
+	.constellation-sky :global(.sky-meteor) {
+		animation: sky-glimmer 10s ease-in-out infinite;
+		animation-play-state: paused;
+	}
+
+	.constellation-sky :global(.sky-constellation) {
+		animation-name: sky-emerge;
+	}
+
+	.constellation-sky :global(.sky-meteor) {
+		opacity: 0;
+		animation-name: sky-shoot;
+		animation-timing-function: linear;
+	}
+
+	.constellation-sky.is-visible :global(.sky-glimmer),
+	.constellation-sky.is-visible :global(.sky-constellation),
+	.constellation-sky.is-visible :global(.sky-meteor) {
+		animation-play-state: running;
+	}
+
+	@keyframes sky-glimmer {
+		0%, 100% { opacity: 0; }
+		45%, 60% { opacity: 1; }
+	}
+
+	@keyframes sky-emerge {
+		0%, 100% { opacity: 0; }
+		25%, 60% { opacity: 1; }
+		85% { opacity: 0; }
+	}
+
+	@keyframes sky-shoot {
+		0%, 96% { opacity: 0; transform: translate(0, 0); }
+		96.5% { opacity: 0.65; }
+		99%, 100% { opacity: 0; transform: translate(120px, 41px); }
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.constellation-sky :global(.sky-glimmer),
+		.constellation-sky :global(.sky-constellation) {
+			animation: none;
+			opacity: 1;
+		}
+
+		.constellation-sky :global(.sky-meteor) {
+			animation: none;
+			display: none;
+		}
+	}
+</style>

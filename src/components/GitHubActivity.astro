@@ -1,107 +1,69 @@
----
-import { CONTRIBUTION_LEVEL_CLASSES } from "../lib/github";
----
-
-<github-activity class="mb-12 block max-sm:mb-10" aria-labelledby="activity-title" role="region">
-	<div class="mb-4 flex items-start justify-between gap-4">
-		<h2
-			class="m-0 text-3xl leading-tight font-extrabold tracking-tight max-sm:text-2xl"
-			id="activity-title"
-		>
-			GitHub activity
+<github-activity
+	class="relative block min-h-48 min-w-0 overflow-hidden rounded-3xl border border-line bg-paper-deep p-5 max-sm:p-4"
+	aria-labelledby="activity-title"
+	role="region"
+>
+	<div class="relative z-10 mb-4 flex min-h-7 items-center">
+		<h2 class="m-0 text-xl leading-tight font-extrabold tracking-tight" id="activity-title">
+			GitHub Contributions
 		</h2>
-		<svg
-			class="hidden h-20 w-44 shrink-0 text-muted opacity-70 md:block"
-			viewBox="0 0 180 80"
-			fill="none"
-			aria-hidden="true"
-		>
-			<g stroke="currentColor" stroke-linecap="round">
-				<ellipse
-					cx="94"
-					cy="41"
-					rx="74"
-					ry="24"
-					transform="rotate(-10 94 41)"
-					stroke-opacity="0.45"
-					stroke-width="0.8"
-				/>
-				<ellipse
-					cx="94"
-					cy="41"
-					rx="61"
-					ry="18"
-					transform="rotate(-4 94 41)"
-					stroke-opacity="0.3"
-					stroke-width="0.7"
-				/>
-				<ellipse
-					cx="94"
-					cy="41"
-					rx="45"
-					ry="12"
-					transform="rotate(-16 94 41)"
-					stroke-opacity="0.25"
-					stroke-width="0.7"
-				/>
-				<path d="M8 62c24-12 48-14 72-6s48 8 72-4" stroke-opacity="0.2" stroke-width="0.7" />
-				<path d="M18 10v6m-3-3h6" stroke-opacity="0.4" stroke-width="0.8" />
-			</g>
-			<g fill="currentColor">
-				<circle cx="34" cy="24" r="1.2" fill-opacity="0.5" />
-				<circle cx="146" cy="18" r="1" fill-opacity="0.4" />
-				<circle cx="158" cy="58" r="1.4" fill-opacity="0.45" />
-				<circle cx="64" cy="65" r="1" fill-opacity="0.35" />
-				<circle cx="112" cy="13" r="1.1" fill-opacity="0.4" />
-			</g>
-			<circle cx="146" cy="18" r="3.2" fill="var(--accent)" fill-opacity="0.8" />
-			<path d="M34 24l2.2 2.2L34 28.4l-2.2-2.2z" fill="var(--accent)" fill-opacity="0.7" />
-		</svg>
 	</div>
+	<svg
+		class="pointer-events-none absolute top-2 right-4 hidden h-20 w-36 text-muted opacity-70 md:block"
+		viewBox="0 0 180 80"
+		fill="none"
+		aria-hidden="true"
+	>
+		<g stroke="currentColor" stroke-linecap="round">
+			<ellipse
+				cx="94"
+				cy="41"
+				rx="74"
+				ry="24"
+				transform="rotate(-10 94 41)"
+				stroke-opacity="0.45"
+				stroke-width="0.8"
+			/>
+			<ellipse
+				cx="94"
+				cy="41"
+				rx="61"
+				ry="18"
+				transform="rotate(-4 94 41)"
+				stroke-opacity="0.3"
+				stroke-width="0.7"
+			/>
+			<ellipse
+				cx="94"
+				cy="41"
+				rx="45"
+				ry="12"
+				transform="rotate(-16 94 41)"
+				stroke-opacity="0.25"
+				stroke-width="0.7"
+			/>
+			<path d="M8 62c24-12 48-14 72-6s48 8 72-4" stroke-opacity="0.2" stroke-width="0.7" />
+			<path d="M18 10v6m-3-3h6" stroke-opacity="0.4" stroke-width="0.8" />
+		</g>
+		<g fill="currentColor">
+			<circle cx="34" cy="24" r="1.2" fill-opacity="0.5" />
+			<circle cx="146" cy="18" r="1" fill-opacity="0.4" />
+			<circle cx="158" cy="58" r="1.4" fill-opacity="0.45" />
+			<circle cx="64" cy="65" r="1" fill-opacity="0.35" />
+			<circle cx="112" cy="13" r="1.1" fill-opacity="0.4" />
+		</g>
+		<circle cx="146" cy="18" r="3.2" fill="var(--accent)" fill-opacity="0.8" />
+		<path d="M34 24l2.2 2.2L34 28.4l-2.2-2.2z" fill="var(--accent)" fill-opacity="0.7" />
+	</svg>
 
-	<div class="min-w-0">
-		<div class="mb-4 flex items-end justify-between gap-4 max-sm:mb-3 max-sm:flex-col max-sm:items-start max-sm:gap-1">
-			<div class="flex flex-wrap items-baseline gap-x-3 gap-y-2">
-				<strong
-					class="font-mono text-4xl leading-none font-medium tracking-tight text-accent sm:text-5xl"
-					data-contribution-total
-				>
-					-
-				</strong>
-				<span class="font-mono text-xs text-muted">contributions in the past year</span>
-			</div>
-			<p class="font-mono text-xs whitespace-nowrap text-muted" data-contribution-streak hidden>
-				longest streak <b class="font-semibold text-ink" data-streak-days></b> days
-			</p>
-		</div>
-
+	<div class="relative z-10 min-w-0">
 		<p class="my-3 text-sm text-muted" data-contribution-status aria-live="polite">
 			Loading contribution activity…
 		</p>
 		<div class="w-full overflow-x-auto" data-contribution-calendar hidden>
-			<p class="mb-2 hidden font-mono text-xs text-faint max-sm:block">
-				Swipe to see the full year <span aria-hidden="true">→</span>
-			</p>
-			<div
-				class="mb-1 grid min-w-max grid-cols-[repeat(var(--week-count),0.75rem)] gap-1 font-mono text-xs leading-none whitespace-nowrap text-faint uppercase max-lg:grid-cols-[repeat(var(--week-count),0.625rem)] max-lg:gap-0.5 max-sm:grid-cols-[repeat(var(--week-count),0.5rem)]"
-				data-contribution-months
-				aria-hidden="true"
-			></div>
-			<div class="flex min-w-max gap-1 max-lg:gap-0.5" data-contribution-weeks role="img"></div>
+			<div class="flex min-w-max gap-[3px]" data-contribution-weeks role="img"></div>
 		</div>
-
-		<div
-			class="mt-3 flex items-center gap-1 font-mono text-xs text-faint"
-			data-contribution-legend
-			aria-hidden="true"
-			hidden
-		>
-			<span>less</span>
-			{CONTRIBUTION_LEVEL_CLASSES.map((level) => (
-				<i class={`inline-block size-2.5 rounded-sm ${level}`}></i>
-			))}
-			<span>more</span>
-		</div>
+		<p class="mt-3 text-sm leading-snug text-muted">Code, experiments &amp; other bits</p>
 	</div>
 </github-activity>
 
@@ -131,10 +93,10 @@ import { CONTRIBUTION_LEVEL_CLASSES } from "../lib/github";
 	function createDayCell(day: ContributionDay | null) {
 		const cell = document.createElement("span");
 		if (day) {
-			cell.className = `block size-3 rounded-sm max-lg:size-2.5 max-sm:size-2 ${CONTRIBUTION_LEVEL_CLASSES[day.level] ?? CONTRIBUTION_LEVEL_CLASSES[0]}`;
+			cell.className = `block size-2 rounded-sm max-sm:size-1.5 ${CONTRIBUTION_LEVEL_CLASSES[day.level] ?? CONTRIBUTION_LEVEL_CLASSES[0]}`;
 			cell.title = `${day.count} contribution${day.count === 1 ? "" : "s"} on ${dateFormat.format(new Date(`${day.date}T00:00:00Z`))}`;
 		} else {
-			cell.className = "block size-3 rounded-sm bg-transparent max-lg:size-2.5 max-sm:size-2";
+			cell.className = "block size-2 rounded-sm bg-transparent max-sm:size-1.5";
 		}
 		return cell;
 	}
@@ -177,33 +139,13 @@ import { CONTRIBUTION_LEVEL_CLASSES } from "../lib/github";
 		}
 
 		private render(payload: ContributionResponse) {
-			const total = this.querySelector<HTMLElement>("[data-contribution-total]")!;
-			const streak = this.querySelector<HTMLElement>("[data-contribution-streak]")!;
-			const streakDays = this.querySelector<HTMLElement>("[data-streak-days]")!;
 			const status = this.querySelector<HTMLElement>("[data-contribution-status]")!;
 			const calendar = this.querySelector<HTMLElement>("[data-contribution-calendar]")!;
-			const monthLabels = this.querySelector<HTMLElement>("[data-contribution-months]")!;
 			const weekColumns = this.querySelector<HTMLElement>("[data-contribution-weeks]")!;
-			const legend = this.querySelector<HTMLElement>("[data-contribution-legend]")!;
 
 			const layout = calendarLayout(payload.contributions);
 			const count =
 				payload.total?.lastYear ?? payload.contributions.reduce((sum, day) => sum + day.count, 0);
-
-			total.textContent = count.toLocaleString("en");
-			if (layout.longestStreak !== null) {
-				streakDays.textContent = String(layout.longestStreak);
-				streak.hidden = false;
-			}
-
-			monthLabels.replaceChildren();
-			monthLabels.style.setProperty("--week-count", String(layout.weeks.length));
-			for (const month of layout.months) {
-				const label = document.createElement("span");
-				label.textContent = month.name;
-				label.style.gridColumn = `${month.week + 1} / span 3`;
-				monthLabels.append(label);
-			}
 
 			weekColumns.replaceChildren();
 			weekColumns.setAttribute(
@@ -212,13 +154,12 @@ import { CONTRIBUTION_LEVEL_CLASSES } from "../lib/github";
 			);
 			for (const week of layout.weeks) {
 				const column = document.createElement("div");
-				column.className = "grid grid-rows-7 gap-1 max-lg:gap-0.5";
+				column.className = "grid grid-rows-7 gap-[3px] max-sm:gap-[2px]";
 				column.append(...week.days.map(createDayCell));
 				weekColumns.append(column);
 			}
 
 			calendar.hidden = false;
-			legend.hidden = false;
 			status.hidden = true;
 		}
 
